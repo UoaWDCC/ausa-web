@@ -1,0 +1,50 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "packageManager": "pnpm@10.7.1",
+  "scripts": {
+    "nodemon": "nodemon",
+    "build": "tsc -p ./tsconfig.json && tsc-alias",
+    "serve": "node --es-module-specifier-resolution=node dist/index.js",
+    "start": "concurrently \"pnpm nodemon -e ts,js --exec\" \"pnpm tsoa spec-and-routes\""
+  },
+  "dependencies": {
+    "@tsoa/runtime": "^6.6.0",
+    "@types/nodemailer": "^7.0.1",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "firebase-admin": "^13.4.0",
+    "google-auth-library": "^10.2.1",
+    "helmet": "^8.1.0",
+    "nodemailer": "^7.0.6",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "tsoa": "^6.6.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.6",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^5",
+    "@types/helmet": "^4.0.0",
+    "@types/node": "^22.14.0",
+    "@types/swagger-jsdoc": "^6",
+    "@types/swagger-ui-express": "^4.1.8",
+    "concurrently": "^9.2.0",
+    "firebase": "^12.2.1",
+    "firebase-tools": "^14.14.0",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.8",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3"
+  },
+  "overrides": {
+    "express": "^4.18.2",
+    "@types/express": "^4.17.21",
+    "@types/express-serve-static-core": "^4.17.31"
+  }
+}
