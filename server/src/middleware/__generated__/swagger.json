@@ -12,8 +12,16 @@
 					"email": {
 						"type": "string"
 					},
-					"username": {
+					"displayName": {
 						"type": "string"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
 					},
 					"role": {
 						"type": "string",
@@ -26,7 +34,8 @@
 				},
 				"required": [
 					"email",
-					"username",
+					"createdAt",
+					"updatedAt",
 					"role"
 				],
 				"type": "object",
