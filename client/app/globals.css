@@ -1,45 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 :root {
+  --primary-900: #043873; /* deep navy */
+  --primary-800: #2563eb; /* primary blue */
+  --primary-700: #3a7d8c; /* teal-ish support */
+  --primary-600: #7ec6ec; /* light accent */
+  --primary-100: #dbeafe; /* pale blue */
 
-  --primary-900: #043873;  /* deep navy */
-  --primary-800: #2563EB;  /* primary blue */
-  --primary-700: #3A7D8C;  /* teal-ish support */
-  --primary-600: #7EC6EC;  /* light accent */
-  --primary-100: #DBEAFE;  /* pale blue */
-
-  --accent-warm: #FFDE91;  /* button alt */
-  --light-grey: #D3D3D3;   /* disabled bg */
-  --beige-100: #FAF7F2;    /* background (light) */
-  --cream-50:  #FFFDFC;    /* background subtle */
-  --cream-100: #FAECD5;    /* warm surface */
-  --black: #2D2D2D;
-  --white: #FFFFFF;
+  --accent-warm: #ffde91; /* button alt */
+  --light-grey: #d3d3d3; /* disabled bg */
+  --beige-100: #faf7f2; /* background (light) */
+  --cream-50: #fffdfc; /* background subtle */
+  --cream-100: #faecd5; /* warm surface */
+  --black: #2d2d2d;
+  --white: #ffffff;
 
   /* Buttons — Primary */
   --btn-primary-bg: var(--accent-warm);
-  --btn-primary-bg-hover: #FFD063;
-  --btn-primary-bg-press: #FFC743;
+  --btn-primary-bg-hover: #ffd063;
+  --btn-primary-bg-press: #ffc743;
   --btn-primary-bg-disabled: var(--light-grey);
 
- 
   --btn-primary-fg: var(--primary-900);
-  --btn-primary-fg-disabled: #8C8C8C;
+  --btn-primary-fg-disabled: #8c8c8c;
 
   /* Buttons — Secondary */
   --btn-secondary-bg: var(--primary-100);
-  --btn-secondary-bg-hover: #BCD9FF;
-  --btn-secondary-bg-press: #8EBEFF;
+  --btn-secondary-bg-hover: #bcd9ff;
+  --btn-secondary-bg-press: #8ebeff;
   --btn-secondary-bg-disabled: var(--light-grey);
 
   --btn-secondary-fg: var(--primary-800);
-  --btn-secondary-fg-disabled: #8C8C8C;
+  --btn-secondary-fg-disabled: #8c8c8c;
 
   /* Buttons — Tertiary */
   --btn-tertiary-bg: var(--accent-warm);
-  --btn-tertiary-bg-hover: #FFEBBD;
-  --btn-tertiary-bg-press: #FFD26B;
+  --btn-tertiary-bg-hover: #ffebbd;
+  --btn-tertiary-bg-press: #ffd26b;
   --btn-tertiary-bg-disabled: var(--light-grey);
 
   --btn-tertiary-fg: var(--primary-900);
@@ -53,7 +51,6 @@
     var(--cream-100) 100%
   );
 }
-
 
 @theme {
   /* --font-family-sans: "Poppins", sans-serif; */
@@ -96,20 +93,20 @@
   body {
     @apply bg-background font-sans;
   }
-  
 
-  h1, h2, h3, h4{
+  h1,
+  h2,
+  h3,
+  h4 {
     @apply font-serif;
   }
-  
- 
+
   .h1 {
     font-size: 110px;
     font-weight: 600;
     line-height: 58px;
     letter-spacing: 0;
   }
-  
 
   .h2 {
     font-size: 80px;
@@ -117,7 +114,6 @@
     line-height: 48px;
     letter-spacing: 0;
   }
-  
 
   .subtitle-italic {
     font-size: 45px;
@@ -133,7 +129,6 @@
     line-height: 28px;
     letter-spacing: 0;
   }
-  
 
   .h4 {
     font-size: 32px;
@@ -141,17 +136,16 @@
     line-height: 24px;
     letter-spacing: 0;
   }
-  
- 
-  .b1-body, p {
+
+  .b1-body,
+  p {
     font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
     font-size: 30px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0.32px;
   }
-  
-  
+
   .b2-body {
     font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
     font-size: 25px;
@@ -159,7 +153,6 @@
     line-height: 24px;
     letter-spacing: 0.32px;
   }
-  
 
   .b3-body {
     font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
@@ -169,7 +162,6 @@
     letter-spacing: 0.32px;
   }
 }
-
 
 @theme inline {
   /* dark theme -- monotone */
@@ -182,4 +174,3 @@
     --foreground: #ededed;
   }
 }
-
