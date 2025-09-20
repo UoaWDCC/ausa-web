@@ -64,7 +64,7 @@ const ModalWindow = () => {
           >
             {/* white lines between cards */}
             {idx < cards.length - 1 && (
-              <span className="hidden md:block absolute right-0 h-[150px] w-[3px] bg-white"></span>
+              <span className="hidden md:block absolute right-0 h-[150px] w-[2px] bg-white"></span>
             )}
             <div className="flex items-center gap-4 mb-4">
               <h2 className="h4 text-white relative 
