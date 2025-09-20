@@ -1,21 +1,166 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 :root {
-  --background: #171717; /* dark:charcoal [monotone] */
+  --primary-900: #043873; /* deep navy */
+  --primary-800: #2563eb; /* primary blue */
+  --primary-700: #3a7d8c; /* teal-ish support */
+  --primary-600: #7ec6ec; /* light accent */
+  --primary-100: #dbeafe; /* pale blue */
+
+  --accent-warm: #ffde91; /* button alt */
+  --light-grey: #d3d3d3; /* disabled bg */
+  --beige-100: #faf7f2; /* background (light) */
+  --cream-50: #fffdfc; /* background subtle */
+  --cream-100: #faecd5; /* warm surface */
+  --black: #2d2d2d;
+  --white: #ffffff;
+
+  /* Buttons — Primary */
+  --btn-primary-bg: var(--accent-warm);
+  --btn-primary-bg-hover: #ffd063;
+  --btn-primary-bg-press: #ffc743;
+  --btn-primary-bg-disabled: var(--light-grey);
+
+  --btn-primary-fg: var(--primary-900);
+  --btn-primary-fg-disabled: #8c8c8c;
+
+  /* Buttons — Secondary */
+  --btn-secondary-bg: var(--primary-100);
+  --btn-secondary-bg-hover: #bcd9ff;
+  --btn-secondary-bg-press: #8ebeff;
+  --btn-secondary-bg-disabled: var(--light-grey);
+
+  --btn-secondary-fg: var(--primary-800);
+  --btn-secondary-fg-disabled: #8c8c8c;
+
+  /* Buttons — Tertiary */
+  --btn-tertiary-bg: var(--accent-warm);
+  --btn-tertiary-bg-hover: #ffebbd;
+  --btn-tertiary-bg-press: #ffd26b;
+  --btn-tertiary-bg-disabled: var(--light-grey);
+
+  --btn-tertiary-fg: var(--primary-900);
+  --btn-tertiary-fg-disabled: #979797;
+
+  /* Backgrounds */
+  --background: var(--beige-100); /* solid */
+  --background-gradient: linear-gradient(
+    0deg,
+    var(--cream-50) 0%,
+    var(--cream-100) 100%
+  );
 }
 
 @theme {
   /* --font-family-sans: "Poppins", sans-serif; */
-  /* example for adding font */
+  /* example for adding font and exposing them to class components*/
+
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Crimson Text", ui-serif, Georgia, serif;
+
+  --color-background: var(--background);
+
+  --color-primary: var(--primary-800);
+  --color-primary-emphasis: var(--primary-900);
+  --color-primary-subtle: var(--primary-100);
+
+  --color-btn-primary-bg: var(--btn-primary-bg);
+  --color-btn-primary-bg-hover: var(--btn-primary-bg-hover);
+  --color-btn-primary-bg-press: var(--btn-primary-bg-press);
+  --color-btn-primary-bg-disabled: var(--btn-primary-bg-disabled);
+  --color-btn-primary-fg: var(--btn-primary-fg);
+  --color-btn-primary-fg-disabled: var(--btn-primary-fg-disabled);
+
+  --color-btn-secondary-bg: var(--btn-secondary-bg);
+  --color-btn-secondary-bg-hover: var(--btn-secondary-bg-hover);
+  --color-btn-secondary-bg-press: var(--btn-secondary-bg-press);
+  --color-btn-secondary-bg-disabled: var(--btn-secondary-bg-disabled);
+  --color-btn-secondary-fg: var(--btn-secondary-fg);
+  --color-btn-secondary-fg-disabled: var(--btn-secondary-fg-disabled);
+
+  --color-btn-tertiary-bg: var(--btn-tertiary-bg);
+  --color-btn-tertiary-bg-hover: var(--btn-tertiary-bg-hover);
+  --color-btn-tertiary-bg-press: var(--btn-tertiary-bg-press);
+  --color-btn-tertiary-bg-disabled: var(--btn-tertiary-bg-disabled);
+  --color-btn-tertiary-fg: var(--btn-tertiary-fg);
+  --color-btn-tertiary-fg-disabled: var(--btn-tertiary-fg-disabled);
 }
 
 @variant dark (&:is(.dark, .dark *));
 
 @layer base {
-  /* h1 {
-    @apply text-4xl font-bold text-black leading-tight;
-  } */
+  body {
+    @apply bg-background font-sans;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+  }
+
+  .h1 {
+    font-size: 110px;
+    font-weight: 600;
+    line-height: 58px;
+    letter-spacing: 0;
+  }
+
+  .h2 {
+    font-size: 80px;
+    font-weight: 600;
+    line-height: 48px;
+    letter-spacing: 0;
+  }
+
+  .subtitle-italic {
+    font-size: 45px;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 28px;
+    letter-spacing: 0;
+  }
+
+  .h3 {
+    font-size: 45px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0;
+  }
+
+  .h4 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+
+  .b1-body,
+  p {
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.32px;
+  }
+
+  .b2-body {
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.32px;
+  }
+
+  .b3-body {
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.32px;
+  }
 }
 
 @theme inline {
@@ -28,8 +173,4 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
-
-body {
-  /* font-family: "Poppins", sans-serif; */
 }
