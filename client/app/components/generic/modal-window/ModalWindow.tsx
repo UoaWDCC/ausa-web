@@ -74,7 +74,7 @@ const ModalWindow = () => {
             )}
             <div className="flex items-center gap-4 mb-4">
               <h2
-                className="h4 text-white relative 
+                className="h5 text-2xl text-white relative 
              after:content-[''] after:block after:h-[2px] after:bg-white 
              after:scale-x-0 after:origin-left 
              after:transition-transform after:duration-300
@@ -108,8 +108,8 @@ const ModalWindow = () => {
               ✕
             </button>
 
-            <h1 className="h4 text-white mb-4">{selectedCard.title}</h1>
-            <p className="b3-body text-white">{selectedCard.popUpText}</p>
+            <h1 className="text-white mb-4">{selectedCard.title}</h1>
+            <p className=" text-white b3-body">{selectedCard.popUpText}</p>
           </div>
         </div>
       )}
