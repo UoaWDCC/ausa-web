@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { ArrowRightIcon } from "@heroicons/react/24/solid";
+import React, { useState } from "react"
+import { ArrowRightIcon } from "@heroicons/react/24/solid"
 
 const cards = [
   {
@@ -9,11 +9,15 @@ const cards = [
     text: "Awareness is about noticing how you’re really feeling—your thoughts, emotions, and energy levels—so you can respond with care.",
     popUpText: (
       <ul className="list-disc pl-5 space-y-1">
-        <li>Notice your thoughts, feelings, and energy levels throughout the day.</li>
+        <li>
+          Notice your thoughts, feelings, and energy levels throughout the day.
+        </li>
         <li>Pause before reacting to situations—observe first.</li>
         <li>Keep a journal to track moods, triggers, and patterns.</li>
         <li>Practice mindfulness or short meditation sessions.</li>
-        <li>Recognize signs of stress or fatigue early and respond appropriately.</li>
+        <li>
+          Recognize signs of stress or fatigue early and respond appropriately.
+        </li>
       </ul>
     ),
   },
@@ -43,10 +47,12 @@ const cards = [
       </ul>
     ),
   },
-];
+]
 
 const ModalWindow = () => {
-  const [selectedCard, setSelectedCard] = useState<null | typeof cards[0]>(null);
+  const [selectedCard, setSelectedCard] = useState<null | (typeof cards)[0]>(
+    null,
+  )
 
   return (
     <div className="w-[500px] md:w-full flex justify-center gap-0">
@@ -67,12 +73,16 @@ const ModalWindow = () => {
               <span className="hidden md:block absolute right-0 h-[150px] w-[2px] bg-white"></span>
             )}
             <div className="flex items-center gap-4 mb-4">
-              <h2 className="h4 text-white relative 
+              <h2
+                className="h4 text-white relative 
              after:content-[''] after:block after:h-[2px] after:bg-white 
              after:scale-x-0 after:origin-left 
              after:transition-transform after:duration-300
-             md:group-hover:after:scale-x-100">{card.title}</h2>
-              <ArrowRightIcon className="w-5 h-5 text-white"/>
+             md:group-hover:after:scale-x-100"
+              >
+                {card.title}
+              </h2>
+              <ArrowRightIcon className="w-5 h-5 text-white" />
             </div>
             <p className="b3-body text-white">{card.text}</p>
           </div>
@@ -85,7 +95,7 @@ const ModalWindow = () => {
           {/* overlay */}
           <div
             className="absolute inset-0 bg-black/50 backdrop-blur-sm "
-            onClick={() => setSelectedCard(null)} 
+            onClick={() => setSelectedCard(null)}
           ></div>
 
           {/* modal card */}
@@ -103,9 +113,8 @@ const ModalWindow = () => {
           </div>
         </div>
       )}
-
     </div>
-  );
-};
+  )
+}
 
-export default ModalWindow;
+export default ModalWindow
