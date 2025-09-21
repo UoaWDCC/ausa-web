@@ -29,8 +29,9 @@ const CarouselCard = ({
         <p className="text-sm text-gray-600">{description}</p>
         <a href={link} target="_blank" rel="noopener noreferrer">
           <Button
-            label="Secondary"
-            className="px-6 py-3 rounded font-bold btn-secondary"
+            label="Visit Website"
+            className="px-6 py-3 btn-secondary"
+            fontWeight="normal"
           />
         </a>
       </div>
