@@ -1,13 +1,7 @@
 import React from "react"
-
-import ModalWindow from "./components/generic/modal-window/ModalWindow"
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-10 bg-background">
-      {/* modal window test */}
-      <div className="">
-        <ModalWindow />
-      </div>
       {/* Headings */}
       <div className="flex flex-col items-center gap-6">
         <h1 className="h1" style={{ color: "black", marginBottom: "24px" }}>
