@@ -18,7 +18,6 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   navigationItems,
   activeItem,
   onNavClick,
-  className,
 }) => {
   const handleNavClick = (item: string) => {
     onNavClick(item)
