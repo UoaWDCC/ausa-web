@@ -1,5 +1,4 @@
 import React from "react"
-import CarouselCard from "./components/carousel/CarouselCard"
 
 export default function Home() {
   return (
@@ -178,22 +177,6 @@ export default function Home() {
           </button>
         </div>
       </div>
-
-      {/* Carousel Testing */}
-      <CarouselCard
-        title="Sample Carousel Card"
-        description="This is a description for the sample carousel card."
-        image="/path/to/image.jpg"
-        link="https://example.com"
-        variant="wide"
-      />
-      <CarouselCard
-        title="Sample Carousel Card"
-        description="This is a description for the sample carousel card."
-        image="/path/to/image.jpg"
-        link="https://example.com"
-        variant="thin"
-      />
     </div>
   )
 }

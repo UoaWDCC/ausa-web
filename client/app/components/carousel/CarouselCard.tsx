@@ -1,5 +1,4 @@
 import React from "react"
-import Image from "next/image"
 import Button from "../generic/button/regular/Button"
 
 interface CarouselCardProps {
