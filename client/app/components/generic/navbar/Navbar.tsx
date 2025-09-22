@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react"
 import Button from "../button/regular/Button"
 import MobileDrawer from "./MobileDrawer"
+import { homedir } from "os"
 
 export interface NavbarProps {
   onNavigate?: (page: string) => void
@@ -118,6 +119,22 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
                   </svg>
                 </button>
               </div>
+            </div>
+            {/* Login */}
+            <div className="">
+              <Button
+                label='Login'
+                onClick={() => handleNavClick("Login")}
+                  className={`
+                    px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
+                    ${
+                      activeItem === "Login"
+                        ? "bg-[var(--btn-secondary-bg-hover)] font-medium shadow-md"
+                        : "bg-[var(--btn-secondary-bg-press)] hover:bg-[var(--btn-secondary-bg)] hover:scale-105"
+                    }
+                  `}
+                  fontWeight={activeItem === "Login" ? "bold" : "normal"}
+                />
             </div>
           </div>
         </div>
