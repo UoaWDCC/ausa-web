@@ -70,11 +70,11 @@ const ModalWindow = () => {
           >
             {/* white lines between cards */}
             {idx < cards.length - 1 && (
-              <span className="hidden md:block absolute right-0 h-[150px] w-[2px] bg-white"></span>
+              <span className="hidden md:block absolute right-0 top-1/2 -translate-y-1/30 h-3/4 w-[2px] bottom-10 top-10 bg-white"></span>
             )}
             <div className="flex items-center gap-4 mb-4">
               <h2
-                className="h5 text-2xl text-white relative 
+                className="h4 text-white relative 
              after:content-[''] after:block after:h-[2px] after:bg-white 
              after:scale-x-0 after:origin-left 
              after:transition-transform after:duration-300
@@ -84,7 +84,7 @@ const ModalWindow = () => {
               </h2>
               <ArrowRightIcon className="w-5 h-5 text-white" />
             </div>
-            <p className="b3-body text-white">{card.text}</p>
+            <p className="b3-body text-white font-light">{card.text}</p>
           </div>
         ))}
       </div>
@@ -108,8 +108,8 @@ const ModalWindow = () => {
               ✕
             </button>
 
-            <h1 className="text-white mb-4">{selectedCard.title}</h1>
-            <p className=" text-white b3-body">{selectedCard.popUpText}</p>
+            <h1 className="h4 text-white mb-4">{selectedCard.title}</h1>
+            <p className="font-light text-white b3-body">{selectedCard.popUpText}</p>
           </div>
         </div>
       )}
