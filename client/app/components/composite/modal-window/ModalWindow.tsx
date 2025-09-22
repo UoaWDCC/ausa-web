@@ -109,7 +109,9 @@ const ModalWindow = () => {
             </button>
 
             <h1 className="h4 text-white mb-4">{selectedCard.title}</h1>
-            <p className="font-light text-white b3-body">{selectedCard.popUpText}</p>
+            <p className="font-light text-white b3-body">
+              {selectedCard.popUpText}
+            </p>
           </div>
         </div>
       )}
