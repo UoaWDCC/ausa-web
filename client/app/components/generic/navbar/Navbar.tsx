@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react"
 import Button from "../button/regular/Button"
 import MobileDrawer from "./MobileDrawer"
-import { homedir } from "os"
 
 export interface NavbarProps {
   onNavigate?: (page: string) => void
