@@ -123,9 +123,9 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
             {/* Login */}
             <div className="">
               <Button
-                label='Login'
+                label="Login"
                 onClick={() => handleNavClick("Login")}
-                  className={`
+                className={`
                     px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
                     ${
                       activeItem === "Login"
@@ -133,8 +133,8 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
                         : "bg-[var(--btn-secondary-bg-press)] hover:bg-[var(--btn-secondary-bg)] hover:scale-105"
                     }
                   `}
-                  fontWeight={activeItem === "Login" ? "bold" : "normal"}
-                />
+                fontWeight={activeItem === "Login" ? "bold" : "normal"}
+              />
             </div>
           </div>
         </div>
