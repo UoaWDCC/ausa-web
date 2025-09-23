@@ -75,6 +75,10 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
     onNavigate?.(item)
   }
 
+  const handleLoginClick = (item: string) => {
+    onNavigate?.('Login')
+  }
+
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
 
   return (
@@ -130,7 +134,7 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
             <div className="hidden md:flex">
               <Button
                 label="Login"
-                onClick={() => handleNavClick("Login")}
+                onClick={() => handleLoginClick("Login")}
                 className={`
                     px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
                     bg-[var(--btn-secondary-bg-press)] hover:bg-[var(--btn-secondary-bg)] hover:scale-105
