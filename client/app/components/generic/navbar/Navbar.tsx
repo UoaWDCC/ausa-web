@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react"
 import Button from "../button/regular/Button"
 import MobileDrawer from "./MobileDrawer"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 export interface NavbarProps {
   onNavigate?: (page: string) => void
@@ -10,9 +12,9 @@ export interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
-  const [activeItem, setActiveItem] = useState("Home")
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [hasScrolled, setHasScrolled] = useState(false)
+  const pathname = usePathname()
 
   const navigationItems = [
     "Home",
@@ -22,6 +24,32 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
     "FAQs",
     "Contacts",
   ]
+
+  const navPaths: Record<string, string> = {
+    Home: "/",
+    Resources: "/resources",
+    Quiz: "/quiz",
+    Events: "/events",
+    FAQs: "/faqs",
+    Contacts: "/contacts",
+    Login: "/login",
+  }
+
+  const pathToItem: Record<string, string> = {
+    "/": "Home",
+    "/resources": "Resources",
+    "/quiz": "Quiz",
+    "/events": "Events",
+    "/faqs": "FAQs",
+    "/contacts": "Contacts",
+    "/login": "Login",
+  }
+
+  const [activeItem, setActiveItem] = useState(() => pathToItem[pathname])
+
+  useEffect(() => {
+    setActiveItem(pathToItem[pathname])
+  }, [pathname])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,30 +89,34 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="">Logo Here</div>
+            <div className="">
+              <img src="/AusaLogo.svg" alt="AUSA Logo" className="h-15" />
+            </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-3 flex-1 justify-center">
               {navigationItems.map((item) => (
                 <div key={item} className="group relative">
-                  <Button
-                    label={item}
-                    onClick={() => handleNavClick(item)}
-                    backgroundColor={
-                      activeItem === item
-                        ? "var(--btn-primary-bg)"
-                        : "transparent"
-                    }
-                    className={`
-                      px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
-                      ${
+                  <Link href={navPaths[item]}>
+                    <Button
+                      label={item}
+                      onClick={() => handleNavClick(item)}
+                      backgroundColor={
                         activeItem === item
-                          ? "font-medium shadow-md"
-                          : "hover:bg-btn-primary-bg-hover group-hover:scale-105"
+                          ? "var(--btn-primary-bg)"
+                          : "transparent"
                       }
-                    `}
-                    fontWeight={activeItem === item ? "bold" : "normal"}
-                  />
+                      className={`
+                        px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
+                        ${
+                          activeItem === item
+                            ? "font-medium shadow-md"
+                            : "hover:bg-btn-primary-bg-hover group-hover:scale-105"
+                        }
+                      `}
+                      fontWeight={activeItem === item ? "bold" : "normal"}
+                    />
+                  </Link>
 
                   {/* Hover Animation */}
                   {activeItem !== item && (
@@ -94,6 +126,18 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
               ))}
             </div>
 
+            {/* Login */}
+            <div className="hidden md:flex">
+              <Button
+                label="Login"
+                onClick={() => handleNavClick("Login")}
+                className={`
+                    px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
+                    bg-[var(--btn-secondary-bg-press)] hover:bg-[var(--btn-secondary-bg)] hover:scale-105
+                  `}
+                fontWeight={activeItem === "Login" ? "bold" : "normal"}
+              />
+            </div>
             <div className="flex">
               {/* Mobile Menu Button */}
               <div className="md:hidden">
@@ -118,22 +162,6 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
                   </svg>
                 </button>
               </div>
-            </div>
-            {/* Login */}
-            <div className="">
-              <Button
-                label="Login"
-                onClick={() => handleNavClick("Login")}
-                className={`
-                    px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
-                    ${
-                      activeItem === "Login"
-                        ? "bg-[var(--btn-secondary-bg-hover)] font-medium shadow-md"
-                        : "bg-[var(--btn-secondary-bg-press)] hover:bg-[var(--btn-secondary-bg)] hover:scale-105"
-                    }
-                  `}
-                fontWeight={activeItem === "Login" ? "bold" : "normal"}
-              />
             </div>
           </div>
         </div>

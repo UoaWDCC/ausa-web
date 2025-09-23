@@ -2,6 +2,7 @@
 
 import React from "react"
 import Button from "../button/regular/Button"
+import Link from "next/link"
 
 interface MobileDrawerProps {
   isOpen: boolean
@@ -24,6 +25,16 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
     onClose()
   }
 
+  const navPaths: Record<string, string> = {
+    Home: "/",
+    Resources: "/resources",
+    Quiz: "/quiz",
+    Events: "/events",
+    FAQs: "/faqs",
+    Contacts: "/contacts",
+    Login: "/login",
+  }
+
   return (
     <>
       {/* Backdrop Overlay */}
@@ -43,31 +54,61 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
       >
         {/* Header with Logo */}
         <div className="flex h-full flex-col p-6">
-          <div className="mb-8 flex justify-center">Logo Here</div>
+          <div className="mb-8 flex justify-center">
+            <img src="/AusaLogo.svg" alt="AUSA Logo" className="h-15" />
+          </div>
 
           {/* Navigation */}
           <nav className="flex flex-col space-y-2">
             {navigationItems.map((item) => (
-              <Button
-                key={`mobile-${item}`}
-                label={item}
-                onClick={() => handleNavClick(item)}
-                backgroundColor={
-                  activeItem === item ? "var(--btn-primary-bg)" : "transparent"
-                }
-                className={`
-                  w-full justify-start px-4 py-3 rounded-lg transition-all duration-500
-                  ${
+              <Link href={navPaths[item]} key={`mobile-${item}`}>
+                <Button
+                  key={`mobile-${item}`}
+                  label={item}
+                  onClick={() => handleNavClick(item)}
+                  backgroundColor={
                     activeItem === item
-                      ? "text-btn-primary-fg hover:bg-btn-primary-bg-hover"
-                      : "text-primary-emphasis hover:bg-btn-secondary-bg-hover"
+                      ? "var(--btn-primary-bg)"
+                      : "transparent"
                   }
-                `}
-                textSize="text-lg"
-                fontWeight={activeItem === item ? "bold" : "normal"}
-              />
+                  className={`
+                    w-full justify-start px-4 py-3 rounded-lg transition-all duration-500
+                    ${
+                      activeItem === item
+                        ? "text-btn-primary-fg hover:bg-btn-primary-bg-hover"
+                        : "text-primary-emphasis hover:bg-btn-secondary-bg-hover"
+                    }
+                  `}
+                  textSize="text-lg"
+                  fontWeight={activeItem === item ? "bold" : "normal"}
+                />
+              </Link>
             ))}
           </nav>
+
+          {/* Login */}
+          <div className="">
+            <Link href={navPaths["Login"]}>
+              <Button
+                label="Login"
+                backgroundColor={
+                  activeItem === "Login"
+                    ? "var(--btn-secondary-bg-hover)"
+                    : "var(--btn-secondary-bg-press)"
+                }
+                className={`
+                  w-full px-4 py-3 rounded-lg transition-all duration-300
+                  ${
+                    activeItem === "Login"
+                      ? "font-bold shadow-md"
+                      : "hover:bg-btn-secondary-bg hover:scale-105"
+                  }
+                `}
+                fontWeight={activeItem === "Login" ? "bold" : "normal"}
+                onClick={() => handleNavClick("Login")}
+              />
+            </Link>
+          </div>
         </div>
       </div>
     </>
