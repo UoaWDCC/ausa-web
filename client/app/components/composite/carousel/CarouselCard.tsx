@@ -1,5 +1,5 @@
 import React from "react"
-import Button from "../generic/button/regular/Button"
+import Button from "@/app/components/generic/button/regular/Button"
 
 interface CarouselCardProps {
   title: string
