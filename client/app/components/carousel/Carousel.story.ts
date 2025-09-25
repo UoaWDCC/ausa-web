@@ -31,3 +31,15 @@ export const DefaultCarouselCard: Story = {
     variant: "thin",
   },
 }
+
+export const LongCarouselCard: Story = {
+  args: {
+    title: "LoL",
+    description:
+      "This is a sample description for the carousel card, which is much longer in order to test whether the button is confined within the card. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. It provides brief information about the content.",
+    image:
+      "https://c4.wallpaperflare.com/wallpaper/108/140/869/digital-digital-art-artwork-fantasy-art-drawing-hd-wallpaper-thumb.jpg",
+    link: "https://example.com",
+    variant: "thin",
+  },
+}

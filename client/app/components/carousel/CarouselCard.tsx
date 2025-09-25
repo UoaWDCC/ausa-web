@@ -28,17 +28,22 @@ const CarouselCard = ({
       className="rounded-lg overflow-hidden shadow-md bg-white flex flex-col"
       style={{ width, height }}
     >
-      <img src={image} alt={title} className="w-full h-2/3 object-cover" />
-      <div className="p-4">
-        <h3 className="text-lg text-gray-600 font-semibold mt-4">{title}</h3>
-        <p className="text-sm text-gray-600 mt-4">{description}</p>
-        <a href={link} target="_blank" rel="noopener noreferrer">
-          <Button
-            label="Visit Website"
-            className="px-6 py-3 mt-4 mb-10 rounded-full btn-secondary"
-            fontWeight="normal"
-          />
-        </a>
+      <img src={image} alt={title} className="w-full h-1/2 object-cover" />
+
+      <div className="p-4 flex flex-col flex-1">
+        <h3 className="text-lg text-gray-600 font-semibold">{title}</h3>
+
+        <p className="text-sm text-gray-600 mt-2 line-clamp-3">{description}</p>
+
+        <div className="mt-auto mb-4">
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            <Button
+              label="Visit Website"
+              className="px-6 py-3 mt-4 rounded-full btn-secondary"
+              fontWeight="normal"
+            />
+          </a>
+        </div>
       </div>
     </div>
   )
