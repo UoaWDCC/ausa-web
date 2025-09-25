@@ -25,7 +25,7 @@ const CarouselCard = ({
   const { width, height } = getDimensions(variant || "thin")
   return (
     <div
-      className="rounded-lg overflow-hidden shadow-md bg-white flex flex-col border-gray-200 border"
+      className="relative rounded-lg overflow-hidden shadow-md bg-white flex flex-col border-gray-200 border"
       style={{ width, height }}
     >
       <img src={image} alt={title} className="w-full h-1/2 object-cover" />
@@ -44,6 +44,12 @@ const CarouselCard = ({
             />
           </a>
         </div>
+
+        <img
+          src="/ausa_logo.png"
+          alt="AUSA Logo"
+          className="absolute bottom-3 right-3 w-14 h-14"
+        />
       </div>
     </div>
   )
