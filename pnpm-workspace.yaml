@@ -1,13 +1,3 @@
 packages:
   - client
   - server
-ignoredBuiltDependencies:
-  - '@firebase/util'
-  - '@scarf/scarf'
-  - '@tailwindcss/oxide'
-  - core-js-pure
-  - esbuild
-  - protobufjs
-  - re2
-  - sharp
-  - unrs-resolver
