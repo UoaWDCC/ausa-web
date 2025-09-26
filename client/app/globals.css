@@ -52,6 +52,28 @@
   );
 }
 
+.btn-secondary {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-fg);
+  border: none;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.btn-secondary:hover {
+  background: var(--btn-secondary-bg-hover);
+}
+
+.btn-secondary:active {
+  background: var(--btn-secondary-bg-press);
+}
+
+.btn-secondary:disabled {
+  background: var(--btn-secondary-bg-disabled);
+  color: var(--btn-secondary-fg-disabled);
+}
+
 @theme {
   /* --font-family-sans: "Poppins", sans-serif; */
   /* example for adding font and exposing them to class components*/
