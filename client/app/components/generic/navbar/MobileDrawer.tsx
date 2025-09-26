@@ -87,16 +87,16 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           </nav>
 
           {/* Login */}
-          <div className="">
+          <div className="mt-auto pt-6">
             <Link href={navPaths["Login"]}>
               <Button
                 label="Login"
                 backgroundColor={"var(--btn-secondary-bg-press)"}
                 className={`
-                  w-full px-4 py-3 rounded-lg transition-all duration-300
+                  w-20 px-4 py-3 justify-centre rounded-lg transition-all duration-300
                   "hover:bg-btn-secondary-bg hover:scale-105"
                 `}
-                fontWeight={"normal"}
+                fontWeight={"bold"}
                 onClick={() => handleNavClick("Login")}
               />
             </Link>
