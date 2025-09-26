@@ -82,7 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
       <nav
         className={`
           navbar fixed top-0 left-0 z-50 w-full transition-all duration-500 ease-out
-          ${hasScrolled ? "shadow-lg" : "shadow-none"}
+          ${hasScrolled ? "bg-black/80" : "bg-black"}
           ${className}
         `}
       >
