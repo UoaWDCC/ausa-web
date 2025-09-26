@@ -28,7 +28,7 @@
     "@tailwindcss/postcss": "^4",
     "@types/gapi": "^0.0.47",
     "@types/gapi.auth2": "^0.0.61",
-    "@types/node": "^20",
+    "@types/node": "^20.19.9",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

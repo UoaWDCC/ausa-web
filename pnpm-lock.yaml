@@ -107,7 +107,7 @@ importers:
         specifier: ^0.0.61
         version: 0.0.61
       '@types/node':
-        specifier: ^20
+        specifier: ^20.19.9
         version: 20.19.9
       '@types/react':
         specifier: ^19
