@@ -4,7 +4,10 @@ export default function Home() {
     <div className="min-h-screen flex flex-col items-center justify-center gap-10 bg-background">
       {/* Headings */}
       <div className="flex flex-col items-center gap-6">
-        <h1 className="h1" style={{ color: "black", marginBottom: "24px" }}>
+        <h1
+          className="h1"
+          style={{ color: "black", marginTop: "150px", marginBottom: "24px" }}
+        >
           Heading 1 (h1)
         </h1>
         <h2 className="h2" style={{ color: "black", marginBottom: "20px" }}>
