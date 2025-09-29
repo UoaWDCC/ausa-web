@@ -111,6 +111,17 @@
 
 @variant dark (&:is(.dark, .dark *));
 
+@layer components {
+  .mobile-drawer {
+    background: var(--black);
+    backdrop-filter: blur(20px);
+  }
+
+  .navbar {
+    background: var(--black);
+  }
+}
+
 @layer base {
   body {
     @apply bg-background font-sans;
@@ -190,9 +201,9 @@
   --color-background: var(--background); /* dark:charcoal [monotone] */
 }
 
-@media (prefers-color-scheme: dark) {
+/*@media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+}*/
