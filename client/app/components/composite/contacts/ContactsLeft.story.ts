@@ -10,8 +10,9 @@ const meta: Meta<typeof ContactsLeft> = {
   },
   tags: ["autodocs"],
   argTypes: {
-    title: { control: { type: "text" }, description: "The main title text" },
-    subtitle: { control: { type: "text" }, description: "Optional subtitle text" },
+    title1: { control: { type: "text" }, description: "The main title text" },
+    title2: { control: { type: "text" }, description: "Optional second title text" },
+    subtitle: { control: { type: "text" }, description: "Optional subtitle/description text" },
     backgroundImage: { control: { type: "text" }, description: "URL for background image" },
   },
 }
@@ -38,7 +39,7 @@ export const TitleOnly: Story = {
 // With custom background image
 export const CustomBackground: Story = {
   args: {
-    title: "Have any Questions? Reach out!",
+    title1: "Have any Questions? Reach out!",
     subtitle: "We're here to listen and support you. Whether you have a question, need guidance, or just want to connect with our team, you can reach out anytime.",
   },
 }

@@ -5,8 +5,11 @@ import Dropdown from "../components/composite/dropdown/Dropdown";
 import Button from "../components/generic/button/regular/Button";
 import emailjs from "@emailjs/browser";
 import { useState } from 'react'
+import ContactsLeft from "../components/composite/contacts/ContactsLeft";
+import Image from "next/image";
+import background from "../components/composite/contacts/contacts background.jpeg";
 
-const Contact = () => {
+const Contacts = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -57,107 +60,110 @@ const Contact = () => {
   };
 
   return (
-    <div className="flex justify-center items-start min-h-screen bg-gray-100 p-5 md:p-10">
+    <div className="flex justify-center items-start min-h-screen bg-gray-100 py-16 px-5 md:p-10">
       <form
-        className="bg-white w-full max-w-[1500px] p-5 md:p-10 mt-5 md:mt-[30px] rounded-lg shadow-lg flex flex-col md:flex-row gap-6 md:gap-10"
+        className="w-full max-w-[1500px] max-h-[1500px] p-5 md:p-10 mt-5 md:mt-[30px] flex flex-col md:flex-row gap-6 md:gap-10"
         onSubmit={sendEmail}
       >
         {/* LHS picture */}
-        <div className="flex-shrink-0 w-full md:w-[400px] flex justify-center items-center">
-          <img
-            src="/contact-illustration.png"
-            alt="Contact Illustration"
-            className="w-[200px] md:w-[250px] h-[200px] md:h-[250px] object-contain"
-          />
-        </div>
-
-        {/* RHS form */}
-        <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          {/* column 1 */}
-          <div className="flex flex-col gap-4">
-            <label className="text-black">First Name</label>
-            <TextBox
-              placeholder="Text"
-              variant="small"
-              value={formData.firstName}
-              onChange={(val) => handleChange("firstName", val)}
-            />
-            <label className="text-black">ID Number</label>
-            <TextBox
-              placeholder="Text"
-              variant="small"
-              value={formData.idNumber}
-              onChange={(val) => handleChange("idNumber", val)}
-            />
-          </div>
-            {/* column 2 */}
-          <div className="flex flex-col gap-4">
-            <label className="text-black">Last Name</label>
-            <TextBox
-              placeholder="Text"
-              variant="small"
-              value={formData.lastName}
-              onChange={(val) => handleChange("lastName", val)}
-            />
-            <label className="text-black">Year Level</label>
-            <TextBox
-              placeholder="Text"
-              variant="small"
-              value={formData.yearLevel}
-              onChange={(val) => handleChange("yearLevel", val)}
+        <div className="flex flex-col md:flex-row gap-6 md:gap-10 w-full bg-white rounded-lg shadow-lg">
+          <div className="flex-shrink-0 w-full md:w-[400px] flex justify-center items-center rounded-r-lg">
+            <ContactsLeft
+              title1="Have any Questions?"
+              title2="Reach out!"
+              subtitle="We're here to listen and support you. Whether you have a question, need guidance, or just want to connect with our team, you can reach out anytime."
+              backgroundImage={background}
             />
           </div>
 
-          {/* email */}
-          <div className="col-span-1 md:col-span-2 flex flex-col gap-2">
-            <label className="text-black">Email</label>
-            <TextBox
-              placeholder="Text"
-              variant="small-long"
-              value={formData.email}
-              onChange={(val) => handleChange("email", val)}
-            />
-          </div>
-
-          {/* enquiry Type */}
-          <div className="flex flex-col gap-4">
-            <label className="text-black">Enquiry Type</label>
-            <Dropdown
-              options={[
-                "Membership & Recruitment",
-                "Events",
-                "Collaboration & Partnerships",
-                "Wellbeing",
-              ]}
-              placeholder="Select an option"
-              value={formData.enquiryType}
-              onChange={(val) => handleChange("enquiryType", val)}
-            />
-          </div>
-
-          {/* action buttons */}
-          <div className="flex flex-col gap-4 mt-4 md:mt-10 col-span-1 md:col-span-2">
-            <div className="flex flex-wrap gap-4">
-              <Button label="Action 1" backgroundColor="#F8FAFC" />
-              <Button label="Action 2" backgroundColor="#F8FAFC" />
-              <Button label="Action 3" backgroundColor="#F8FAFC" />
+          {/* RHS form */}
+          <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 p-10">
+            {/* column 1 */}
+            <div className="flex flex-col gap-4">
+              <label className="text-black">First Name</label>
+              <TextBox
+                placeholder="Text"
+                variant="small"
+                value={formData.firstName}
+                onChange={(val) => handleChange("firstName", val)}
+              />
+              <label className="text-black">ID Number</label>
+              <TextBox
+                placeholder="Text"
+                variant="small"
+                value={formData.idNumber}
+                onChange={(val) => handleChange("idNumber", val)}
+              />
             </div>
-          </div>
+              {/* column 2 */}
+            <div className="flex flex-col gap-4">
+              <label className="text-black">Last Name</label>
+              <TextBox
+                placeholder="Text"
+                variant="small"
+                value={formData.lastName}
+                onChange={(val) => handleChange("lastName", val)}
+              />
+              <label className="text-black">Year Level</label>
+              <TextBox
+                placeholder="Text"
+                variant="small"
+                value={formData.yearLevel}
+                onChange={(val) => handleChange("yearLevel", val)}
+              />
+            </div>
 
-          {/* message */}
-          <div className="col-span-1 md:col-span-2 flex flex-col gap-2 mt-4">
-            <label className="text-black">Message</label>
-            <TextBox
-              placeholder="Message Here"
-              variant="big"
-              value={formData.message}
-              onChange={(val) => handleChange("message", val)}
-            />
-          </div>
+            {/* email */}
+            <div className="col-span-1 md:col-span-2 flex flex-col gap-2">
+              <label className="text-black">Email</label>
+              <TextBox
+                placeholder="Text"
+                variant="small-long"
+                value={formData.email}
+                onChange={(val) => handleChange("email", val)}
+              />
+            </div>
 
-          {/* submit button */}
-          <div className="col-span-1 md:col-span-2 flex justify-end mt-6">
-            <Button label="Submit" backgroundColor="#2563eb" type="submit" />
+            {/* enquiry Type */}
+            <div className="flex flex-col gap-4">
+              <label className="text-black">Enquiry Type</label>
+              <Dropdown
+                options={[
+                  "Membership & Recruitment",
+                  "Events",
+                  "Collaboration & Partnerships",
+                  "Wellbeing",
+                ]}
+                placeholder="Select an option"
+                value={formData.enquiryType}
+                onChange={(val) => handleChange("enquiryType", val)}
+              />
+            </div>
+
+            {/* action buttons */}
+            <div className="flex flex-col gap-4 mt-4 md:mt-10 col-span-1 md:col-span-2">
+              <div className="flex flex-wrap gap-4">
+                <Button label="Action 1" backgroundColor="#F8FAFC" />
+                <Button label="Action 2" backgroundColor="#F8FAFC" />
+                <Button label="Action 3" backgroundColor="#F8FAFC" />
+              </div>
+            </div>
+
+            {/* message */}
+            <div className="col-span-1 md:col-span-2 flex flex-col gap-2 mt-4">
+              <label className="text-black">Message</label>
+              <TextBox
+                placeholder="Message Here"
+                variant="big"
+                value={formData.message}
+                onChange={(val) => handleChange("message", val)}
+              />
+            </div>
+
+            {/* submit button */}
+            <div className="col-span-1 md:col-span-2 flex justify-end mt-6">
+              <Button label="Submit" backgroundColor="#2563eb" type="submit" />
+            </div>
           </div>
         </div>
       </form>
@@ -165,4 +171,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Contacts;
