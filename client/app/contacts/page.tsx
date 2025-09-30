@@ -1,39 +1,126 @@
+"use client";
 import React from "react";
 import TextBox from "../components/composite/text-box/TextBox";
 import Dropdown from "../components/composite/dropdown/Dropdown";
+import Button from "../components/generic/button/regular/Button";
+import emailjs from "@emailjs/browser";
+import { useState } from 'react'
 
 const Contact = () => {
-  return (
-    // full page container
-    <div className="flex justify-center items-start min-h-screen bg-gray-100 p-10">
-      {/* form container */}
-      <div className="bg-white w-[90%] max-w-[900px] p-10 mt-[30px] rounded-lg shadow-lg flex gap-10">
-        
-        {/* form inputs (rhs) */}
-        <div className="grid grid-cols-2 gap-6">
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    idNumber: "",
+    yearLevel: "",
+    email: "",
+    enquiryType: "",
+    message: "",
+  });
 
-          {/* top row: first name / last name columns */}
-          <div className="flex flex-col gap-4 border border-black">
+  const handleChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const sendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
+      alert("Please fill in all required fields!");
+      return;
+    }
+
+    emailjs
+      .send(
+        "service_vo27jod",
+        "template_q845yhw",
+        formData,
+        "DPs78eLGecvnCMXH1"
+      )
+      .then(
+        () => {
+          alert("Message sent successfully!");
+          setFormData({
+            firstName: "",
+            lastName: "",
+            idNumber: "",
+            yearLevel: "",
+            email: "",
+            enquiryType: "",
+            message: "",
+          });
+        },
+        (error) => {
+          console.error(error);
+          alert("Failed to send message. Try again later.");
+        }
+      );
+  };
+
+  return (
+    <div className="flex justify-center items-start min-h-screen bg-gray-100 p-5 md:p-10">
+      <form
+        className="bg-white w-full max-w-[1500px] p-5 md:p-10 mt-5 md:mt-[30px] rounded-lg shadow-lg flex flex-col md:flex-row gap-6 md:gap-10"
+        onSubmit={sendEmail}
+      >
+        {/* LHS picture */}
+        <div className="flex-shrink-0 w-full md:w-[400px] flex justify-center items-center">
+          <img
+            src="/contact-illustration.png"
+            alt="Contact Illustration"
+            className="w-[200px] md:w-[250px] h-[200px] md:h-[250px] object-contain"
+          />
+        </div>
+
+        {/* RHS form */}
+        <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          {/* Column 1 */}
+          <div className="flex flex-col gap-4">
             <label className="text-black">First Name</label>
-            <TextBox placeholder="Text" variant="small" />
+            <TextBox
+              placeholder="Text"
+              variant="small"
+              value={formData.firstName}
+              onChange={(val) => handleChange("firstName", val)}
+            />
             <label className="text-black">ID Number</label>
-            <TextBox placeholder="Text" variant="small" />
+            <TextBox
+              placeholder="Text"
+              variant="small"
+              value={formData.idNumber}
+              onChange={(val) => handleChange("idNumber", val)}
+            />
           </div>
 
+          {/* Column 2 */}
           <div className="flex flex-col gap-4">
             <label className="text-black">Last Name</label>
-            <TextBox placeholder="Text" variant="small" />
+            <TextBox
+              placeholder="Text"
+              variant="small"
+              value={formData.lastName}
+              onChange={(val) => handleChange("lastName", val)}
+            />
             <label className="text-black">Year Level</label>
-            <TextBox placeholder="Text" variant="small" />
+            <TextBox
+              placeholder="Text"
+              variant="small"
+              value={formData.yearLevel}
+              onChange={(val) => handleChange("yearLevel", val)}
+            />
           </div>
 
-          {/* Email spans full width */}
-          <div className="col-span-2 flex flex-col gap-2">
+          {/* Email (spans full width) */}
+          <div className="col-span-1 md:col-span-2 flex flex-col gap-2">
             <label className="text-black">Email</label>
-            <TextBox placeholder="Text" variant="small-long" />
+            <TextBox
+              placeholder="Text"
+              variant="small-long"
+              value={formData.email}
+              onChange={(val) => handleChange("email", val)}
+            />
           </div>
 
-          {/* Middle row: enquiry + three small boxes */}
+          {/* Enquiry Type */}
           <div className="flex flex-col gap-4">
             <label className="text-black">Enquiry Type</label>
             <Dropdown
@@ -44,27 +131,39 @@ const Contact = () => {
                 "Wellbeing",
               ]}
               placeholder="Select an option"
+              value={formData.enquiryType}
+              onChange={(val) => handleChange("enquiryType", val)}
             />
           </div>
 
-          <div className="flex flex-col gap-4">
-            <label className="text-black">Extra 1</label>
-            <TextBox placeholder="Text" variant="small" />
-            <label className="text-black">Extra 2</label>
-            <TextBox placeholder="Text" variant="small" />
-            <label className="text-black">Extra 3</label>
-            <TextBox placeholder="Text" variant="small" />
+          {/* Action buttons */}
+          <div className="flex flex-col gap-4 mt-4 md:mt-10 col-span-1 md:col-span-2">
+            <div className="flex flex-wrap gap-4">
+              <Button label="Action 1" backgroundColor="#F8FAFC" />
+              <Button label="Action 2" backgroundColor="#F8FAFC" />
+              <Button label="Action 3" backgroundColor="#F8FAFC" />
+            </div>
           </div>
 
-          {/* Message spans full width at the bottom */}
-          <div className="col-span-2 flex flex-col gap-2 mt-4">
-            <label className="text-black">Message Here</label>
-            <TextBox placeholder="Message Here" variant="big" />
+          {/* Message (spans full width) */}
+          <div className="col-span-1 md:col-span-2 flex flex-col gap-2 mt-4">
+            <label className="text-black">Message</label>
+            <TextBox
+              placeholder="Message Here"
+              variant="big"
+              value={formData.message}
+              onChange={(val) => handleChange("message", val)}
+            />
           </div>
-            
+
+          {/* Submit Button */}
+          <div className="col-span-1 md:col-span-2 flex justify-end mt-6">
+            <Button label="Submit" backgroundColor="#2563eb" type="submit" />
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
-  export default Contact;
+
+export default Contact;

@@ -1,24 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 interface DropdownProps {
-  options: string[];       
-  placeholder?: string;   
+  options: string[];
+  placeholder?: string;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
   options,
   placeholder = "Select an option",
+  value = "",
+  onChange,
 }) => {
-  const [selected, setSelected] = useState("");
-
   const styles =
-    "bg-[#F8FAFC] rounded-lg outline-none text-black w-[250px] h-[40px] p-2 text-sm";
+    "bg-[#F8FAFC] rounded-lg outline-none text-black w-full max-w-full h-[40px] p-2 text-sm";
 
   return (
     <select
-      value={selected}
-      onChange={(e) => setSelected(e.target.value)}
+      value={value}
+      onChange={(e) => onChange?.(e.target.value)}
       className={styles}
     >
       <option value="" disabled hidden>

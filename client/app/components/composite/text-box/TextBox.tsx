@@ -1,32 +1,34 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 interface TextBoxProps {
   variant?: "big" | "small" | "small-long"; 
-  placeholder?: string; 
+  placeholder?: string;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
 const TextBox: React.FC<TextBoxProps> = ({
   variant = "small",
   placeholder = "",
+  value = "",
+  onChange,
 }) => {
-  const [value, setValue] = useState("");
-
   const baseStyles =
-    "bg-[#F8FAFC] rounded-lg outline-none resize-none text-black";
+    "bg-[#F8FAFC] rounded-lg outline-none resize-none text-black w-full max-w-full";
 
   const sizeStyles =
     variant === "big"
-      ? "w-[600px] h-[300px] p-4 text-sm"
+      ? "h-[300px] p-4 text-sm md:h-[300px]"
       : variant === "small-long"
-      ? "w-[630px] h-[40px] p-2 text-sm" 
-      : "w-[300px] h-[40px] p-2 text-sm"; 
+      ? "h-[40px] p-2 text-sm md:h-[40px]"
+      : "h-[40px] p-2 text-sm md:h-[40px]";
 
   return variant === "big" ? (
     <textarea
       value={value}
       placeholder={placeholder} 
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) => onChange?.(e.target.value)}
       className={`${baseStyles} ${sizeStyles}`}
     />
   ) : (
@@ -34,7 +36,7 @@ const TextBox: React.FC<TextBoxProps> = ({
       type="text"
       value={value}
       placeholder={placeholder} 
-      onChange={(e) => setValue(e.target.value)}
+      onChange={(e) => onChange?.(e.target.value)}
       className={`${baseStyles} ${sizeStyles}`}
     />
   );
