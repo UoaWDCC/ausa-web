@@ -9,21 +9,59 @@ const Contact = () => {
       {/* form container */}
       <div className="bg-white w-[90%] max-w-[900px] p-10 mt-[30px] rounded-lg shadow-lg flex gap-10">
         
-        {/* left column */}
-        <div className="flex flex-col gap-4 flex-1">
-          <h2 className="text-xl font-semibold">Left Column</h2>
-          <p>Some content here...</p>
-        </div>
+        {/* form inputs (rhs) */}
+        <div className="grid grid-cols-2 gap-6">
 
-        {/* right column (form inputs) */}
-        <div className="flex flex-col gap-4 flex-1">
-            <h1>First Name</h1>
-          <TextBox placeholder="Text" variant="small" />
-          <TextBox placeholder="Message Here" variant="big" />
-          <Dropdown
-            options={["None", "Option 1", "Option 2", "Option 3"]}
-            placeholder="Select an option"
-          />
+          {/* top row: first name / last name columns */}
+          <div className="flex flex-col gap-4 border border-black">
+            <label className="text-black">First Name</label>
+            <TextBox placeholder="Text" variant="small" />
+            <label className="text-black">ID Number</label>
+            <TextBox placeholder="Text" variant="small" />
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <label className="text-black">Last Name</label>
+            <TextBox placeholder="Text" variant="small" />
+            <label className="text-black">Year Level</label>
+            <TextBox placeholder="Text" variant="small" />
+          </div>
+
+          {/* Email spans full width */}
+          <div className="col-span-2 flex flex-col gap-2">
+            <label className="text-black">Email</label>
+            <TextBox placeholder="Text" variant="small-long" />
+          </div>
+
+          {/* Middle row: enquiry + three small boxes */}
+          <div className="flex flex-col gap-4">
+            <label className="text-black">Enquiry Type</label>
+            <Dropdown
+              options={[
+                "Membership & Recruitment",
+                "Events",
+                "Collaboration & Partnerships",
+                "Wellbeing",
+              ]}
+              placeholder="Select an option"
+            />
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <label className="text-black">Extra 1</label>
+            <TextBox placeholder="Text" variant="small" />
+            <label className="text-black">Extra 2</label>
+            <TextBox placeholder="Text" variant="small" />
+            <label className="text-black">Extra 3</label>
+            <TextBox placeholder="Text" variant="small" />
+          </div>
+
+          {/* Message spans full width at the bottom */}
+          <div className="col-span-2 flex flex-col gap-2 mt-4">
+            <label className="text-black">Message Here</label>
+            <TextBox placeholder="Message Here" variant="big" />
+          </div>
+            
         </div>
       </div>
     </div>

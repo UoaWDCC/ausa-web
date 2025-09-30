@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 
 interface DropdownProps {
-  options: string[];       // items to select from
-  placeholder?: string;    // default text when nothing is selected
+  options: string[];       
+  placeholder?: string;   
 }
 
 const Dropdown: React.FC<DropdownProps> = ({

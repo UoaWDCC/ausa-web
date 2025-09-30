@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 
 interface TextBoxProps {
-  variant?: "big" | "small";
-  placeholder?: string; // text shown inside input
+  variant?: "big" | "small" | "small-long"; 
+  placeholder?: string; 
 }
 
 const TextBox: React.FC<TextBoxProps> = ({
@@ -17,8 +17,10 @@ const TextBox: React.FC<TextBoxProps> = ({
 
   const sizeStyles =
     variant === "big"
-      ? "w-[600px] h-[300px] p-4 text-sm" 
-      : "w-[250px] h-[40px] p-2 text-sm";
+      ? "w-[600px] h-[300px] p-4 text-sm"
+      : variant === "small-long"
+      ? "w-[630px] h-[40px] p-2 text-sm" 
+      : "w-[300px] h-[40px] p-2 text-sm"; 
 
   return variant === "big" ? (
     <textarea
