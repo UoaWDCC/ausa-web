@@ -73,7 +73,7 @@ const Contact = () => {
 
         {/* RHS form */}
         <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          {/* Column 1 */}
+          {/* column 1 */}
           <div className="flex flex-col gap-4">
             <label className="text-black">First Name</label>
             <TextBox
@@ -90,8 +90,7 @@ const Contact = () => {
               onChange={(val) => handleChange("idNumber", val)}
             />
           </div>
-
-          {/* Column 2 */}
+            {/* column 2 */}
           <div className="flex flex-col gap-4">
             <label className="text-black">Last Name</label>
             <TextBox
@@ -109,7 +108,7 @@ const Contact = () => {
             />
           </div>
 
-          {/* Email (spans full width) */}
+          {/* email */}
           <div className="col-span-1 md:col-span-2 flex flex-col gap-2">
             <label className="text-black">Email</label>
             <TextBox
@@ -120,7 +119,7 @@ const Contact = () => {
             />
           </div>
 
-          {/* Enquiry Type */}
+          {/* enquiry Type */}
           <div className="flex flex-col gap-4">
             <label className="text-black">Enquiry Type</label>
             <Dropdown
@@ -136,7 +135,7 @@ const Contact = () => {
             />
           </div>
 
-          {/* Action buttons */}
+          {/* action buttons */}
           <div className="flex flex-col gap-4 mt-4 md:mt-10 col-span-1 md:col-span-2">
             <div className="flex flex-wrap gap-4">
               <Button label="Action 1" backgroundColor="#F8FAFC" />
@@ -145,7 +144,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Message (spans full width) */}
+          {/* message */}
           <div className="col-span-1 md:col-span-2 flex flex-col gap-2 mt-4">
             <label className="text-black">Message</label>
             <TextBox
@@ -156,7 +155,7 @@ const Contact = () => {
             />
           </div>
 
-          {/* Submit Button */}
+          {/* submit button */}
           <div className="col-span-1 md:col-span-2 flex justify-end mt-6">
             <Button label="Submit" backgroundColor="#2563eb" type="submit" />
           </div>
