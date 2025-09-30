@@ -15,7 +15,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   onChange,
 }) => {
   const styles =
-    "bg-[#F8FAFC] rounded-lg outline-none text-black w-full max-w-full h-[40px] p-2 text-sm";
+    "bg-[#F8FAFC] rounded-lg outline-none text-slate-500 w-full max-w-full h-[40px] p-2 text-sm";
 
   return (
     <select

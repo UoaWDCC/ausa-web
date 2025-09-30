@@ -80,14 +80,14 @@ const Contacts = () => {
           <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 p-10">
             {/* column 1 */}
             <div className="flex flex-col gap-4">
-              <label className="text-black">First Name</label>
+              <label className="h3 text-2xl text-[#043873]">First Name</label>
               <TextBox
                 placeholder="Text"
                 variant="small"
                 value={formData.firstName}
                 onChange={(val) => handleChange("firstName", val)}
               />
-              <label className="text-black">ID Number</label>
+              <label className="h3 text-2xl text-[#043873]">ID Number</label>
               <TextBox
                 placeholder="Text"
                 variant="small"
@@ -97,14 +97,14 @@ const Contacts = () => {
             </div>
               {/* column 2 */}
             <div className="flex flex-col gap-4">
-              <label className="text-black">Last Name</label>
+              <label className="h3 text-2xl text-[#043873]">Last Name</label>
               <TextBox
                 placeholder="Text"
                 variant="small"
                 value={formData.lastName}
                 onChange={(val) => handleChange("lastName", val)}
               />
-              <label className="text-black">Year Level</label>
+              <label className="h3 text-2xl text-[#043873]">Year Level</label>
               <TextBox
                 placeholder="Text"
                 variant="small"
@@ -115,7 +115,7 @@ const Contacts = () => {
 
             {/* email */}
             <div className="col-span-1 md:col-span-2 flex flex-col gap-2">
-              <label className="text-black">Email</label>
+              <label className="h3 text-2xl text-[#043873]">Email</label>
               <TextBox
                 placeholder="Text"
                 variant="small-long"
@@ -126,7 +126,7 @@ const Contacts = () => {
 
             {/* enquiry Type */}
             <div className="flex flex-col gap-4">
-              <label className="text-black">Enquiry Type</label>
+              <label className="h3 text-2xl text-[#043873]">Enquiry Type</label>
               <Dropdown
                 options={[
                   "Membership & Recruitment",
@@ -143,15 +143,24 @@ const Contacts = () => {
             {/* action buttons */}
             <div className="flex flex-col gap-4 mt-4 md:mt-10 col-span-1 md:col-span-2">
               <div className="flex flex-wrap gap-4">
-                <Button label="Action 1" backgroundColor="#F8FAFC" />
-                <Button label="Action 2" backgroundColor="#F8FAFC" />
-                <Button label="Action 3" backgroundColor="#F8FAFC" />
+                <Button 
+                  label="Action 1" 
+                  backgroundColor="#1a61b1" 
+                />
+                <Button 
+                  label="Action 2" 
+                  backgroundColor="#1a61b1"
+                  />
+                <Button 
+                  label="Action 3" 
+                  backgroundColor="#1a61b1"
+                  />
               </div>
             </div>
 
             {/* message */}
             <div className="col-span-1 md:col-span-2 flex flex-col gap-2 mt-4">
-              <label className="text-black">Message</label>
+              <label className="h3 text-2xl text-[#043873]">Message Here</label>
               <TextBox
                 placeholder="Message Here"
                 variant="big"

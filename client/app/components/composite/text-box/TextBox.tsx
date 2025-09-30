@@ -15,7 +15,7 @@ const TextBox: React.FC<TextBoxProps> = ({
   onChange,
 }) => {
   const baseStyles =
-    "bg-[#F8FAFC] rounded-lg outline-none resize-none text-black w-full max-w-full";
+    "bg-[#F8FAFC] rounded-lg outline-none resize-none placeholder:text-slate-500 text-black w-full max-w-full";
 
   const sizeStyles =
     variant === "big"
