@@ -1,11 +1,11 @@
-"use client";
-import React from "react";
+"use client"
+import React from "react"
 
 interface DropdownProps {
-  options: string[];
-  placeholder?: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  options: string[]
+  placeholder?: string
+  value?: string
+  onChange?: (value: string) => void
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -15,7 +15,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   onChange,
 }) => {
   const styles =
-    "bg-[#F8FAFC] rounded-lg outline-none text-slate-500 w-full max-w-full h-[40px] p-2 text-sm";
+    "bg-[#F8FAFC] rounded-lg outline-none text-slate-500 w-full max-w-full h-[40px] p-2 text-sm"
 
   return (
     <select
@@ -32,7 +32,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         </option>
       ))}
     </select>
-  );
-};
+  )
+}
 
-export default Dropdown;
+export default Dropdown

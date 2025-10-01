@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs"
 import ContactsLeft from "./ContactsLeft"
-import background from "../contacts/contacts background.jpeg"
 
 const meta: Meta<typeof ContactsLeft> = {
   title: "Components/Contacts/ContactsLeft",
@@ -11,9 +10,18 @@ const meta: Meta<typeof ContactsLeft> = {
   tags: ["autodocs"],
   argTypes: {
     title1: { control: { type: "text" }, description: "The main title text" },
-    title2: { control: { type: "text" }, description: "Optional second title text" },
-    subtitle: { control: { type: "text" }, description: "Optional subtitle/description text" },
-    backgroundImage: { control: { type: "text" }, description: "URL for background image" },
+    title2: {
+      control: { type: "text" },
+      description: "Optional second title text",
+    },
+    subtitle: {
+      control: { type: "text" },
+      description: "Optional subtitle/description text",
+    },
+    backgroundImage: {
+      control: { type: "text" },
+      description: "URL for background image",
+    },
   },
 }
 
@@ -25,7 +33,8 @@ export const Default: Story = {
   args: {
     title1: "Have any Questions?",
     title2: "Reach out!",
-    subtitle: "We're here to listen and support you. Whether you have a question, need guidance, or just want to connect with our team, you can reach out anytime.",
+    subtitle:
+      "We're here to listen and support you. Whether you have a question, need guidance, or just want to connect with our team, you can reach out anytime.",
   },
 }
 
@@ -40,6 +49,7 @@ export const TitleOnly: Story = {
 export const CustomBackground: Story = {
   args: {
     title1: "Have any Questions? Reach out!",
-    subtitle: "We're here to listen and support you. Whether you have a question, need guidance, or just want to connect with our team, you can reach out anytime.",
+    subtitle:
+      "We're here to listen and support you. Whether you have a question, need guidance, or just want to connect with our team, you can reach out anytime.",
   },
 }

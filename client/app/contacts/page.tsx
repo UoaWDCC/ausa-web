@@ -1,13 +1,12 @@
-"use client";
-import React from "react";
-import TextBox from "../components/composite/text-box/TextBox";
-import Dropdown from "../components/composite/dropdown/Dropdown";
-import Button from "../components/generic/button/regular/Button";
-import emailjs from "@emailjs/browser";
-import { useState } from 'react'
-import ContactsLeft from "../components/composite/contacts/ContactsLeft";
-import Image from "next/image";
-import background from "../components/composite/contacts/contacts background.jpeg";
+"use client"
+import React from "react"
+import TextBox from "../components/composite/text-box/TextBox"
+import Dropdown from "../components/composite/dropdown/Dropdown"
+import Button from "../components/generic/button/regular/Button"
+import emailjs from "@emailjs/browser"
+import { useState } from "react"
+import ContactsLeft from "../components/composite/contacts/ContactsLeft"
+import background from "../components/composite/contacts/contacts background.jpeg"
 
 const Contacts = () => {
   const [formData, setFormData] = useState({
@@ -18,18 +17,23 @@ const Contacts = () => {
     email: "",
     enquiryType: "",
     message: "",
-  });
+  })
 
   const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+    setFormData((prev) => ({ ...prev, [field]: value }))
+  }
 
   const sendEmail = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
-      alert("Please fill in all required fields!");
-      return;
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.message
+    ) {
+      alert("Please fill in all required fields!")
+      return
     }
 
     emailjs
@@ -37,11 +41,11 @@ const Contacts = () => {
         "service_vo27jod",
         "template_q845yhw",
         formData,
-        "DPs78eLGecvnCMXH1"
+        "DPs78eLGecvnCMXH1",
       )
       .then(
         () => {
-          alert("Message sent successfully!");
+          alert("Message sent successfully!")
           setFormData({
             firstName: "",
             lastName: "",
@@ -50,14 +54,14 @@ const Contacts = () => {
             email: "",
             enquiryType: "",
             message: "",
-          });
+          })
         },
         (error) => {
-          console.error(error);
-          alert("Failed to send message. Try again later.");
-        }
-      );
-  };
+          console.error(error)
+          alert("Failed to send message. Try again later.")
+        },
+      )
+  }
 
   return (
     <div className="flex justify-center items-start min-h-screen bg-gray-100 py-16 px-5 md:p-10">
@@ -79,14 +83,14 @@ const Contacts = () => {
           <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 p-10">
             {/* column 1 */}
             <div className="flex flex-col gap-4">
-              <label className="h3 text-2xl text-[#043873]">First Name</label>
+              <h3 className=" text-2xl text-[#043873]">First Name</h3>
               <TextBox
                 placeholder="Text"
                 variant="small"
                 value={formData.firstName}
                 onChange={(val) => handleChange("firstName", val)}
               />
-              <label className="h3 text-2xl text-[#043873]">ID Number</label>
+              <h3 className=" text-2xl text-[#043873]">ID Number</h3>
               <TextBox
                 placeholder="Text"
                 variant="small"
@@ -96,14 +100,14 @@ const Contacts = () => {
             </div>
             {/* column 2 */}
             <div className="flex flex-col gap-4">
-              <label className="h3 text-2xl text-[#043873]">Last Name</label>
+              <h3 className=" text-2xl text-[#043873]">Last Name</h3>
               <TextBox
                 placeholder="Text"
                 variant="small"
                 value={formData.lastName}
                 onChange={(val) => handleChange("lastName", val)}
               />
-              <label className="h3 text-2xl text-[#043873]">Year Level</label>
+              <h3 className=" text-2xl text-[#043873]">Year Level</h3>
               <TextBox
                 placeholder="Text"
                 variant="small"
@@ -114,7 +118,7 @@ const Contacts = () => {
 
             {/* email */}
             <div className="col-span-1 md:col-span-2 flex flex-col gap-2">
-              <label className="h3 text-2xl text-[#043873]">Email</label>
+              <h3 className="text-2xl text-[#043873]">Email</h3>
               <TextBox
                 placeholder="Text"
                 variant="small-long"
@@ -125,7 +129,7 @@ const Contacts = () => {
 
             {/* enquiry Type */}
             <div className="flex flex-col gap-4">
-              <label className="h3 text-2xl text-[#043873]">Enquiry Type</label>
+              <h3 className="text-2xl text-[#043873]">Enquiry Type</h3>
               <Dropdown
                 options={[
                   "Membership & Recruitment",
@@ -141,7 +145,7 @@ const Contacts = () => {
 
             {/* message */}
             <div className="col-span-1 md:col-span-2 flex flex-col gap-2 mt-4">
-              <label className="h3 text-2xl text-[#043873]">Message Here</label>
+              <h3 className="text-2xl text-[#043873]">Message Here</h3>
               <TextBox
                 placeholder="Message Here"
                 variant="big"
@@ -158,7 +162,7 @@ const Contacts = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Contacts;
+export default Contacts
