@@ -80,7 +80,7 @@ const Contacts = () => {
           <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 p-10">
             {/* column 1 */}
             <div className="flex flex-col gap-4">
-              <label className="h3 text-2xl text-[#043873]">First Name</label>
+              <p className="h3 text-2xl text-[#043873]">First Name</p>
               <TextBox
                 placeholder="Text"
                 variant="small"
