@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs"
 import ContactsLeft from "./ContactsLeft"
-import background from "../contacts/contacts background.jpeg"
 
 const meta: Meta<typeof ContactsLeft> = {
   title: "Components/Contacts/ContactsLeft",

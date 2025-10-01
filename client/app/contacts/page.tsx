@@ -6,7 +6,6 @@ import Button from "../components/generic/button/regular/Button"
 import emailjs from "@emailjs/browser"
 import { useState } from "react"
 import ContactsLeft from "../components/composite/contacts/ContactsLeft"
-import Image from "next/image"
 import background from "../components/composite/contacts/contacts background.jpeg"
 
 const Contacts = () => {
