@@ -1,13 +1,13 @@
-"use client";
-import React from "react";
-import TextBox from "../components/composite/text-box/TextBox";
-import Dropdown from "../components/composite/dropdown/Dropdown";
-import Button from "../components/generic/button/regular/Button";
-import emailjs from "@emailjs/browser";
-import { useState } from 'react'
-import ContactsLeft from "../components/composite/contacts/ContactsLeft";
-import Image from "next/image";
-import background from "../components/composite/contacts/contacts background.jpeg";
+"use client"
+import React from "react"
+import TextBox from "../components/composite/text-box/TextBox"
+import Dropdown from "../components/composite/dropdown/Dropdown"
+import Button from "../components/generic/button/regular/Button"
+import emailjs from "@emailjs/browser"
+import { useState } from "react"
+import ContactsLeft from "../components/composite/contacts/ContactsLeft"
+import Image from "next/image"
+import background from "../components/composite/contacts/contacts background.jpeg"
 
 const Contacts = () => {
   const [formData, setFormData] = useState({
@@ -18,18 +18,23 @@ const Contacts = () => {
     email: "",
     enquiryType: "",
     message: "",
-  });
+  })
 
   const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+    setFormData((prev) => ({ ...prev, [field]: value }))
+  }
 
   const sendEmail = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.message) {
-      alert("Please fill in all required fields!");
-      return;
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.message
+    ) {
+      alert("Please fill in all required fields!")
+      return
     }
 
     emailjs
@@ -37,11 +42,11 @@ const Contacts = () => {
         "service_vo27jod",
         "template_q845yhw",
         formData,
-        "DPs78eLGecvnCMXH1"
+        "DPs78eLGecvnCMXH1",
       )
       .then(
         () => {
-          alert("Message sent successfully!");
+          alert("Message sent successfully!")
           setFormData({
             firstName: "",
             lastName: "",
@@ -50,14 +55,14 @@ const Contacts = () => {
             email: "",
             enquiryType: "",
             message: "",
-          });
+          })
         },
         (error) => {
-          console.error(error);
-          alert("Failed to send message. Try again later.");
-        }
-      );
-  };
+          console.error(error)
+          alert("Failed to send message. Try again later.")
+        },
+      )
+  }
 
   return (
     <div className="flex justify-center items-start min-h-screen bg-gray-100 py-16 px-5 md:p-10">
@@ -159,7 +164,7 @@ const Contacts = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Contacts;
+export default Contacts
