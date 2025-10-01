@@ -121,6 +121,11 @@
   .navbar {
     background: var(--black);
   }
+
+  .footer {
+    background: var(--black);
+    color: var(--white);
+  }
 }
 
 @layer base {
