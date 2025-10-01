@@ -95,7 +95,7 @@ const Contacts = () => {
                 onChange={(val) => handleChange("idNumber", val)}
               />
             </div>
-              {/* column 2 */}
+            {/* column 2 */}
             <div className="flex flex-col gap-4">
               <label className="h3 text-2xl text-[#043873]">Last Name</label>
               <TextBox
@@ -138,24 +138,6 @@ const Contacts = () => {
                 value={formData.enquiryType}
                 onChange={(val) => handleChange("enquiryType", val)}
               />
-            </div>
-
-            {/* action buttons */}
-            <div className="flex flex-col gap-4 mt-4 md:mt-10 col-span-1 md:col-span-2">
-              <div className="flex flex-wrap gap-4">
-                <Button 
-                  label="Action 1" 
-                  backgroundColor="#1a61b1" 
-                />
-                <Button 
-                  label="Action 2" 
-                  backgroundColor="#1a61b1"
-                  />
-                <Button 
-                  label="Action 3" 
-                  backgroundColor="#1a61b1"
-                  />
-              </div>
             </div>
 
             {/* message */}
