@@ -15,16 +15,19 @@ const ContactsLeft: React.FC<ContactsLeftProps> = ({
   subtitle,
   backgroundImage,
 }) => {
-  return (
-    <div className="relative w-full md:w-[400px] h-full p-4 rounded-lg overflow-hidden flex">
-      {/* Background Image */}
-      <Image
-        src={backgroundImage || "/default-background.jpg"}
-        alt="Background"
-        fill
-        className="object-cover object-center absolute inset-0 z-0 opacity-92"
-        priority
-      />
+    return (
+      <div className="relative w-full md:w-[400px] h-full p-4 rounded-lg overflow-hidden flex">
+        {/* Background Image */}
+        <Image
+            src={backgroundImage || "/default-background.jpg"}
+            alt="Background"
+            fill
+            className="object-cover object-center absolute inset-0 z-0 opacity-92 bg-linear-to-t from-sky-500 to-indigo-500"
+            priority
+        />
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#043873]/40 via-black/40 to-[#D9D9D9]/60" />
 
       {/* Text */}
       <div className="relative z-10 px-6">
