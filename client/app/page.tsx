@@ -2,6 +2,38 @@
 // or pages/index.tsx (Pages Router)
 import Image from "next/image"
 import ModalWindow from "./components/composite/modal-window/ModalWindow"
+import Carousel from "./components/composite/carousel/Carousel"
+
+const carouselItems = [
+  {
+    title: "Counselling Services",
+    description:
+      "Free and confidential counselling sessions available to all students. Book online or in-person.",
+    image: "/counselling.jpg",
+    link: "https://www.auckland.ac.nz/en/on-campus/student-support/student-health-counselling.html",
+  },
+  {
+    title: "Medical Centre",
+    description:
+      "On-campus doctors and nurses providing primary healthcare, prescriptions, and wellbeing checks.",
+    image: "/medical.jpg",
+    link: "https://www.auckland.ac.nz/en/on-campus/student-support/student-health.html",
+  },
+  {
+    title: "Peer Support",
+    description:
+      "Connect with fellow students trained to support you through challenges in a safe space.",
+    image: "/peer.jpg",
+    link: "https://ausa.org.nz/",
+  },
+  {
+    title: "More Support",
+    description:
+      "Connect with fellow students trained to support you through challenges in a safe space.",
+    image: "/peer.jpg",
+    link: "https://ausa.org.nz/",
+  },
+]
 
 export default function Home() {
   return (
@@ -36,6 +68,12 @@ export default function Home() {
       <div className="hidden md:flex md:w-[90%] md:mx-auto md:relative md:z-10 md:-mt-24">
         <ModalWindow />
       </div>
+
+      <h1 className="text-[#3A7D8C] mt-10 italic text-4xl text-center mb-8">
+        Wellbeing Events
+      </h1>
+
+      <Carousel items={carouselItems} />
     </div>
   )
 }
