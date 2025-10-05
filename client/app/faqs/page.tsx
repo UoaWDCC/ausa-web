@@ -18,6 +18,7 @@ const faqData = [
 
 const FAQ = () => {
   return (
+    // for testing accordian, mt-40 is also for testing
     <div className="mt-40 px-4 max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold mb-4 text-black">Frequently Asked Questions</h1>
       {/* divide-y will create a single line between each accordion */}
