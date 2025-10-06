@@ -1,28 +1,88 @@
+"use client"
+
 import Accordian from "../components/generic/accordian/Accordian"
 import Button from "../components/generic/button/regular/Button"
-import React from "react"
+import React, { useState } from "react"
 
-const faqData = [
+const tabConfigs = [
   {
-    question: "What kinds of wellbeing support are available at UOA?",
-    answer:
-      "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+    label: "University Support",
+    bg: "var(--btn-secondary-bg)",
+    gradient: "to bottom, var(--white), var(--btn-secondary-bg)",
+    faqs: [
+      {
+        question: "What kinds of wellbeing support are available at UOA?",
+        answer:
+          "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+      },
+      {
+        question: "What kinds of wellbeing support are available at UOA?",
+        answer:
+          "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+      },
+      {
+        question: "What kinds of wellbeing support are available at UOA?",
+        answer:
+          "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+      },
+    ],
   },
   {
-    question: "What kinds of wellbeing support are available at UOA?",
-    answer:
-      "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+    label: "External Support",
+    bg: "var(--btn-tertiary-bg-hover)",
+    gradient: "to bottom, var(--white), var(--btn-tertiary-bg-hover)",
+    faqs: [
+      {
+        question: "What kinds of wellbeing support are available at UOA?",
+        answer:
+          "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+      },
+      {
+        question: "What kinds of wellbeing support are available at UOA?",
+        answer:
+          "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+      },
+      {
+        question: "What kinds of wellbeing support are available at UOA?",
+        answer:
+          "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+      },
+    ],
   },
   {
-    question: "What kinds of wellbeing support are available at UOA?",
-    answer:
-      "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+    label: "Emergency Support",
+    bg: "var(--btn-primary-bg-press)",
+    gradient: "to bottom, var(--white), var(--btn-primary-bg-press)",
+    faqs: [
+      {
+        question: "What kinds of wellbeing support are available at UOA?",
+        answer:
+          "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+      },
+      {
+        question: "What kinds of wellbeing support are available at UOA?",
+        answer:
+          "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+      },
+      {
+        question: "What kinds of wellbeing support are available at UOA?",
+        answer:
+          "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
+      },
+    ],
   },
 ]
 
 const FAQ = () => {
+  const [activeTab, setActiveTab] = useState(tabConfigs[0])
+
   return (
-    <div className="mt-40 px-8 mx-auto flex flex-col pb-16">
+    <div
+      className="px-8 mx-auto flex flex-col pb-16"
+      style={{
+        background: `linear-gradient(${activeTab.gradient})`,
+      }}
+    >
       <h2 className="h2 text-primary-emphasis mb-6">
         Frequently
         <br />
@@ -34,25 +94,19 @@ const FAQ = () => {
         help you find what you need quickly and confidently.
       </p>
       <div className="flex flex-row gap-4 mb-20">
-        <Button
-          label="University Support"
-          backgroundColor="var(--btn-secondary-bg)"
-          className="px-6 py-3 rounded-full"
-        />
-        <Button
-          label="External Support"
-          backgroundColor="var(--btn-tertiary-bg-hover)"
-          className="px-6 py-3 rounded-full"
-        />
-        <Button
-          label="Emergency Support"
-          backgroundColor="var(--btn-primary-bg-press)"
-          className="px-6 py-3 rounded-full"
-        />
+        {tabConfigs.map((tab) => (
+          <Button
+            key={tab.label}
+            label={tab.label}
+            backgroundColor={tab.bg}
+            className="px-6 py-3 rounded-full"
+            onClick={() => setActiveTab(tab)}
+          />
+        ))}
       </div>
-      <h3 className="h3 text-primary-emphasis mb-6">University Support</h3>
+      <h3 className="h3 text-primary-emphasis mb-6">{activeTab.label}</h3>
       <div className="divide-y divide-[#043873] w-full">
-        {faqData.map((faq, index) => (
+        {activeTab.faqs.map((faq, index) => (
           <Accordian key={index} title={faq.question} content={faq.answer} />
         ))}
       </div>
