@@ -41,7 +41,7 @@ const sampleQuiz = {
               id: "res3",
               title: "Fun happenings around the city",
               description:
-                "Connect with students who understand what you're going through",
+                "Discover events and activities happening around Auckland",
               url: "https://ourauckland.aucklandcouncil.govt.nz/events/",
               type: "directory",
             },
@@ -63,7 +63,7 @@ const sampleQuiz = {
               id: "res5",
               title: "University of Auckland Website",
               description:
-                "Free confidential counselling to help you find direction",
+                "Comprehensive information and resources about university services and support",
               url: "https://www.auckland.ac.nz/en.html",
               type: "directory",
             },
@@ -71,7 +71,7 @@ const sampleQuiz = {
               id: "res6",
               title: "Student Services Online",
               description:
-                "Get help with finding your path and making decisions",
+                "Access your student portal and online university services",
               url: "https://www.auckland.ac.nz/en/students/my-tools/sso.html",
               type: "directory",
             },
@@ -139,7 +139,8 @@ const sampleQuiz = {
             {
               id: "res13",
               title: "Student Job Search",
-              description: "Find part-time work opportunities for students",
+              description:
+                "University employment opportunities and career support services",
               url: "https://www.auckland.ac.nz/https://www.sjs.co.nz/?gad_source=1&gad_campaignid=21755270091&gbraid=0AAAAA9yRfnLYVGsGuZBVgLjuJYYl8YrF5&gclid=CjwKCAjwiY_GBhBEEiwAFaghviLTLMNpWZLbOnsfV3lY9QPMqoiM-rBefMWSoGx6dEJE48sX6vXH7BoCXC4QAvD_BwE/students/student-support/employment-opportunities.html",
               type: "directory",
             },
