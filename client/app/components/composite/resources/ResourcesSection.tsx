@@ -20,9 +20,9 @@ const ResourcesSection: React.FC<ResourcesSectionProps> = ({
   resources,
 }) => {
   return (
-    <section className="rounded-xl p-8 mb-10">
+    <section className="rounded-xl mb-10">
         <h1 className="text-4xl text-[#2A2A2A] mb-3">
-        <span className="italic">{sectionTitle}</span> Resources
+        <span className="italic font-bold">{sectionTitle}</span> Resources
         </h1>
         
         <h3 className="text-gray-600 mb-6">{sectionDescription}</h3>

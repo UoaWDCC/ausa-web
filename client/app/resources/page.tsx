@@ -50,12 +50,12 @@ function SidebarSection({ title, defaultOpen = false, children }: SidebarSection
 
 const ResourcesPage = () => {
   return (
-    <div className="flex justify-center items-start min-h-screen bg-[#FAF7F2] py-16 px-5 md:p-10">
+    <div className="flex items-start min-h-screen bg-[#FAF7F2] mt-[64px]">
       {/* Main container (sidebar + content) */}
-      <div className="w-full max-w-[1500px] flex flex-col md:flex-row gap-8">
+      <div className="w-full max-w-[1500px] flex flex-col md:flex-row gap-20">
 
         {/* LHS SIDEBAR — hello eve! */}
-        <div className="w-full md:w-[300px] bg-gradient-to-b from-[#043873] to-[#C7E1FF] rounded-lg shadow-md p-6 hidden md:block mt-14">
+        <div className="w-full md:w-[300px] bg-gradient-to-b from-[#043873] to-[#C7E1FF] rounded-tr-4xl shadow-md p-6 hidden md:block mt-12">
           {/* Sidebar buttons */}
             <h3 className="text-3xl text-white mb-10">Our <span className="italic">Resources</span></h3>
             <SidebarSection title="Financial">
@@ -144,7 +144,7 @@ const ResourcesPage = () => {
         </div>
 
         {/* RHS CONTENT */}
-        <div className="flex-1 w-full bg-white rounded-lg shadow-lg p-8">
+        <div className="flex-1 w-full bg-[#FAF7F2] p-6 mt-12">
             <ResourcesSection
                 sectionTitle="Financial"
                 sectionDescription="Money worries can add extra stress, but you don’t have to face them alone. 
