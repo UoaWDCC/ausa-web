@@ -7,11 +7,13 @@ import QuizButton from "../components/composite/quiz/QuizButton"
 import QuizProgressBar from "../components/composite/quiz/QuizProgressBar"
 
 // TODO: Replace with your actual quiz ID after seeding
-const QUIZ_ID = "RoS7kDxCTKJGlwTQrPx7"
+const QUIZ_ID = "qQdUlPiUg1zsBifrMRSe"
 
 export default function QuizPage() {
   const [quizTitle, setQuizTitle] = useState("")
-  const [currentQuestion, setCurrentQuestion] = useState<QuizQuestion | null>(null)
+  const [currentQuestion, setCurrentQuestion] = useState<QuizQuestion | null>(
+    null,
+  )
   const [resources, setResources] = useState<Resource[] | null>(null)
   const [loading, setLoading] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
@@ -19,36 +21,37 @@ export default function QuizPage() {
   useEffect(() => {
     async function loadQuiz() {
       const response = await getQuizById(QUIZ_ID)
-      
+
       if (response.success && response.quiz) {
         setQuizTitle(response.quiz.title)
-        const firstQuestion = response.quiz.questions[response.quiz.startQuestionId]
+        const firstQuestion =
+          response.quiz.questions[response.quiz.startQuestionId]
         setCurrentQuestion(firstQuestion)
         setCurrentStep(1)
       }
-      
+
       setLoading(false)
     }
-    
+
     loadQuiz()
   }, [])
 
   const handleAnswer = async (questionId: string, optionId: string) => {
     setLoading(true)
-    
+
     const response = await navigateQuiz(QUIZ_ID, questionId, optionId)
-    
+
     if (response.success) {
-      if (response.type === 'resources' && response.resources) {
+      if (response.type === "resources" && response.resources) {
         setResources(response.resources)
         setCurrentQuestion(null)
         setCurrentStep(3) // Final step
-      } else if (response.type === 'question' && response.question) {
+      } else if (response.type === "question" && response.question) {
         setCurrentQuestion(response.question)
         setCurrentStep(2) // Second question
       }
     }
-    
+
     setLoading(false)
   }
 
@@ -70,7 +73,7 @@ export default function QuizPage() {
       <div className="min-h-screen flex flex-col items-center justify-center p-8">
         <div className="max-w-3xl w-full space-y-8">
           <h1 className="text-3xl font-bold text-center">{quizTitle}</h1>
-          
+
           <QuizProgressBar totalSections={3} currentSection={3} />
 
           <div className="bg-white rounded-lg shadow-md p-8 mt-8">
@@ -80,7 +83,10 @@ export default function QuizPage() {
 
             <div className="space-y-4 mb-8">
               {resources.map((resource) => (
-                <div key={resource.id} className="border-2 border-gray-200 rounded-lg p-5">
+                <div
+                  key={resource.id}
+                  className="border-2 border-gray-200 rounded-lg p-5"
+                >
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="text-lg font-semibold text-gray-900">
                       {resource.title}
@@ -122,16 +128,18 @@ export default function QuizPage() {
       <div className="min-h-screen flex flex-col items-center justify-center p-8">
         <div className="max-w-3xl w-full space-y-8">
           <h1 className="text-3xl font-bold text-center">{quizTitle}</h1>
-          
+
           <QuizProgressBar totalSections={3} currentSection={currentStep} />
 
           <div className="bg-white rounded-lg shadow-md p-8 mt-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">
               {currentQuestion.text}
             </h2>
-            
+
             {currentQuestion.description && (
-              <p className="text-gray-600 mb-6">{currentQuestion.description}</p>
+              <p className="text-gray-600 mb-6">
+                {currentQuestion.description}
+              </p>
             )}
 
             <div className="space-y-3">
