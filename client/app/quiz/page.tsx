@@ -1,68 +1,157 @@
 "use client"
 
-import React, { useState } from "react"
+import { useEffect, useState } from "react"
+import { getQuizById, navigateQuiz } from "../services/quizService"
+import { QuizQuestion, Resource } from "../models/Object/quizTypes"
 import QuizButton from "../components/composite/quiz/QuizButton"
 import QuizProgressBar from "../components/composite/quiz/QuizProgressBar"
 
-export default function QuizPage() {
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const totalQuestions = 5
+// TODO: Replace with your actual quiz ID after seeding
+const QUIZ_ID = "RoS7kDxCTKJGlwTQrPx7"
 
-  const handleNext = () => {
-    if (currentQuestion < totalQuestions - 1) {
-      setCurrentQuestion(currentQuestion + 1)
+export default function QuizPage() {
+  const [quizTitle, setQuizTitle] = useState("")
+  const [currentQuestion, setCurrentQuestion] = useState<QuizQuestion | null>(null)
+  const [resources, setResources] = useState<Resource[] | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [currentStep, setCurrentStep] = useState(0)
+
+  useEffect(() => {
+    async function loadQuiz() {
+      const response = await getQuizById(QUIZ_ID)
+      
+      if (response.success && response.quiz) {
+        setQuizTitle(response.quiz.title)
+        const firstQuestion = response.quiz.questions[response.quiz.startQuestionId]
+        setCurrentQuestion(firstQuestion)
+        setCurrentStep(1)
+      }
+      
+      setLoading(false)
     }
+    
+    loadQuiz()
+  }, [])
+
+  const handleAnswer = async (questionId: string, optionId: string) => {
+    setLoading(true)
+    
+    const response = await navigateQuiz(QUIZ_ID, questionId, optionId)
+    
+    if (response.success) {
+      if (response.type === 'resources' && response.resources) {
+        setResources(response.resources)
+        setCurrentQuestion(null)
+        setCurrentStep(3) // Final step
+      } else if (response.type === 'question' && response.question) {
+        setCurrentQuestion(response.question)
+        setCurrentStep(2) // Second question
+      }
+    }
+    
+    setLoading(false)
   }
 
-  const handlePrevious = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1)
-    }
+  const handleRestart = () => {
+    window.location.reload()
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg">Loading...</div>
+      </div>
+    )
+  }
+
+  // Resources view (end of quiz)
+  if (resources) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-8">
+        <div className="max-w-3xl w-full space-y-8">
+          <h1 className="text-3xl font-bold text-center">{quizTitle}</h1>
+          
+          <QuizProgressBar totalSections={3} currentSection={3} />
+
+          <div className="bg-white rounded-lg shadow-md p-8 mt-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              Resources for You
+            </h2>
+
+            <div className="space-y-4 mb-8">
+              {resources.map((resource) => (
+                <div key={resource.id} className="border-2 border-gray-200 rounded-lg p-5">
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {resource.title}
+                    </h3>
+                    <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded uppercase">
+                      {resource.type}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 mb-3">{resource.description}</p>
+                  {resource.url && (
+                    <a
+                      href={resource.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-700 font-medium inline-block"
+                    >
+                      Learn More →
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <button
+              onClick={handleRestart}
+              className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Take Quiz Again
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Question view
+  if (currentQuestion) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-8">
+        <div className="max-w-3xl w-full space-y-8">
+          <h1 className="text-3xl font-bold text-center">{quizTitle}</h1>
+          
+          <QuizProgressBar totalSections={3} currentSection={currentStep} />
+
+          <div className="bg-white rounded-lg shadow-md p-8 mt-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              {currentQuestion.text}
+            </h2>
+            
+            {currentQuestion.description && (
+              <p className="text-gray-600 mb-6">{currentQuestion.description}</p>
+            )}
+
+            <div className="space-y-3">
+              {currentQuestion.options.map((option) => (
+                <QuizButton
+                  key={option.id}
+                  text={option.text}
+                  onClick={() => handleAnswer(currentQuestion.id, option.id)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-8 gap-8">
-      <div className="max-w-2xl w-full space-y-8">
-        <h1 className="text-3xl font-bold text-center mb-8">Quiz Components Demo</h1>
-
-        
-        <div className="flex justify-center">
-          <QuizProgressBar
-            totalSections={totalQuestions}
-            currentSection={currentQuestion}
-          />
-        </div>
-
-        <div className="text-center text-xl font-medium my-12">
-          Question {currentQuestion + 1} of {totalQuestions}
-        </div>
-
-        
-        <div className="space-y-4">
-          <QuizButton text="Option A" onClick={() => alert("Selected A")} />
-          <QuizButton text="Option B" onClick={() => alert("Selected B")} />
-          <QuizButton text="Option C" onClick={() => alert("Selected C")} />
-          <QuizButton text="Option D" onClick={() => alert("Selected D")} />
-        </div>
-
-      
-        <div className="flex gap-4 mt-8">
-          <button
-            onClick={handlePrevious}
-            disabled={currentQuestion === 0}
-            className="px-6 py-2 border rounded disabled:opacity-50"
-          >
-            Previous
-          </button>
-          <button
-            onClick={handleNext}
-            disabled={currentQuestion === totalQuestions - 1}
-            className="px-6 py-2 border rounded disabled:opacity-50"
-          >
-            Next
-          </button>
-        </div>
-      </div>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-red-600">Failed to load quiz</div>
     </div>
   )
 }
