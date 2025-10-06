@@ -2,17 +2,145 @@
 import React from "react"
 import ResourcesSection from "../components/composite/resources/ResourcesSection"
 
+type SidebarSectionProps = {
+    title: string
+    defaultOpen?: boolean
+    children: React.ReactNode
+}
+
+// Collapsible sidebar section component
+function SidebarSection({ title, defaultOpen = false, children }: SidebarSectionProps) {
+    const [open, setOpen] = React.useState(defaultOpen)
+    const id = React.useId()
+
+    return (
+        <div className="mb-3 text-white">
+            <button
+                type="button"
+                className="flex gap-2 items-center"
+                onClick={() => setOpen(o => !o)}
+                aria-expanded={open}
+                aria-controls={`sec-${id}`}
+            >
+                <h3 className="text-2xl mb-3">{title}</h3>
+        {/* chevron */}
+                <svg
+                    className={`h-5 w-5 transition-transform ${open ? "rotate-180" : ""}`}
+                    viewBox="0 0 20 20" fill="white" 
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" />
+                </svg>
+            </button>
+
+            <div
+                id={`sec-${id}`}
+                aria-hidden={!open}
+                className={`
+                    overflow-hidden duration-500
+                    transition-[max-height,opacity]
+                    ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}
+                `}   
+            >
+                {children}
+            </div>
+        </div>
+    )
+}
+
 const ResourcesPage = () => {
   return (
-    <div className="flex justify-center items-start min-h-screen bg-gray-100 py-16 px-5 md:p-10">
+    <div className="flex justify-center items-start min-h-screen bg-[#FAF7F2] py-16 px-5 md:p-10">
       {/* Main container (sidebar + content) */}
       <div className="w-full max-w-[1500px] flex flex-col md:flex-row gap-8">
 
         {/* LHS SIDEBAR — hello eve! */}
-        <div className="w-full md:w-[300px] bg-white rounded-lg shadow-md p-6 hidden md:block">
-          {/* Placeholder for sidebar buttons */}
-          <h3 className="text-lg font-semibold text-gray-700 mb-4">Categories</h3>
-          <p className="text-sm text-gray-500 italic">Sidebar under construction...</p>
+        <div className="w-full md:w-[300px] bg-gradient-to-b from-[#043873] to-[#C7E1FF] rounded-lg shadow-md p-6 hidden md:block mt-14">
+          {/* Sidebar buttons */}
+            <h3 className="text-3xl text-white mb-10">Our <span className="italic">Resources</span></h3>
+            <SidebarSection title="Financial">
+                <div className="ml-5 text-xl py-2 space-y-2 underline-offset-4 decoration-1 font-serif italic">
+                    <a
+                        href="https://www.learninghub.auckland.ac.nz/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:underline"
+                    >
+                        University Learning Hub
+                    </a>
+                    <a
+                        href="https://www.library.auckland.ac.nz/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:underline"
+                    >
+                        Library Research Help
+                    </a>
+                </div>
+            </SidebarSection>
+
+            <SidebarSection title="Academic">
+                <div className="ml-5 text-xl py-2 space-y-2 underline-offset-4 decoration-1 font-serif italic">
+                    <a
+                        href="https://www.learninghub.auckland.ac.nz/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:underline"
+                    >
+                        University Learning Hub
+                    </a>
+                    <a
+                        href="https://www.library.auckland.ac.nz/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:underline"
+                    >
+                        Library Research Help
+                    </a>
+                </div>
+            </SidebarSection>
+
+            <SidebarSection title="Wellbeing">
+                <div className="ml-5 text-xl py-2 space-y-2 underline-offset-4 decoration-1 font-serif italic">
+                    <a
+                        href="https://www.learninghub.auckland.ac.nz/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:underline"
+                    >
+                        University Learning Hub
+                    </a>
+                    <a
+                        href="https://www.library.auckland.ac.nz/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:underline"
+                    >
+                        Library Research Help
+                    </a>
+                </div>
+            </SidebarSection>
+
+            <SidebarSection title="External">
+                <div className="ml-5 text-xl py-2 space-y-2 underline-offset-4 decoration-1 font-serif italic">
+                    <a
+                        href="https://www.auckland.ac.nz/en/on-campus/student-support.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:underline"
+                    >
+                        Student Health & Counselling
+                    </a>
+                    <a
+                        href="https://www.auckland.ac.nz/en/study/scholarships-and-awards.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block hover:underline"
+                    >
+                        Financial Aid Office
+                    </a>
+                </div>
+            </SidebarSection>
         </div>
 
         {/* RHS CONTENT */}
