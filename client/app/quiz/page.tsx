@@ -81,10 +81,18 @@ export default function QuizPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-8">
         <div className="max-w-3xl w-full space-y-8">
-          <h1 className="text-3xl font-bold text-center">{quizTitle}</h1>
+          <h1
+            className="text-3xl font-bold text-center"
+            style={{ color: "var(--primary-900)" }}
+          >
+            {quizTitle}
+          </h1>
 
           <div className="flex justify-center">
-            <QuizProgressBar totalSections={totalSteps} currentSection={currentStep} />
+            <QuizProgressBar
+              totalSections={totalSteps}
+              currentSection={currentStep}
+            />
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-8 mt-8">
@@ -138,22 +146,27 @@ export default function QuizPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-8">
         <div className="max-w-3xl w-full space-y-8">
-          <h1 className="text-3xl font-bold text-center">{quizTitle}</h1>
+          <h1
+            className="text-3xl font-bold text-center"
+            style={{ color: "var(--primary-900)" }}
+          >
+            {quizTitle}
+          </h1>
 
           <div className="flex justify-center">
-            <QuizProgressBar totalSections={totalSteps} currentSection={currentStep} />
+            <QuizProgressBar
+              totalSections={totalSteps}
+              currentSection={currentStep}
+            />
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-8 mt-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+          <div className="mt-8">
+            <h2
+              className="text-2xl font-semibold mb-6 text-center"
+              style={{ color: "var(--primary-900)" }}
+            >
               {currentQuestion.text}
             </h2>
-
-            {currentQuestion.description && (
-              <p className="text-gray-600 mb-6">
-                {currentQuestion.description}
-              </p>
-            )}
 
             <div className="space-y-3">
               {currentQuestion.options.map((option) => (
