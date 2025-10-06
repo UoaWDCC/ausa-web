@@ -23,14 +23,10 @@ const QuizProgressBar: React.FC<QuizProgressBarProps> = ({
   gap = 4,
   className = "",
 }) => {
-  // Calculate width for each section including gaps
-  const sectionWidth = (width - gap * (totalSections - 1)) / totalSections
-
   return (
     <div
-      className={`flex ${className}`}
+      className={`flex w-full max-w-md sm:max-w-lg md:max-w-2xl ${className}`}
       style={{
-        width: `${width}px`,
         height: `${height}px`,
         gap: `${gap}px`,
       }}
@@ -38,9 +34,8 @@ const QuizProgressBar: React.FC<QuizProgressBarProps> = ({
       {Array.from({ length: totalSections }).map((_, index) => (
         <div
           key={index}
-          className="transition-all duration-300 ease-in-out rounded-full"
+          className="flex-1 transition-all duration-300 ease-in-out rounded-full"
           style={{
-            width: `${sectionWidth}px`,
             height: `${height}px`,
             backgroundColor:
               index <= currentSection
