@@ -17,6 +17,7 @@ export default function QuizPage() {
   const [resources, setResources] = useState<Resource[] | null>(null)
   const [loading, setLoading] = useState(true)
   const [currentStep, setCurrentStep] = useState(0)
+  const [totalSteps, setTotalSteps] = useState(2) // Default to 2 steps, will be 3 for sad/overwhelmed/anxious
 
   useEffect(() => {
     async function loadQuiz() {
@@ -27,7 +28,7 @@ export default function QuizPage() {
         const firstQuestion =
           response.quiz.questions[response.quiz.startQuestionId]
         setCurrentQuestion(firstQuestion)
-        setCurrentStep(1)
+        setCurrentStep(0) // Start at step 0 (first bar)
       }
 
       setLoading(false)
@@ -45,10 +46,14 @@ export default function QuizPage() {
       if (response.type === "resources" && response.resources) {
         setResources(response.resources)
         setCurrentQuestion(null)
-        setCurrentStep(3) // Final step
+        // If we came from first question directly to resources, go to step 1 (2nd bar)
+        // If we came from second question to resources, go to step 2 (3rd bar)
+        setCurrentStep(currentStep === 0 ? 1 : 2)
       } else if (response.type === "question" && response.question) {
+        // This means we're going from q1 to q2 (sad/overwhelmed/anxious option)
         setCurrentQuestion(response.question)
-        setCurrentStep(2) // Second question
+        setCurrentStep(1) // Second bar
+        setTotalSteps(3) // Change to 3 steps since we have the multi-step flow
       }
     }
 
@@ -56,6 +61,10 @@ export default function QuizPage() {
   }
 
   const handleRestart = () => {
+    setCurrentStep(0)
+    setTotalSteps(2)
+    setResources(null)
+    setCurrentQuestion(null)
     window.location.reload()
   }
 
@@ -74,7 +83,9 @@ export default function QuizPage() {
         <div className="max-w-3xl w-full space-y-8">
           <h1 className="text-3xl font-bold text-center">{quizTitle}</h1>
 
-          <QuizProgressBar totalSections={3} currentSection={3} />
+          <div className="flex justify-center">
+            <QuizProgressBar totalSections={totalSteps} currentSection={currentStep} />
+          </div>
 
           <div className="bg-white rounded-lg shadow-md p-8 mt-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">
@@ -129,7 +140,9 @@ export default function QuizPage() {
         <div className="max-w-3xl w-full space-y-8">
           <h1 className="text-3xl font-bold text-center">{quizTitle}</h1>
 
-          <QuizProgressBar totalSections={3} currentSection={currentStep} />
+          <div className="flex justify-center">
+            <QuizProgressBar totalSections={totalSteps} currentSection={currentStep} />
+          </div>
 
           <div className="bg-white rounded-lg shadow-md p-8 mt-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">
