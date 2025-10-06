@@ -90,7 +90,7 @@ const FAQ = () => {
         FAQ section covers common queries with simple, supportive answers to
         help you find what you need quickly and confidently.
       </p>
-      <div className="flex flex-row gap-4 mb-20">
+      <div className="flex flex-row gap-4 mb-10">
         {tabConfigs.map((tab) => (
           <Button
             key={tab.label}
