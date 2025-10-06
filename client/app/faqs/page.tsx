@@ -2,7 +2,7 @@
 
 import Accordian from "../components/generic/accordian/Accordian"
 import Button from "../components/generic/button/regular/Button"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 const tabConfigs = [
   {
@@ -76,17 +76,14 @@ const tabConfigs = [
 const FAQ = () => {
   const [activeTab, setActiveTab] = useState(tabConfigs[0])
 
+  useEffect(() => {
+    document.body.style.background = `linear-gradient(${activeTab.gradient})`
+  }, [activeTab])
+
   return (
-    <div
-      className="px-8 mx-auto flex flex-col pb-16"
-      style={{
-        background: `linear-gradient(${activeTab.gradient})`,
-      }}
-    >
-      <h2 className="h2 text-primary-emphasis mb-6">
-        Frequently
-        <br />
-        <div className="mt-10">Asked Questions</div>
+    <div className="mt-30 px-8 flex flex-col pb-16">
+      <h2 className="h2 text-primary-emphasis mb-6 mt-16 leading-tight sm:leading-[100px]">
+        Frequently Asked Questions
       </h2>
       <p className="b3-body text-primary-emphasis mb-8 w-full mt-4">
         Have questions about mental wellbeing or how to use our resources? Our
@@ -98,13 +95,17 @@ const FAQ = () => {
           <Button
             key={tab.label}
             label={tab.label}
-            backgroundColor={tab.bg}
+            backgroundColor={
+              activeTab.label === tab.label ? tab.bg : "var(--light-grey)"
+            }
             className="px-6 py-3 rounded-full"
             onClick={() => setActiveTab(tab)}
           />
         ))}
       </div>
-      <h3 className="h3 text-primary-emphasis mb-6">{activeTab.label}</h3>
+      <h3 className="h3 text-primary-emphasis mb-6 leading-snug">
+        {activeTab.label}
+      </h3>
       <div className="divide-y divide-[#043873] w-full">
         {activeTab.faqs.map((faq, index) => (
           <Accordian key={index} title={faq.question} content={faq.answer} />
