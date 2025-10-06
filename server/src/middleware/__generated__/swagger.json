@@ -41,6 +41,105 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"Record_string.QuizQuestion_": {
+				"properties": {},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
+			"Resource": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"description",
+					"type"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"QuizOption": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"text": {
+						"type": "string"
+					},
+					"nextQuestionId": {
+						"type": "string"
+					},
+					"resources": {
+						"items": {
+							"$ref": "#/components/schemas/Resource"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"text"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"QuizQuestion": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"text": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"options": {
+						"items": {
+							"$ref": "#/components/schemas/QuizOption"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"text",
+					"options"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NavigateRequest": {
+				"properties": {
+					"questionId": {
+						"type": "string"
+					},
+					"optionId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"questionId",
+					"optionId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"GoogleOAuthUser": {
 				"properties": {
 					"uid": {
@@ -274,6 +373,308 @@
 						}
 					}
 				]
+			}
+		},
+		"/quiz": {
+			"get": {
+				"operationId": "GetAllQuizzes",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"properties": {
+												"message": {},
+												"quizzes": {
+													"items": {
+														"properties": {
+															"description": {
+																"type": "string"
+															},
+															"title": {
+																"type": "string"
+															},
+															"id": {
+																"type": "string"
+															}
+														},
+														"required": [
+															"description",
+															"title",
+															"id"
+														],
+														"type": "object"
+													},
+													"type": "array"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"quizzes",
+												"success"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"quizzes": {
+													"items": {
+														"properties": {
+															"description": {
+																"type": "string"
+															},
+															"title": {
+																"type": "string"
+															},
+															"id": {
+																"type": "string"
+															}
+														},
+														"required": [
+															"description",
+															"title",
+															"id"
+														],
+														"type": "object"
+													},
+													"type": "array"
+												},
+												"message": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"quizzes",
+												"message",
+												"success"
+											],
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Get all quizzes",
+				"tags": [
+					"Quiz"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/quiz/{id}": {
+			"get": {
+				"operationId": "GetQuizById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"properties": {
+												"quiz": {},
+												"message": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"message",
+												"success"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"message": {},
+												"quiz": {
+													"properties": {
+														"questions": {
+															"$ref": "#/components/schemas/Record_string.QuizQuestion_"
+														},
+														"startQuestionId": {
+															"type": "string"
+														},
+														"description": {
+															"type": "string"
+														},
+														"title": {
+															"type": "string"
+														},
+														"id": {
+															"type": "string"
+														},
+														"updatedAt": {},
+														"createdAt": {}
+													},
+													"required": [
+														"questions",
+														"startQuestionId",
+														"description",
+														"title",
+														"id",
+														"updatedAt",
+														"createdAt"
+													],
+													"type": "object"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"quiz",
+												"success"
+											],
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Get quiz by ID",
+				"tags": [
+					"Quiz"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/quiz/{id}/navigate": {
+			"post": {
+				"operationId": "NavigateQuiz",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"properties": {
+												"questionId": {},
+												"question": {},
+												"resources": {},
+												"type": {},
+												"message": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"message",
+												"success"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"questionId": {},
+												"question": {},
+												"message": {},
+												"resources": {
+													"items": {
+														"$ref": "#/components/schemas/Resource"
+													},
+													"type": "array"
+												},
+												"type": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"resources",
+												"type",
+												"success"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"resources": {},
+												"message": {},
+												"questionId": {
+													"type": "string"
+												},
+												"question": {
+													"$ref": "#/components/schemas/QuizQuestion"
+												},
+												"type": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"questionId",
+												"question",
+												"type",
+												"success"
+											],
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Navigate quiz - answer question and get next step",
+				"tags": [
+					"Quiz"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/NavigateRequest"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/auth/google/verify": {

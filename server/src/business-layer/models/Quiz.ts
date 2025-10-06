@@ -3,28 +3,29 @@ export interface Quiz {
   title: string
   description: string
   startQuestionId: string
-  questions: Record<string, any>
-  createdAt: Date
-  updatedAt: Date
+  questions: Record<string, QuizQuestion>
+  createdAt?: Date
+  updatedAt?: Date
 }
 
-export interface QuizSession {
+export interface QuizQuestion {
   id: string
-  quizId: string
-  userId?: string // Optional - null for anonymous users
-  quizTitle: string
-  path: Array<{
-    questionId: string
-    selectedOptionId: string
-    questionText: string
-    selectedOptionText: string
-  }>
-  resources: Array<{
-    id: string
-    title: string
-    description: string
-    url?: string
-    type: string
-  }>
-  completedAt: Date
+  text: string
+  description?: string
+  options: QuizOption[]
+}
+
+export interface QuizOption {
+  id: string
+  text: string
+  nextQuestionId?: string
+  resources?: Resource[]
+}
+
+export interface Resource {
+  id: string
+  title: string
+  description: string
+  url?: string
+  type: string
 }
