@@ -38,17 +38,7 @@ const carouselItems = [
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="relative flex flex-col items-center justify-center text-center text-white min-h-[60vh]">
-        <div className="absolute inset-0 -z-10">
-          <Image
-            src="/image3.jpeg"
-            alt="Hero Background"
-            fill
-            priority
-            className="object-cover brightness-75"
-          />
-        </div>
-
+      <div className="relative flex flex-col items-center justify-center text-center bg-black text-white min-h-screen mt-10">
         <h1 className="text-4xl md:text-5xl font-bold">
           Your Wellbeing, Our Priority
         </h1>
