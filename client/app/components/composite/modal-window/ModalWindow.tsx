@@ -55,14 +55,14 @@ const ModalWindow = () => {
   )
 
   return (
-    <div className="w-[500px] md:w-full flex justify-center gap-0">
+    <div className="w-[500px] md:w-[90%] flex justify-center gap-0">
       {/* cards */}
       <div className="flex flex-col md:flex-row gap-4 md:gap-0">
         {cards.map((card, idx) => (
           <div
             key={idx}
             onClick={() => setSelectedCard(card)}
-            className="flex-1 p-8 cursor-pointer 
+            className="max-w-[80vw] w-full flex-1 p-8 cursor-pointer 
                        transition 
                        bg-[#3A7D8C]
                        group

@@ -38,7 +38,7 @@ const carouselItems = [
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="relative flex flex-col items-center justify-center text-center bg-black text-white min-h-screen mt-10">
+      <div className="relative flex flex-col items-center justify-center text-center bg-black text-white min-h-screen max-w-[100vw] mt-10">
         <h1 className="text-4xl md:text-5xl font-bold">
           Your Wellbeing, Our Priority
         </h1>
@@ -51,11 +51,11 @@ export default function Home() {
         <button className="mt-6 bg-yellow-500 text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">
           Learn More
         </button>
-        <div className="flex md:hidden w-[90%] mx-10 mt-6">
+        <div className="md:hidden mx-auto mt-6">
           <ModalWindow />
         </div>
       </div>
-      <div className="hidden md:flex md:w-[90%] md:mx-auto md:relative md:z-10 md:-mt-24">
+      <div className="hidden md:flex md:justify-center md:relative md:z-10 md:-mt-24">
         <ModalWindow />
       </div>
 
