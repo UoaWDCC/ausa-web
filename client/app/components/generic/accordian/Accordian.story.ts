@@ -25,6 +25,7 @@ type Story = StoryObj<typeof meta>
 export const DefaultAccordian: Story = {
   args: {
     title: "What kinds of wellbeing support are available at UOA?",
-    content: "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre"
+    content:
+      "Most universities offer a range of wellbeing support services to help students manage both personal and academic challenges. These can include free or low-cost counselling sessions, student support advisors, peer mentoring, wellbeing workshops, and spaces to connect with others. Many universities also provide academic accommodations if you’re experiencing difficulties that affect your studies. You can usually find details on your university’s student services or wellbeing page, or by reaching out directly to your student support centre",
   },
 }
