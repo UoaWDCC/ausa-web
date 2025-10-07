@@ -3,6 +3,7 @@
 import { Controller, Get, Post, Route, Path, Body, Tags } from "tsoa"
 import FirestoreCollections from "../../data-layer/adapters/FirestoreCollections"
 import { Quiz, QuizOption } from "../../business-layer/models/Quiz"
+import { QuizService } from "../../service-layer/services/QuizService"
 
 interface NavigateRequest {
   questionId: string
@@ -12,34 +13,61 @@ interface NavigateRequest {
 @Route("quiz")
 @Tags("Quiz")
 export class QuizController extends Controller {
-  
+  /**
+   * Create a new quiz
+   */
+  @Post("/")
+  public async createQuiz(
+    @Body() quizData: Omit<Quiz, "id" | "createdAt" | "updatedAt">,
+  ) {
+    try {
+      const result = await QuizService.createQuiz(quizData)
+
+      this.setStatus(201)
+      return {
+        success: true,
+        message: "Quiz created successfully",
+        quiz: result.quiz,
+      }
+    } catch (error) {
+      console.error("Error creating quiz:", error)
+      this.setStatus(500)
+      return {
+        success: false,
+        message: "Failed to create quiz",
+      }
+    }
+  }
+
   /**
    * Get all quizzes
    */
   @Get("/")
   public async getAllQuizzes() {
     try {
-      const snapshot = await FirestoreCollections.quizzes.get()
-      
-      const quizzes = snapshot.docs.map(doc => {
-        const data = doc.data() as Quiz
-        return {
-          id: doc.id,
-          title: data.title,
-          description: data.description
-        }
-      })
+      const quizzes = await QuizService.getAllQuizzes()
+
+      const quizSummaries = quizzes.map((quiz) => ({
+        id: quiz.id,
+        title: quiz.title,
+        description: quiz.description,
+      }))
 
       return {
         success: true,
-        quizzes
+        quizzes: quizSummaries,
       }
     } catch (error) {
       console.error("Error fetching quizzes:", error)
+      this.setStatus(500)
       return {
         success: false,
         message: "Failed to fetch quizzes",
-        quizzes: [] as Array<{id: string, title: string, description: string}>
+        quizzes: [] as Array<{
+          id: string
+          title: string
+          description: string
+        }>,
       }
     }
   }
@@ -50,32 +78,26 @@ export class QuizController extends Controller {
   @Get("/{id}")
   public async getQuizById(@Path() id: string) {
     try {
-      const doc = await FirestoreCollections.quizzes.doc(id).get()
-      
-      if (!doc.exists) {
+      const quiz = await QuizService.getQuizById(id)
+
+      if (!quiz) {
         this.setStatus(404)
         return {
           success: false,
-          message: "Quiz not found"
+          message: "Quiz not found",
         }
       }
 
-      const data = doc.data() as Quiz
-      
       return {
         success: true,
-        quiz: {
-          id: doc.id,
-          ...data,
-          createdAt: (data as any)?.createdAt?.toDate(),
-          updatedAt: (data as any)?.updatedAt?.toDate()
-        }
+        quiz,
       }
     } catch (error) {
       console.error("Error fetching quiz:", error)
+      this.setStatus(500)
       return {
         success: false,
-        message: "Failed to fetch quiz"
+        message: "Failed to fetch quiz",
       }
     }
   }
@@ -84,39 +106,36 @@ export class QuizController extends Controller {
    * Navigate quiz - answer question and get next step
    */
   @Post("/{id}/navigate")
-  public async navigateQuiz(
-    @Path() id: string,
-    @Body() body: NavigateRequest
-  ) {
+  public async navigateQuiz(@Path() id: string, @Body() body: NavigateRequest) {
     try {
       const quizDoc = await FirestoreCollections.quizzes.doc(id).get()
-      
+
       if (!quizDoc.exists) {
         this.setStatus(404)
         return {
           success: false,
-          message: "Quiz not found"
+          message: "Quiz not found",
         }
       }
 
       const quizData = quizDoc.data() as Quiz
       const currentQuestion = quizData.questions[body.questionId]
-      
+
       if (!currentQuestion) {
         return {
           success: false,
-          message: "Question not found"
+          message: "Question not found",
         }
       }
 
       const selectedOption = currentQuestion.options.find(
-        (opt: QuizOption) => opt.id === body.optionId
+        (opt: QuizOption) => opt.id === body.optionId,
       )
-      
+
       if (!selectedOption) {
         return {
           success: false,
-          message: "Option not found"
+          message: "Option not found",
         }
       }
 
@@ -124,39 +143,39 @@ export class QuizController extends Controller {
       if (selectedOption.resources && selectedOption.resources.length > 0) {
         return {
           success: true,
-          type: 'resources',
-          resources: selectedOption.resources
+          type: "resources",
+          resources: selectedOption.resources,
         }
       }
 
       // Navigate to next question
       if (selectedOption.nextQuestionId) {
         const nextQuestion = quizData.questions[selectedOption.nextQuestionId]
-        
+
         if (!nextQuestion) {
           return {
             success: false,
-            message: "Next question not found"
+            message: "Next question not found",
           }
         }
 
         return {
           success: true,
-          type: 'question',
+          type: "question",
           question: nextQuestion,
-          questionId: selectedOption.nextQuestionId
+          questionId: selectedOption.nextQuestionId,
         }
       }
 
       return {
         success: false,
-        message: "Invalid quiz structure"
+        message: "Invalid quiz structure",
       }
     } catch (error) {
       console.error("Error navigating quiz:", error)
       return {
         success: false,
-        message: "Failed to navigate quiz"
+        message: "Failed to navigate quiz",
       }
     }
   }
