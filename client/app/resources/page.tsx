@@ -88,7 +88,8 @@ function MobileCategories({
   includeAll?: boolean
   label?: string
 }) {
-  const opts = includeAll ? [{ id: "all", label: "All" }, ...categories]
+  const opts = includeAll
+    ? [{ id: "all", label: "All" }, ...categories]
     : categories
 
   return (
@@ -215,7 +216,7 @@ const ResourcesPage = () => {
           categories={categories}
           value={selectedCategory}
           onChange={setSelectedCategory}
-          includeAll={true}
+          includeAll
           label="Filter"
         />
 
