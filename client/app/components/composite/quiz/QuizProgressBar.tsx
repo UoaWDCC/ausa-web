@@ -18,7 +18,7 @@ interface QuizProgressBarProps {
 const QuizProgressBar: React.FC<QuizProgressBarProps> = ({
   totalSections,
   currentSection,
-  width = 650,
+  // width = 650,
   height = 11,
   gap = 4,
   className = "",

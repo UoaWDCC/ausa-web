@@ -1,12 +1,17 @@
 // app/services/quizService.ts
 
 import client from "./fetch-client"
-import { QuizListItem, Quiz, QuizQuestion, Resource } from "../models/Object/quizTypes"
+import {
+  QuizListItem,
+  Quiz,
+  QuizQuestion,
+  Resource,
+} from "../models/Object/quizTypes"
 
 export const getAllQuizzes = async () => {
   try {
     const { data, error } = await client.GET("/quiz/")
-    
+
     if (error) {
       console.error("Error fetching quizzes:", error)
       return { success: false, quizzes: [] as QuizListItem[] }
@@ -22,7 +27,7 @@ export const getAllQuizzes = async () => {
 export const getQuizById = async (quizId: string) => {
   try {
     const { data, error } = await client.GET("/quiz/{id}", {
-      params: { path: { id: quizId } }
+      params: { path: { id: quizId } },
     })
 
     if (error) {
@@ -40,12 +45,12 @@ export const getQuizById = async (quizId: string) => {
 export const navigateQuiz = async (
   quizId: string,
   questionId: string,
-  optionId: string
+  optionId: string,
 ) => {
   try {
     const { data, error } = await client.POST("/quiz/{id}/navigate", {
       params: { path: { id: quizId } },
-      body: { questionId, optionId }
+      body: { questionId, optionId },
     })
 
     if (error) {
@@ -53,9 +58,9 @@ export const navigateQuiz = async (
       return { success: false }
     }
 
-    return data as { 
+    return data as {
       success: boolean
-      type?: 'question' | 'resources'
+      type?: "question" | "resources"
       question?: QuizQuestion
       questionId?: string
       resources?: Resource[]

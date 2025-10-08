@@ -1,5 +1,5 @@
 import type { User } from "../../business-layer/models/User"
-import { QUIZ_COLLECTION,USERS_COLLECTION } from "./CollectionNames"
+import { QUIZ_COLLECTION, USERS_COLLECTION } from "./CollectionNames"
 import firestore from "./Firestore"
 
 const FirestoreCollections = {
