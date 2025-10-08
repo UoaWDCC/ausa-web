@@ -41,11 +41,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Record_string.QuizQuestion_": {
-				"properties": {},
-				"type": "object",
-				"description": "Construct a type with a set of properties K of type T"
-			},
 			"Resource": {
 				"properties": {
 					"id": {
@@ -123,6 +118,78 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"Record_string.QuizQuestion_": {
+				"properties": {},
+				"additionalProperties": {
+					"$ref": "#/components/schemas/QuizQuestion"
+				},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
+			"Quiz": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"startQuestionId": {
+						"type": "string"
+					},
+					"questions": {
+						"$ref": "#/components/schemas/Record_string.QuizQuestion_"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"description",
+					"startQuestionId",
+					"questions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pick_Quiz.Exclude_keyofQuiz.id-or-createdAt-or-updatedAt__": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"startQuestionId": {
+						"type": "string"
+					},
+					"questions": {
+						"$ref": "#/components/schemas/Record_string.QuizQuestion_"
+					}
+				},
+				"required": [
+					"title",
+					"description",
+					"startQuestionId",
+					"questions"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"Omit_Quiz.id-or-createdAt-or-updatedAt_": {
+				"$ref": "#/components/schemas/Pick_Quiz.Exclude_keyofQuiz.id-or-createdAt-or-updatedAt__",
+				"description": "Construct a type with the properties of T except for those in type K."
 			},
 			"NavigateRequest": {
 				"properties": {
@@ -376,6 +443,73 @@
 			}
 		},
 		"/quiz": {
+			"post": {
+				"operationId": "CreateQuiz",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"properties": {
+												"quiz": {
+													"$ref": "#/components/schemas/Quiz"
+												},
+												"message": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"quiz",
+												"message",
+												"success"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"quiz": {},
+												"message": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"message",
+												"success"
+											],
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Create a new quiz",
+				"tags": [
+					"Quiz"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Omit_Quiz.id-or-createdAt-or-updatedAt_"
+							}
+						}
+					}
+				}
+			},
 			"get": {
 				"operationId": "GetAllQuizzes",
 				"responses": {
@@ -502,35 +636,7 @@
 											"properties": {
 												"message": {},
 												"quiz": {
-													"properties": {
-														"questions": {
-															"$ref": "#/components/schemas/Record_string.QuizQuestion_"
-														},
-														"startQuestionId": {
-															"type": "string"
-														},
-														"description": {
-															"type": "string"
-														},
-														"title": {
-															"type": "string"
-														},
-														"id": {
-															"type": "string"
-														},
-														"updatedAt": {},
-														"createdAt": {}
-													},
-													"required": [
-														"questions",
-														"startQuestionId",
-														"description",
-														"title",
-														"id",
-														"updatedAt",
-														"createdAt"
-													],
-													"type": "object"
+													"$ref": "#/components/schemas/Quiz"
 												},
 												"success": {
 													"type": "boolean"
