@@ -16,7 +16,7 @@ const ResourcesLink: React.FC<ResourcesLinkProps> = ({ title, description, url }
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="self-start px-4 py-2 text-[#2563EB] bg-[#DBEAFE] rounded-md text-sm hover:bg-[#1e4fc9] transition-colors"
+        className="self-start px-4 py-2 text-[#2563EB] bg-[#DBEAFE]/70 rounded-md text-sm hover:bg-[#DBEAFE] transition-colors"
       >
         Visit Website
       </a>
