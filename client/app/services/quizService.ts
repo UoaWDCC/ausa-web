@@ -10,7 +10,7 @@ import {
 
 export const getAllQuizzes = async () => {
   try {
-    const { data, error } = await client.GET("/quiz",)
+    const { data, error } = await client.GET("/quiz")
 
     if (error) {
       console.error("Error fetching quizzes:", error)
