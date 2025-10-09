@@ -114,7 +114,9 @@ export default function QuizPage() {
                       {resource.type}
                     </span>
                   </div>
-                  <p className="text-gray-600 mb-3">{resource.description}</p>
+                  <p className="text-gray-600 mb-3 leading-normal">
+                    {resource.description}
+                  </p>
                   {resource.url && (
                     <a
                       href={resource.url}
