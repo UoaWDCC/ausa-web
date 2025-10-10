@@ -9,10 +9,12 @@
   --primary-600: #7ec6ec; /* light accent */
   --primary-100: #dbeafe; /* pale blue */
 
-  /* Buttons Colors */
-  --accent-warm: #ffde91; /* Default Btn Color */
-  --accent-warm-100: #ffd063; /* Btn Hover Color */
-  --accent-warm-200: #ffc743; /* Btn Press Color */
+  /* Buttons Colors - Accent Warm (Light to Dark) */
+  --accent-warm-50: #ffebbd; /* Lightest */
+  --accent-warm-100: #ffde91; /* Light - Default Btn Color */
+  --accent-warm-200: #ffd063; /* Medium - Btn Hover Color */
+  --accent-warm-300: #ffd26b; /* Medium-Dark */
+  --accent-warm-400: #ffc743; /* Dark - Btn Press Color */
   --light-grey: #d3d3d3; /* Disabled Btn Color */
   --light-grey-100: #eeeade;
 
@@ -24,9 +26,9 @@
   --white: #ffffff;
 
   /* Buttons — Primary */
-  --btn-primary-bg: var(--accent-warm);
-  --btn-primary-bg-hover: var(--accent-warm-100);
-  --btn-primary-bg-press: var(--accent-warm-200);
+  --btn-primary-bg: var(--accent-warm-100);
+  --btn-primary-bg-hover: var(--accent-warm-200);
+  --btn-primary-bg-press: var(--accent-warm-400);
   --btn-primary-bg-disabled: var(--light-grey);
 
   --btn-primary-fg: var(--primary-900);
@@ -42,9 +44,9 @@
   --btn-secondary-fg-disabled: #8c8c8c;
 
   /* Buttons — Tertiary */
-  --btn-tertiary-bg: var(--accent-warm);
-  --btn-tertiary-bg-hover: #ffebbd;
-  --btn-tertiary-bg-press: #ffd26b;
+  --btn-tertiary-bg: var(--accent-warm-100);
+  --btn-tertiary-bg-hover: var(--accent-warm-50);
+  --btn-tertiary-bg-press: var(--accent-warm-300);
   --btn-tertiary-bg-disabled: var(--light-grey);
 
   --btn-tertiary-fg: var(--primary-900);
