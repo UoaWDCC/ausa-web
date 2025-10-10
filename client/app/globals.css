@@ -2,15 +2,21 @@
 @import "tailwindcss";
 
 :root {
+  /* Primary and Text Colors */
   --primary-900: #043873; /* deep navy */
   --primary-800: #2563eb; /* primary blue */
   --primary-700: #3a7d8c; /* teal-ish support */
   --primary-600: #7ec6ec; /* light accent */
   --primary-100: #dbeafe; /* pale blue */
 
-  --accent-warm: #ffde91; /* button alt */
-  --light-grey: #d3d3d3; /* disabled bg */
-  --light-dark-grey: #eeeade;
+  /* Buttons Colors */
+  --accent-warm: #ffde91; /* Default Btn Color */
+  --accent-warm-100: #ffd063; /* Btn Hover Color */
+  --accent-warm-200: #ffc743; /* Btn Press Color */
+  --light-grey: #d3d3d3; /* Disabled Btn Color */
+  --light-grey-100: #eeeade;
+
+  /* Background Colors */
   --beige-100: #faf7f2; /* background (light) */
   --cream-50: #fffdfc; /* background subtle */
   --cream-100: #faecd5; /* warm surface */
@@ -19,8 +25,8 @@
 
   /* Buttons — Primary */
   --btn-primary-bg: var(--accent-warm);
-  --btn-primary-bg-hover: #ffd063;
-  --btn-primary-bg-press: #ffc743;
+  --btn-primary-bg-hover: var(--accent-warm-100);
+  --btn-primary-bg-press: var(--accent-warm-200);
   --btn-primary-bg-disabled: var(--light-grey);
 
   --btn-primary-fg: var(--primary-900);
