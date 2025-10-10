@@ -14,7 +14,10 @@ export interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [hasScrolled, setHasScrolled] = useState(false)
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+  const [highlightStyle, setHighlightStyle] = useState({ width: 0, left: 0 })
   const pathname = usePathname()
+  const buttonRefs = React.useRef<{ [key: string]: HTMLDivElement | null }>({})
 
   const navigationItems = [
     "Home",
@@ -70,10 +73,35 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
     }
   }, [isMobileMenuOpen])
 
+  const updateHighlightPosition = (item: string) => {
+    const buttonElement = buttonRefs.current[item]
+    if (buttonElement) {
+      const { offsetLeft, offsetWidth } = buttonElement
+      setHighlightStyle({ left: offsetLeft, width: offsetWidth })
+    }
+  }
+
   const handleNavClick = (item: string) => {
     setActiveItem(item)
     onNavigate?.(item)
   }
+
+  const handleMouseEnter = (item: string) => {
+    setHoveredItem(item)
+    updateHighlightPosition(item)
+  }
+
+  const handleMouseLeave = () => {
+    setHoveredItem(null)
+    updateHighlightPosition(activeItem)
+  }
+
+  // Update highlight position when active item changes
+  useEffect(() => {
+    if (activeItem) {
+      updateHighlightPosition(activeItem)
+    }
+  }, [activeItem])
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
 
@@ -94,34 +122,41 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-3 flex-1 justify-center">
-              {navigationItems.map((item) => (
-                <div key={item} className="group relative">
+            <div className="hidden md:flex items-center space-x-3 flex-1 justify-center relative">
+              {/* Moving highlight background */}
+              <div 
+                className="absolute top-0 bottom-0 bg-[var(--btn-primary-bg)] rounded-lg transition-all duration-300 ease-out pointer-events-none z-0"
+                style={{
+                  width: `${highlightStyle.width}px`,
+                  left: `${highlightStyle.left}px`,
+                }}
+              />
+              
+              {navigationItems.map((item, index) => (
+                <div 
+                  key={item} 
+                  className="relative z-10"
+                  ref={(el) => {
+                    buttonRefs.current[item] = el
+                  }}
+                >
                   <Link href={navPaths[item]}>
                     <Button
                       label={item}
                       onClick={() => handleNavClick(item)}
-                      backgroundColor={
-                        activeItem === item
-                          ? "var(--btn-primary-bg)"
-                          : "transparent"
-                      }
+                      backgroundColor="transparent"
                       className={`
-                        px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
-                        ${
-                          activeItem === item
-                            ? "font-medium shadow-md"
-                            : "hover:bg-btn-primary-bg-hover group-hover:scale-105"
+                        px-4 py-2 rounded-lg transition-colors duration-200 relative
+                        ${(activeItem === item || hoveredItem === item) 
+                          ? "font-medium text-[var(--btn-primary-fg)]" 
+                          : "text-white"
                         }
                       `}
-                      fontWeight={activeItem === item ? "bold" : "normal"}
+                      fontWeight={(activeItem === item || hoveredItem === item) ? "bold" : "normal"}
+                      onMouseEnter={() => handleMouseEnter(item)}
+                      onMouseLeave={handleMouseLeave}
                     />
                   </Link>
-
-                  {/* Hover Animation */}
-                  {activeItem !== item && (
-                    <div className="absolute bottom-0 left-1/2 h-0.5 w-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0" />
-                  )}
                 </div>
               ))}
             </div>
