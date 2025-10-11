@@ -156,6 +156,12 @@
   --color-primary-emphasis: var(--primary-900);
   --color-primary-subtle: var(--primary-100);
 
+  --color-accent-warm-50: var(--accent-warm-50);
+  --color-accent-warm-100: var(--accent-warm-100);
+  --color-accent-warm-200: var(--accent-warm-200);
+  --color-accent-warm-300: var(--accent-warm-300);
+  --color-accent-warm-400: var(--accent-warm-400);
+
   --color-btn-primary-bg: var(--btn-primary-bg);
   --color-btn-primary-bg-hover: var(--btn-primary-bg-hover);
   --color-btn-primary-bg-press: var(--btn-primary-bg-press);
