@@ -2,8 +2,8 @@
 
 import Image from "next/image"
 import { useRef, useState } from "react"
-import Button from "../components/generic/button/regular/Button"
-import Page from "@/public/ausa_logo.png"
+import Logo from "@/public/ausa_logo.png"
+import Camera from "@/public/camera.svg"
 
 const TAB_COLOURS: Record<string, { header: string; main: string }> = {
   about: {
@@ -46,7 +46,7 @@ const Profile = () => {
       <div className="relative w-[250px] h-[250px] mx-auto -mt-[200px] z-10">
         {/* Profile Picture */}
         <div className="relative w-full h-full rounded-full overflow-hidden shadow-md bg-white ring-2 ring-black">
-          <Image alt="Profile Photo" className="object-cover" fill src={Page} />
+          <Image alt="Profile Photo" className="object-cover" fill src={Logo} />
         </div>
         <input
           accept="image/*"
@@ -58,11 +58,15 @@ const Profile = () => {
 
 
         {/* Camera Button */}
-        <Button label="cameraIcon" onClick={handleFileClick}></Button>
+        <button 
+        className="absolute bottom-6 right-2 bg-[#FAF7F2] p-2 rounded-full shadow-md hover:ring-2 ring-black transition"
+        onClick={handleFileClick}>
+          <Image alt="Change Profile Photo" className="object-cover" src={Camera} />
+        </button>
       </div>
 
       {/* Tabs Section */}
-      <div className="flex flex-col text-black mt-[50px] w-full relative">
+      <div className="flex flex-col text-black w-full relative">
         <h1 className="text-4xl text-[#043873] text-center mt-20 mb-15">
           Welcome, User!
         </h1>
