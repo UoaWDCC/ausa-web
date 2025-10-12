@@ -2,15 +2,23 @@
 @import "tailwindcss";
 
 :root {
+  /* Primary and Text Colors */
   --primary-900: #043873; /* deep navy */
   --primary-800: #2563eb; /* primary blue */
   --primary-700: #3a7d8c; /* teal-ish support */
   --primary-600: #7ec6ec; /* light accent */
   --primary-100: #dbeafe; /* pale blue */
 
-  --accent-warm: #ffde91; /* button alt */
-  --light-grey: #d3d3d3; /* disabled bg */
-  --light-dark-grey: #eeeade;
+  /* Buttons Colors - Accent Warm (Light to Dark) */
+  --accent-warm-50: #ffebbd; /* Lightest */
+  --accent-warm-100: #ffde91; /* Light - Default Btn Color */
+  --accent-warm-200: #ffd063; /* Medium - Btn Hover Color */
+  --accent-warm-300: #ffd26b; /* Medium-Dark */
+  --accent-warm-400: #ffc743; /* Dark - Btn Press Color */
+  --light-grey: #d3d3d3; /* Disabled Btn Color */
+  --light-grey-100: #eeeade;
+
+  /* Background Colors */
   --beige-100: #faf7f2; /* background (light) */
   --cream-50: #fffdfc; /* background subtle */
   --cream-100: #faecd5; /* warm surface */
@@ -18,9 +26,9 @@
   --white: #ffffff;
 
   /* Buttons — Primary */
-  --btn-primary-bg: var(--accent-warm);
-  --btn-primary-bg-hover: #ffd063;
-  --btn-primary-bg-press: #ffc743;
+  --btn-primary-bg: var(--accent-warm-100);
+  --btn-primary-bg-hover: var(--accent-warm-200);
+  --btn-primary-bg-press: var(--accent-warm-400);
   --btn-primary-bg-disabled: var(--light-grey);
 
   --btn-primary-fg: var(--primary-900);
@@ -36,9 +44,9 @@
   --btn-secondary-fg-disabled: #8c8c8c;
 
   /* Buttons — Tertiary */
-  --btn-tertiary-bg: var(--accent-warm);
-  --btn-tertiary-bg-hover: #ffebbd;
-  --btn-tertiary-bg-press: #ffd26b;
+  --btn-tertiary-bg: var(--accent-warm-100);
+  --btn-tertiary-bg-hover: var(--accent-warm-50);
+  --btn-tertiary-bg-press: var(--accent-warm-300);
   --btn-tertiary-bg-disabled: var(--light-grey);
 
   --btn-tertiary-fg: var(--primary-900);
@@ -53,26 +61,86 @@
   );
 }
 
+/* Button Base Styles */
+.btn-primary,
+.btn-secondary,
+.btn-tertiary {
+  padding: 12px 24px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-family: inherit;
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-tertiary:disabled {
+  cursor: not-allowed;
+}
+
+/* Primary Button */
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--btn-primary-bg-hover);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active:not(:disabled) {
+  background: var(--btn-primary-bg-press);
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  background: var(--btn-primary-bg-disabled);
+  color: var(--btn-primary-fg-disabled);
+}
+
+/* Secondary Button */
 .btn-secondary {
   background: var(--btn-secondary-bg);
   color: var(--btn-secondary-fg);
-  border: none;
-  transition:
-    background 0.2s,
-    color 0.2s;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
   background: var(--btn-secondary-bg-hover);
+  transform: translateY(-1px);
 }
 
-.btn-secondary:active {
+.btn-secondary:active:not(:disabled) {
   background: var(--btn-secondary-bg-press);
+  transform: translateY(0);
 }
 
 .btn-secondary:disabled {
   background: var(--btn-secondary-bg-disabled);
   color: var(--btn-secondary-fg-disabled);
+}
+
+/* Tertiary Button */
+.btn-tertiary {
+  background: var(--btn-tertiary-bg);
+  color: var(--btn-tertiary-fg);
+}
+
+.btn-tertiary:hover:not(:disabled) {
+  background: var(--btn-tertiary-bg-hover);
+  transform: translateY(-1px);
+}
+
+.btn-tertiary:active:not(:disabled) {
+  background: var(--btn-tertiary-bg-press);
+  transform: translateY(0);
+}
+
+.btn-tertiary:disabled {
+  background: var(--btn-tertiary-bg-disabled);
+  color: var(--btn-tertiary-fg-disabled);
 }
 
 @theme {
@@ -87,6 +155,12 @@
   --color-primary: var(--primary-800);
   --color-primary-emphasis: var(--primary-900);
   --color-primary-subtle: var(--primary-100);
+
+  --color-accent-warm-50: var(--accent-warm-50);
+  --color-accent-warm-100: var(--accent-warm-100);
+  --color-accent-warm-200: var(--accent-warm-200);
+  --color-accent-warm-300: var(--accent-warm-300);
+  --color-accent-warm-400: var(--accent-warm-400);
 
   --color-btn-primary-bg: var(--btn-primary-bg);
   --color-btn-primary-bg-hover: var(--btn-primary-bg-hover);

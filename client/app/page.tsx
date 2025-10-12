@@ -50,131 +50,23 @@ export default function Home() {
       <div className="flex flex-col gap-6 mt-10 items-center">
         <div className="flex flex-row gap-4 flex-wrap justify-center">
           {/* Primary Buttons */}
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-primary-bg)",
-              color: "var(--btn-primary-fg)",
-              border: "none",
-            }}
-          >
-            Primary
-          </button>
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-primary-bg-hover)",
-              color: "var(--btn-primary-fg)",
-              border: "none",
-            }}
-          >
-            Primary Hover
-          </button>
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-primary-bg-press)",
-              color: "var(--btn-primary-fg)",
-              border: "none",
-            }}
-          >
-            Primary Press
-          </button>
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-primary-bg-disabled)",
-              color: "var(--btn-primary-fg-disabled)",
-              border: "none",
-            }}
-            disabled
-          >
+          <button className="btn-primary">Primary (Hover me!)</button>
+          <button className="btn-primary">Primary Click Test</button>
+          <button className="btn-primary" disabled>
             Primary Disabled
           </button>
 
           {/* Secondary Buttons */}
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-secondary-bg)",
-              color: "var(--btn-secondary-fg)",
-              border: "none",
-            }}
-          >
-            Secondary
-          </button>
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-secondary-bg-hover)",
-              color: "var(--btn-secondary-fg)",
-              border: "none",
-            }}
-          >
-            Secondary Hover
-          </button>
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-secondary-bg-press)",
-              color: "var(--btn-secondary-fg)",
-              border: "none",
-            }}
-          >
-            Secondary Press
-          </button>
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-secondary-bg-disabled)",
-              color: "var(--btn-secondary-fg-disabled)",
-              border: "none",
-            }}
-            disabled
-          >
+          <button className="btn-secondary">Secondary (Hover me!)</button>
+          <button className="btn-secondary">Secondary Click Test</button>
+          <button className="btn-secondary" disabled>
             Secondary Disabled
           </button>
 
           {/* Tertiary Buttons */}
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-tertiary-bg)",
-              color: "var(--btn-tertiary-fg)",
-              border: "none",
-            }}
-          >
-            Tertiary
-          </button>
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-tertiary-bg-hover)",
-              color: "var(--btn-tertiary-fg)",
-              border: "none",
-            }}
-          >
-            Tertiary Hover
-          </button>
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-tertiary-bg-press)",
-              color: "var(--btn-tertiary-fg)",
-              border: "none",
-            }}
-          >
-            Tertiary Press
-          </button>
-          <button
-            className="px-6 py-3 rounded font-bold"
-            style={{
-              background: "var(--btn-tertiary-bg-disabled)",
-              color: "var(--btn-tertiary-fg-disabled)",
-              border: "none",
-            }}
-            disabled
-          >
+          <button className="btn-tertiary">Tertiary (Hover me!)</button>
+          <button className="btn-tertiary">Tertiary Click Test</button>
+          <button className="btn-tertiary" disabled>
             Tertiary Disabled
           </button>
         </div>
