@@ -81,8 +81,8 @@ const FAQ = () => {
   }, [activeTab])
 
   return (
-    <div className="mt-20 px-8 flex flex-col pb-16 min-h-screen">
-      <h2 className="h2 text-primary-emphasis mb-6 mt-16 leading-tight sm:leading-[100px]">
+    <div className="flex flex-col pt-20 min-h-screen w-full px-4">
+      <h2 className="h2 text-primary-emphasis mb-6 leading-tight sm:leading-[100px]">
         Frequently Asked Questions
       </h2>
       <p className="b3-body text-primary-emphasis mb-8 w-full mt-4">
@@ -106,7 +106,7 @@ const FAQ = () => {
       <h3 className="h3 text-primary-emphasis mb-6 leading-snug">
         {activeTab.label}
       </h3>
-      <div className="divide-y divide-[#043873] w-full">
+      <div className="divide-y divide-[#043873] w-full pb-8">
         {activeTab.faqs.map((faq, index) => (
           <Accordian key={index} title={faq.question} content={faq.answer} />
         ))}
