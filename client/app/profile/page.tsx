@@ -32,6 +32,8 @@ const sampleEntries: Entry[] = [
     resources: [
       { id: "R1", title: "Mixing University Life with Mental Wellbeing", url: "https://example.com/a", description: "aaa"},
       { id: "R2", title: "How to Survive Building a Project for AUSA", url: "https://example.com/b", description: "aaa"},
+      { id: "R3", title: "Mixing University Life with Mental Wellbeing", url: "https://example.com/a", description: "aaa"},
+      { id: "R4", title: "How to Survive Building a Project for AUSA", url: "https://example.com/b", description: "aaa"},
     ],
   },
   {
