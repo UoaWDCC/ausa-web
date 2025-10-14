@@ -30,8 +30,8 @@ const sampleEntries: Entry[] = [
     label: "06/10/25, 1:10pm",
     datetime: "2025-10-06T13:10:00",
     resources: [
-      { id: "R1", title: "1st Resource for 1st Entry", url: "https://example.com/a", description: "aaa"},
-      { id: "R2", title: "2nd Resource for 1st Entry", url: "https://example.com/b", description: "aaa"},
+      { id: "R1", title: "Mixing University Life with Mental Wellbeing", url: "https://example.com/a", description: "aaa"},
+      { id: "R2", title: "How to Survive Building a Project for AUSA", url: "https://example.com/b", description: "aaa"},
     ],
   },
   {
@@ -39,8 +39,8 @@ const sampleEntries: Entry[] = [
     label: "08/10/25, 4:20pm",
     datetime: "2025-10-08T16:20:00",
     resources: [
-      { id: "R1", title: "1st Resource for 2nd Entry", url: "https://example.com/a", description: "aaa"},
-      { id: "R2", title: "2nd Resource for 2nd Entry", url: "https://example.com/b", description: "aaa"},
+      { id: "R1", title: "How to Prevent Your Repo from Getting Cancer", url: "https://example.com/a", description: "aaa"},
+      { id: "R2", title: "Why does Ray Not Believe in Pronouns?", url: "https://example.com/b", description: "aaa"},
     ],
   },
   {
@@ -48,8 +48,8 @@ const sampleEntries: Entry[] = [
     label: "12/10/25, 6:09pm",
     datetime: "2025-10-12T18:09:00",
     resources: [
-      { id: "R1", title: "1st Resource for 3rd Entry", url: "https://example.com/a", description: "aaa"},
-      { id: "R2", title: "2nd Resource for 3rd Entry", url: "https://example.com/b", description: "aaa"},
+      { id: "R1", title: "How to Deal with Your Client Showing Up 90 Minutes Late", url: "https://example.com/a", description: "aaa"},
+      { id: "R2", title: "Is Becky using AI to Communicate with Her Team?", url: "https://example.com/b", description: "aaa"},
     ],
   },
 ]
@@ -231,11 +231,19 @@ const Profile = () => {
                     return (
                       <li key={entry.id}>
                         <button
-                          className={`w-full text-left px-3 py-2 rounded-md transition ${selected ? "bg-blue-50 ring-1 ring-blue-200 text-[#2563EB]" : "hover:bg-neutral-100"}`}
+                          className={`w-full text-left px-3 py-2 rounded-md transition text-xl ${selected ? "text-[#2563EB]" : "hover:text-[#0000FF] text-[#3B3F5C]"}`}
                           onClick={() => setActiveEntryId(entry.id)}
                         >
-                          <div className="text-sm font-medium">{entry.label}</div>
-                          <div className="text-xs text-[#6B7280]">{new Date(entry.datetime).toLocaleString()}</div>
+                          <div className="font-semibold text-xl">
+                            {/* ensure datetime is follows format in NZ */}
+                            {new Date(entry.datetime).toLocaleDateString("en-NZ", {
+                              day: "2-digit",
+                              month: "2-digit",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit"
+                            })}
+                          </div>
                         </button>
                       </li>
                     )
