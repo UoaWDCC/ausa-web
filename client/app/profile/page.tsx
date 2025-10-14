@@ -15,8 +15,8 @@ const TAB_COLOURS: Record<string, { header: string; main: string }> = {
     main: "bg-gradient-to-b from-[#FAF7F2] to-[#CAE5F8]",
   },
   quizresults: {
-    header: "bg-[#FFDE91]",
-    main: "bg-[#FAF7F2]",
+    header: "bg-white",
+    main: "bg-gradient-to-b from-[#FAF7F2] to-[#CAE5F8]",
   },
 }
 
@@ -101,7 +101,7 @@ const Profile = () => {
 
       {/* Tabs Section */}
       <div className="flex flex-col text-black w-full relative">
-        <h1 className="text-4xl text-[#043873] text-center mt-12 mb-16">
+        <h1 className="text-4xl text-[#043873] text-center mt-12 mb-16 italic">
           {/* {`Welcome, ${displayName}!`} */}
           Welcome, User!
         </h1>
@@ -114,7 +114,7 @@ const Profile = () => {
                 <button
                   type="button"
                   onClick={() => setActiveTab("about")}
-                  className={`px-2 py-1 transition ${activeTab === "about" ? "text-[#2563EB]" : "text-black"}`}
+                  className={`px-2 py-1 transition ${activeTab === "about" ? "text-[#2563EB]" : "text-[#3B3F5C]"}`}
                 >
                   About
                 </button>
@@ -124,7 +124,7 @@ const Profile = () => {
                 <button
                   type="button"
                   onClick={() => setActiveTab("quizresults")}
-                  className={`px-2 py-1 transition ${activeTab === "quizresults" ? "text-[#2563EB]" : "text-black"}`}
+                  className={`px-2 py-1 transition ${activeTab === "quizresults" ? "text-[#2563EB]" : "text-[#3B3F5C]"}`}
                 >
                   Quiz Results
                 </button>
@@ -147,51 +147,73 @@ const Profile = () => {
 
         {/* Tab Content (depending on what tab is currently clicked on) */}
         <div className="mt-8 px-6 md:mx-30 mb-20">
+          {/* About Tab */}
           {activeTab === "about" && (
             // Section Container
             <div className="flex flex-col gap-10">
               {/* About Me Section */}
               <div className="w-full bg-white rounded-lg px-6 py-8 border border-neutral-200 hover:shadow-md">
-                <h3 className="font-semibold text-xl mb-6">About Me</h3>
+                <h3 className="font-semibold text-xl mb-6 text-[#3B3F5C]">About Me</h3>
                 <p className="text-[#3B3F5C] mt-2 text-sm">
-                  Description goes here.
+                  Description here.
                 </p>
               </div>
               {/* Wellbeing Notes Section */}
               <div className="w-full bg-white rounded-lg px-6 py-8 border border-neutral-200 hover:shadow-md">
-                <h3 className="font-semibold text-xl mb-6">Wellbeing Notes</h3>
-                <p className="text-[#3B3F5C] mt-2 text-sm">
-                  Description goes here.
+                <h3 className="font-semibold text-xl text-[#3B3F5C]">Wellbeing Notes</h3>
+                <h3 className="font-medium text-lg mt-10 text-[#3B3F5C]">Best wellbeing advice I was given was...</h3>
+                <p className="text-[#3B3F5C] mt-3 text-sm">
+                  Description here.
+                </p>
+                <h3 className="font-medium text-lg mt-10 text-[#3B3F5C]">Best way to chill after a day of Uni is...</h3>
+                <p className="text-[#3B3F5C] mt-3 text-sm">
+                  Description here.
                 </p>
               </div>
             </div>
           )}
+          {/* Quiz Results Tab */}
           {activeTab === "quizresults" && (
             // Section Container
             <div className="flex gap-10 flex-col md:flex-row">
               {/* Sidebar section*/}
               <div className="hidden lg:block lg:w-[300px] bg-white rounded-lg px-6 py-8 border border-neutral-200">
-                <h3 className="text-xl mb-6">Entry</h3>
+                <h3 className="font-semibold text-xl mb-6 text-[#3B3F5C]">Entries</h3>
+                <h3 className="text-xl mb-6 ml-3">06/10/25, 1:10pm</h3>
+                <h3 className="text-xl mb-6 ml-3">06/10/25, 1:10pm</h3>
+                <h3 className="text-xl mb-6 ml-3">06/10/25, 1:10pm</h3>
               </div>
               {/* Resource Link section */}
               <div className="w-full lg:flex-1 flex flex-col gap-10">
                 <div className="bg-white rounded-lg px-6 py-8 border border-neutral-200 hover:shadow-md">
-                  <h3 className="text-xl mb-6">Resource Links</h3>
-                  <p className="text-[#3B3F5C] mt-2 text-sm">
-                    Description goes here.
+                  <h3 className="font-semibold text-xl mb-6 text-[#3B3F5C]">Resource Links</h3>
+                  <p className="text-[#3B3F5C] mt-2 text-sm mb-5">
+                    Description here.
                   </p>
+                  <button
+                    type="button"
+                    className="bg-blue-100 text-blue-500 p-2 rounded-full hover:bg transition"
+                  >Visit Website</button>
                 </div>
                 <div className="bg-white rounded-lg px-6 py-8 border border-neutral-200 hover:shadow-md">
-                  <h3 className="text-xl mb-6">Resource Links</h3>
-                  <p className="text-[#3B3F5C] mt-2 text-sm">
-                    Description goes here.
+                  <h3 className="font-semibold text-xl mb-6 text-[#3B3F5C]">Resource Links</h3>
+                  <p className="text-[#3B3F5C] mt-2 text-sm mb-5">
+                    Description here.
                   </p>
+                  <button
+                    type="button"
+                    className="bg-blue-100 text-blue-500 p-2 rounded-full hover:bg transition"
+                  >Visit Website</button>
                 </div>
                 <div className="bg-white rounded-lg px-6 py-8 border border-neutral-200 hover:shadow-md">
-                  <h3 className="text-xl mb-6">Resource Links</h3>
-                  <p className="text-[#3B3F5C] mt-2 text-sm">
-                    Description goes here.
+                  <h3 className="text-xl mb-6 text-[#3B3F5C]">Resource Links</h3>
+                  <p className="text-[#3B3F5C] mt-2 text-sm mb-5">
+                    Description here.
                   </p>
+                  <button
+                    type="button"
+                    className="bg-blue-100 text-blue-500 p-2 rounded-full hover:bg transition"
+                  >Visit Website</button>
                 </div>
               </div>
             </div>
