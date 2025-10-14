@@ -81,16 +81,16 @@ const FAQ = () => {
   }, [activeTab])
 
   return (
-    <div className="flex flex-col pt-20 min-h-screen w-full px-4">
+    <div className="flex flex-col pt-20 min-h-screen px-4">
       <h2 className="h2 text-primary-emphasis mb-6 leading-tight sm:leading-[100px]">
         Frequently Asked Questions
       </h2>
-      <p className="b3-body text-primary-emphasis mb-8 w-full mt-4">
+      <p className="b3-body text-primary-emphasis mb-8 mt-4">
         Have questions about mental wellbeing or how to use our resources? Our
         FAQ section covers common queries with simple, supportive answers to
         help you find what you need quickly and confidently.
       </p>
-      <div className="flex flex-row gap-4 mb-10">
+      <div className="flex flex-wrap sm:flex-row gap-4 mb-10">
         {tabConfigs.map((tab) => (
           <Button
             key={tab.label}
@@ -98,7 +98,7 @@ const FAQ = () => {
             backgroundColor={
               activeTab.label === tab.label ? tab.bg : "var(--light-grey)"
             }
-            className="px-6 py-3 rounded-full"
+            className="px-6 py-3 rounded-full whitespace-nowrap w-48 justify-center"
             onClick={() => setActiveTab(tab)}
           />
         ))}
