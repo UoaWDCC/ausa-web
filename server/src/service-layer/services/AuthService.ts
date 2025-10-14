@@ -1,117 +1,143 @@
-import { auth } from "../../business-layer/security/Firebase"
-import { AuthRepository } from "../../data-layer/repositories/AuthRepository"
+// business-layer/services/authService.ts
+import * as jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import FirestoreCollections from 'data-layer/adapters/FirestoreCollections';
+import type { User } from 'business-layer/models/User';
 
-import { generateVerificationCode } from "../../utils/generateVerificationCode"
-import EmailService from "./EmailService"
-import { SendVerificationCodeResponse } from "../dtos/response/SendVerificationCodeResponse"
-import { VerifyCodeResponse } from "../dtos/response/VerifyCodeResponse"
+const JWT_SECRET = process.env.JWT_SECRET!;
+const JWT_EXPIRES_IN: string | number = process.env.JWT_EXPIRES_IN || '24h';
 
-import { VerifyTokenResponse } from "../dtos/response/VerifyTokenResponse"
-
-export default class AuthService {
-  private authRepository: AuthRepository
-  private emailService: EmailService
-
-  constructor() {
-    this.authRepository = new AuthRepository()
-    this.emailService = new EmailService()
-  }
-
-  public async sendVerificationCode(
-    email: string,
-  ): Promise<SendVerificationCodeResponse> {
-    try {
-      // Generate verification code
-      const verificationCode = generateVerificationCode()
-      await this.authRepository.saveVerificationCode(email, verificationCode)
-
-      // Send verification code via email
-      await this.emailService.sendVerificationEmail(email, verificationCode)
-
-      // Return response
-      const responseBody: SendVerificationCodeResponse = {
-        success: true,
-        message: "Verification code sent successfully",
-      }
-      return responseBody
-    } catch (err) {
-      console.error("Error sending verification code:", err)
-      throw new Error("Failed to send verification code")
-    }
-  }
-
-  public async verifyCode(
-    email: string,
-    inputCode: string,
-  ): Promise<VerifyCodeResponse> {
-    // Verify code
-    const result = await this.authRepository.verifyCode(email, inputCode)
-
-    // Return response
-    const responseBody: VerifyCodeResponse = {
-      success: result,
-      message: result
-        ? "Verification code verified successfully"
-        : "Verification code verification failed",
-    }
-    return responseBody
-  }
-
-  public async verifyIdToken(idToken: string): Promise<VerifyTokenResponse> {
-    try {
-      // Verify the ID token using Firebase Admin SDK
-      const decodedToken = await auth.verifyIdToken(idToken)
-
-      // Extract user information from the decoded token
-      const uid = decodedToken.uid
-      const email = decodedToken.email
-
-      // Check if user exists in Firestore, if not create user record
-      await this.ensureUserExists(uid, email)
-
-      const responseBody: VerifyTokenResponse = {
-        success: true,
-        message: "Token verified successfully",
-        uid: uid,
-        email: email,
-      }
-      return responseBody
-    } catch (err: any) {
-      console.error("Error verifying ID token:", err)
-
-      let errorMessage = "Token verification failed"
-      if (err.code === "auth/id-token-expired") {
-        errorMessage = "Token has expired. Please sign in again."
-      } else if (err.code === "auth/invalid-id-token") {
-        errorMessage = "Invalid token. Please sign in again."
-      } else if (err.code === "auth/argument-error") {
-        errorMessage = "Invalid token format."
-      }
-
-      const responseBody: VerifyTokenResponse = {
-        success: false,
-        message: errorMessage,
-      }
-      return responseBody
-    }
-  }
-
-  private async ensureUserExists(
-    uid: string,
-    email: string | undefined,
-  ): Promise<void> {
-    try {
-      // Check if user already exists in Firestore
-      const userDoc = await this.authRepository.getUserByUid(uid)
-
-      if (!userDoc) {
-        // User doesn't exist in Firestore, create user record
-        await this.authRepository.saveUser(uid, email || "")
-        console.log(`Created user record in Firestore for UID: ${uid}`)
-      }
-    } catch (error) {
-      console.error("Error ensuring user exists:", error)
-      // Don't throw error here as token verification was successful
-    }
-  }
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET must be defined in environment variables');
 }
+
+export const authService = {
+  // Register new user
+  async register(email: string, password: string, displayName?: string) {
+    // Check if user exists
+    const snapshot = await FirestoreCollections.users
+      .where('email', '==', email)
+      .get();
+    
+    if (!snapshot.empty) {
+      throw new Error('User already exists');
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create user
+    const newUser = {
+      email,
+      password: hashedPassword,
+      displayName: displayName || undefined,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      role: "user" as const,
+    };
+
+    // Save to Firestore
+    const docRef = await FirestoreCollections.users.add(newUser);
+
+    // Generate token
+    const token = this.generateToken(
+      docRef.id,
+      email,
+      displayName || email,
+      "user"
+    );
+
+    return {
+      token,
+      user: {
+        id: docRef.id,
+        email,
+        displayName: displayName || undefined,
+        role: "user" as const,
+        createdAt: newUser.createdAt,
+        updatedAt: newUser.updatedAt,
+      },
+    };
+  },
+
+  // Login user
+  async login(email: string, password: string) {
+    // Find user
+    const snapshot = await FirestoreCollections.users
+      .where('email', '==', email)
+      .get();
+
+    if (snapshot.empty) {
+      throw new Error('Invalid credentials');
+    }
+
+    const userDoc = snapshot.docs[0];
+    const userData = userDoc.data() as User;
+
+    // Verify password
+    const isValidPassword = await bcrypt.compare(password, userData.password);
+    
+    if (!isValidPassword) {
+      throw new Error('Invalid credentials');
+    }
+
+    // Update last login
+    await FirestoreCollections.users.doc(userDoc.id).update({
+      updatedAt: new Date(),
+    });
+
+    // Generate token
+    const token = this.generateToken(
+      userDoc.id,
+      userData.email,
+      userData.displayName || userData.email,
+      userData.role
+    );
+
+    return {
+      token,
+      user: {
+        id: userDoc.id,
+        email: userData.email,
+        displayName: userData.displayName,
+        role: userData.role,
+        createdAt: userData.createdAt,
+        updatedAt: new Date(),
+      },
+    };
+  },
+
+  // Get user by ID
+  async getUserById(uid: string) {
+    const doc = await FirestoreCollections.users.doc(uid).get();
+    
+    if (!doc.exists) {
+      return null;
+    }
+
+    const userData = doc.data() as User;
+    
+    return {
+      id: doc.id,
+      email: userData.email,
+      displayName: userData.displayName,
+      role: userData.role,
+      createdAt: userData.createdAt,
+      updatedAt: userData.updatedAt,
+    };
+  },
+
+  // Generate JWT token
+  generateToken(uid: string, email: string, name: string, role: string): string {
+    const payload = { uid, email, name, role };
+    const options: jwt.SignOptions = { 
+      expiresIn: JWT_EXPIRES_IN as jwt.SignOptions['expiresIn']
+    };
+    return jwt.sign(payload, JWT_SECRET, options);
+  },
+
+  // Verify JWT token
+  verifyToken(token: string) {
+    return jwt.verify(token, JWT_SECRET);
+  },
+};
