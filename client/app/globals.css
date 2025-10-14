@@ -208,3 +208,25 @@
     --foreground: #ededed;
   }
 }*/
+
+/* Hide scrollbar track, show only the thumb */
+.scrollable-resources {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #474747 transparent; /* thumb and track color */
+}
+
+/* Chrome, Edge, Safari */
+.scrollable-resources::-webkit-scrollbar {
+  width: 8px; /* scrollbar width */
+}
+
+.scrollable-resources::-webkit-scrollbar-track {
+  background: transparent; /* hide track */
+}
+
+.scrollable-resources::-webkit-scrollbar-thumb {
+  background-color: #474747; /* thumb color */
+  border-radius: 999px;
+  border: none; /* remove border */
+}
+
