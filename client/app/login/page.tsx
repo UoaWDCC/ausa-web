@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import PortalCard from "../components/composite/portal-card/PortalCard"
-import Background from "../components/composite/background/Background"
+import Background from "../components/composite/background/background"
 
 const LoginPage = () => {
   const [email, setEmail] = useState("")
