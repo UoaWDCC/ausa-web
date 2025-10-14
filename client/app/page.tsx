@@ -1,7 +1,5 @@
 // app/page.tsx (App Router)
 // or pages/index.tsx (Pages Router)
-import Image from "next/image"
-import ModalWindow from "./components/composite/modal-window/ModalWindow"
 import Carousel from "./components/composite/carousel/Carousel"
 import WellbeingCards from "./components/generic/card/card"
 
