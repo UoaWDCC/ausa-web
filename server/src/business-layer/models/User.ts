@@ -4,5 +4,5 @@ export interface User {
   displayName?: string
   createdAt: Date
   updatedAt: Date
-  role: "user" | "lab_manager" | "admin"
+  role: "user" | "admin"
 }

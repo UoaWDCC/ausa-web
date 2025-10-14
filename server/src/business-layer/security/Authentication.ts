@@ -1,5 +1,5 @@
-// business-layer/security/auth.ts (or wherever your expressAuthentication is)
-import { authService } from 'service-layer/services/AuthService';
+
+import { authService } from '../../service-layer/services/AuthService';
 import { AuthRequest } from '../../service-layer/dtos/request/AuthRequest';
 
 export function expressAuthentication(
@@ -24,7 +24,7 @@ export function expressAuthentication(
         // Check scopes if provided
         if (scopes && scopes.length > 0) {
           for (const scope of scopes) {
-            // Example: scope could be "admin", "lab_manager", etc.
+            // Example: scope could be "admin", "user" etc.
             if (decoded.role !== scope) {
               return reject(new Error(`Required role: ${scope}`));
             }

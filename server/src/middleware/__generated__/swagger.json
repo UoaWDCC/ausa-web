@@ -12,6 +12,9 @@
 					"email": {
 						"type": "string"
 					},
+					"password": {
+						"type": "string"
+					},
 					"displayName": {
 						"type": "string"
 					},
@@ -27,13 +30,13 @@
 						"type": "string",
 						"enum": [
 							"user",
-							"lab_manager",
 							"admin"
 						]
 					}
 				},
 				"required": [
 					"email",
+					"password",
 					"createdAt",
 					"updatedAt",
 					"role"
@@ -203,6 +206,41 @@
 				"required": [
 					"questionId",
 					"optionId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RegisterRequest": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"displayName": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"LoginRequest": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"email",
+					"password"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -627,6 +665,194 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/NavigateRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/register": {
+			"post": {
+				"operationId": "Register",
+				"responses": {
+					"201": {
+						"description": "User registered successfully",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"properties": {
+												"user": {
+													"properties": {
+														"updatedAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"createdAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"role": {
+															"type": "string",
+															"enum": [
+																"user"
+															],
+															"nullable": false
+														},
+														"displayName": {
+															"type": "string"
+														},
+														"email": {
+															"type": "string"
+														},
+														"id": {
+															"type": "string"
+														}
+													},
+													"required": [
+														"updatedAt",
+														"createdAt",
+														"role",
+														"displayName",
+														"email",
+														"id"
+													],
+													"type": "object"
+												},
+												"token": {}
+											},
+											"required": [
+												"user",
+												"token"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"error": {}
+											},
+											"required": [
+												"error"
+											],
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request - User already exists"
+					}
+				},
+				"description": "Register a new user",
+				"tags": [
+					"Authentication"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/RegisterRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/login": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "Login successful",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"properties": {
+												"user": {
+													"properties": {
+														"updatedAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"createdAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"role": {
+															"type": "string",
+															"enum": [
+																"user",
+																"admin"
+															]
+														},
+														"displayName": {
+															"type": "string"
+														},
+														"email": {
+															"type": "string"
+														},
+														"id": {
+															"type": "string"
+														}
+													},
+													"required": [
+														"updatedAt",
+														"createdAt",
+														"role",
+														"displayName",
+														"email",
+														"id"
+													],
+													"type": "object"
+												},
+												"token": {}
+											},
+											"required": [
+												"user",
+												"token"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"error": {
+													"type": "string"
+												}
+											},
+											"required": [
+												"error"
+											],
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized - Invalid credentials"
+					}
+				},
+				"description": "Login a user",
+				"tags": [
+					"Authentication"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LoginRequest"
 							}
 						}
 					}

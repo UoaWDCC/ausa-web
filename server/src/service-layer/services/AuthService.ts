@@ -1,10 +1,10 @@
-// business-layer/services/authService.ts
+
 import * as jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import FirestoreCollections from 'data-layer/adapters/FirestoreCollections';
-import type { User } from 'business-layer/models/User';
+import FirestoreCollections from '../../data-layer/adapters/FirestoreCollections';
+import type { User } from '../../business-layer/models/User';
 
-const JWT_SECRET = process.env.JWT_SECRET!;
+const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRES_IN: string | number = process.env.JWT_EXPIRES_IN || '24h';
 
 if (!JWT_SECRET) {

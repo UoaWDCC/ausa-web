@@ -4,557 +4,484 @@
  */
 
 export interface paths {
-  "/users": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get: operations["GetAllUsers"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/users/{user_id}/email": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** @description Get email of the current logged in user */
-    get: operations["GetEmail"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/quiz": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** @description Get all quizzes */
-    get: operations["GetAllQuizzes"]
-    put?: never
-    /** @description Create a new quiz */
-    post: operations["CreateQuiz"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/quiz/{id}": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    /** @description Get quiz by ID */
-    get: operations["GetQuizById"]
-    put?: never
-    post?: never
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/quiz/{id}/navigate": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /** @description Navigate quiz - answer question and get next step */
-    post: operations["NavigateQuiz"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/auth/google/verify": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    /** @description Verifies Google ID token and authenticates user. */
-    post: operations["VerifyToken"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/auth/send-verification-code": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations["SendVerificationCode"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/auth/verify-code": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations["VerifyCode"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/auth/verify-token": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations["VerifyToken"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
+    "/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["GetAllUsers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/users/{user_id}/email": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Get email of the current logged in user */
+        get: operations["GetEmail"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/quiz": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Get all quizzes */
+        get: operations["GetAllQuizzes"];
+        put?: never;
+        /** @description Create a new quiz */
+        post: operations["CreateQuiz"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/quiz/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Get quiz by ID */
+        get: operations["GetQuizById"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/quiz/{id}/navigate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Navigate quiz - answer question and get next step */
+        post: operations["NavigateQuiz"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/register": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Register a new user */
+        post: operations["Register"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Login a user */
+        post: operations["Login"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
-export type webhooks = Record<string, never>
+export type webhooks = Record<string, never>;
 export interface components {
-  schemas: {
-    User: {
-      email: string
-      displayName?: string
-      /** Format: date-time */
-      createdAt: string
-      /** Format: date-time */
-      updatedAt: string
-      /** @enum {string} */
-      role: "user" | "lab_manager" | "admin"
-    }
-    Resource: {
-      id: string
-      title: string
-      description: string
-      url?: string
-      type: string
-    }
-    QuizOption: {
-      id: string
-      text: string
-      nextQuestionId?: string
-      resources?: components["schemas"]["Resource"][]
-    }
-    QuizQuestion: {
-      id: string
-      text: string
-      description?: string
-      options: components["schemas"]["QuizOption"][]
-    }
-    /** @description Construct a type with a set of properties K of type T */
-    "Record_string.QuizQuestion_": {
-      [key: string]: components["schemas"]["QuizQuestion"]
-    }
-    Quiz: {
-      id: string
-      title: string
-      description: string
-      startQuestionId: string
-      questions: components["schemas"]["Record_string.QuizQuestion_"]
-      /** Format: date-time */
-      createdAt?: string
-      /** Format: date-time */
-      updatedAt?: string
-    }
-    /** @description From T, pick a set of properties whose keys are in the union K */
-    "Pick_Quiz.Exclude_keyofQuiz.id-or-createdAt-or-updatedAt__": {
-      title: string
-      description: string
-      startQuestionId: string
-      questions: components["schemas"]["Record_string.QuizQuestion_"]
-    }
-    /** @description Construct a type with the properties of T except for those in type K. */
-    "Omit_Quiz.id-or-createdAt-or-updatedAt_": components["schemas"]["Pick_Quiz.Exclude_keyofQuiz.id-or-createdAt-or-updatedAt__"]
-    NavigateRequest: {
-      questionId: string
-      optionId: string
-    }
-    GoogleOAuthUser: {
-      uid: string
-      email: string
-      displayName?: string
-      photoURL?: string
-    }
-    GoogleOAuthResponse: {
-      success: boolean
-      message: string
-      token?: string
-      user?: components["schemas"]["GoogleOAuthUser"]
-    }
-    GoogleOAuthRequest: {
-      idToken: string
-    }
-    SendVerificationCodeResponse: {
-      success: boolean
-      message: string
-    }
-    SendVerificationCodeRequest: {
-      email: string
-    }
-    VerifyCodeResponse: {
-      success: boolean
-      message: string
-    }
-    VerifyCodeRequest: {
-      email: string
-      inputCode: string
-    }
-    VerifyTokenResponse: {
-      success: boolean
-      message: string
-      uid?: string
-      email?: string
-    }
-    VerifyTokenRequest: {
-      idToken: string
-    }
-  }
-  responses: never
-  parameters: never
-  requestBodies: never
-  headers: never
-  pathItems: never
+    schemas: {
+        User: {
+            email: string;
+            password: string;
+            displayName?: string;
+            /** Format: date-time */
+            createdAt: string;
+            /** Format: date-time */
+            updatedAt: string;
+            /** @enum {string} */
+            role: "user" | "admin";
+        };
+        Resource: {
+            id: string;
+            title: string;
+            description: string;
+            url?: string;
+            type: string;
+        };
+        QuizOption: {
+            id: string;
+            text: string;
+            nextQuestionId?: string;
+            resources?: components["schemas"]["Resource"][];
+        };
+        QuizQuestion: {
+            id: string;
+            text: string;
+            description?: string;
+            options: components["schemas"]["QuizOption"][];
+        };
+        /** @description Construct a type with a set of properties K of type T */
+        "Record_string.QuizQuestion_": {
+            [key: string]: components["schemas"]["QuizQuestion"];
+        };
+        Quiz: {
+            id: string;
+            title: string;
+            description: string;
+            startQuestionId: string;
+            questions: components["schemas"]["Record_string.QuizQuestion_"];
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+        };
+        /** @description From T, pick a set of properties whose keys are in the union K */
+        "Pick_Quiz.Exclude_keyofQuiz.id-or-createdAt-or-updatedAt__": {
+            title: string;
+            description: string;
+            startQuestionId: string;
+            questions: components["schemas"]["Record_string.QuizQuestion_"];
+        };
+        /** @description Construct a type with the properties of T except for those in type K. */
+        "Omit_Quiz.id-or-createdAt-or-updatedAt_": components["schemas"]["Pick_Quiz.Exclude_keyofQuiz.id-or-createdAt-or-updatedAt__"];
+        NavigateRequest: {
+            questionId: string;
+            optionId: string;
+        };
+        RegisterRequest: {
+            email: string;
+            password: string;
+            displayName?: string;
+        };
+        LoginRequest: {
+            email: string;
+            password: string;
+        };
+    };
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
-export type $defs = Record<string, never>
+export type $defs = Record<string, never>;
 export interface operations {
-  GetAllUsers: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Users retrieved successfully */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["User"][]
-        }
-      }
-    }
-  }
-  GetEmail: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        user_id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description User email retrieved successfully */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": {
-            email: string
-          }
-        }
-      }
-    }
-  }
-  GetAllQuizzes: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Ok */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json":
-            | {
-                message?: unknown
-                quizzes: {
-                  description: string
-                  title: string
-                  id: string
-                }[]
-                success: boolean
-              }
-            | {
-                quizzes: {
-                  description: string
-                  title: string
-                  id: string
-                }[]
-                message: string
-                success: boolean
-              }
-        }
-      }
-    }
-  }
-  CreateQuiz: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Omit_Quiz.id-or-createdAt-or-updatedAt_"]
-      }
-    }
-    responses: {
-      /** @description Ok */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json":
-            | {
-                quiz: components["schemas"]["Quiz"]
-                message: string
-                success: boolean
-              }
-            | {
-                quiz?: unknown
-                message: string
-                success: boolean
-              }
-        }
-      }
-    }
-  }
-  GetQuizById: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody?: never
-    responses: {
-      /** @description Ok */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json":
-            | {
-                quiz?: unknown
-                message: string
-                success: boolean
-              }
-            | {
-                message?: unknown
-                quiz: components["schemas"]["Quiz"]
-                success: boolean
-              }
-        }
-      }
-    }
-  }
-  NavigateQuiz: {
-    parameters: {
-      query?: never
-      header?: never
-      path: {
-        id: string
-      }
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["NavigateRequest"]
-      }
-    }
-    responses: {
-      /** @description Ok */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json":
-            | {
-                questionId?: unknown
-                question?: unknown
-                resources?: unknown
-                type?: unknown
-                message: string
-                success: boolean
-              }
-            | {
-                questionId?: unknown
-                question?: unknown
-                message?: unknown
-                resources: components["schemas"]["Resource"][]
-                type: string
-                success: boolean
-              }
-            | {
-                resources?: unknown
-                message?: unknown
-                questionId: string
-                question: components["schemas"]["QuizQuestion"]
-                type: string
-                success: boolean
-              }
-        }
-      }
-    }
-  }
-  VerifyToken: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["GoogleOAuthRequest"]
-      }
-    }
-    responses: {
-      /** @description Ok */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["GoogleOAuthResponse"]
-        }
-      }
-    }
-  }
-  SendVerificationCode: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["SendVerificationCodeRequest"]
-      }
-    }
-    responses: {
-      /** @description Ok */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["SendVerificationCodeResponse"]
-        }
-      }
-    }
-  }
-  VerifyCode: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["VerifyCodeRequest"]
-      }
-    }
-    responses: {
-      /** @description Ok */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["VerifyCodeResponse"]
-        }
-      }
-    }
-  }
-  VerifyToken: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["VerifyTokenRequest"]
-      }
-    }
-    responses: {
-      /** @description Ok */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["VerifyTokenResponse"]
-        }
-      }
-    }
-  }
+    GetAllUsers: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Users retrieved successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["User"][];
+                };
+            };
+        };
+    };
+    GetEmail: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description User email retrieved successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        email: string;
+                    };
+                };
+            };
+        };
+    };
+    GetAllQuizzes: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        message?: unknown;
+                        quizzes: {
+                            description: string;
+                            title: string;
+                            id: string;
+                        }[];
+                        success: boolean;
+                    } | {
+                        quizzes: {
+                            description: string;
+                            title: string;
+                            id: string;
+                        }[];
+                        message: string;
+                        success: boolean;
+                    };
+                };
+            };
+        };
+    };
+    CreateQuiz: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Omit_Quiz.id-or-createdAt-or-updatedAt_"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        quiz: components["schemas"]["Quiz"];
+                        message: string;
+                        success: boolean;
+                    } | {
+                        quiz?: unknown;
+                        message: string;
+                        success: boolean;
+                    };
+                };
+            };
+        };
+    };
+    GetQuizById: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        quiz?: unknown;
+                        message: string;
+                        success: boolean;
+                    } | {
+                        message?: unknown;
+                        quiz: components["schemas"]["Quiz"];
+                        success: boolean;
+                    };
+                };
+            };
+        };
+    };
+    NavigateQuiz: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["NavigateRequest"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        questionId?: unknown;
+                        question?: unknown;
+                        resources?: unknown;
+                        type?: unknown;
+                        message: string;
+                        success: boolean;
+                    } | {
+                        questionId?: unknown;
+                        question?: unknown;
+                        message?: unknown;
+                        resources: components["schemas"]["Resource"][];
+                        type: string;
+                        success: boolean;
+                    } | {
+                        resources?: unknown;
+                        message?: unknown;
+                        questionId: string;
+                        question: components["schemas"]["QuizQuestion"];
+                        type: string;
+                        success: boolean;
+                    };
+                };
+            };
+        };
+    };
+    Register: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RegisterRequest"];
+            };
+        };
+        responses: {
+            /** @description User registered successfully */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        user: {
+                            /** Format: date-time */
+                            updatedAt: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                            /** @enum {string} */
+                            role: "user";
+                            displayName: string;
+                            email: string;
+                            id: string;
+                        };
+                        token: unknown;
+                    } | {
+                        error: unknown;
+                    };
+                };
+            };
+            /** @description Bad Request - User already exists */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    Login: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoginRequest"];
+            };
+        };
+        responses: {
+            /** @description Login successful */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        user: {
+                            /** Format: date-time */
+                            updatedAt: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                            /** @enum {string} */
+                            role: "user" | "admin";
+                            displayName: string;
+                            email: string;
+                            id: string;
+                        };
+                        token: unknown;
+                    } | {
+                        error: string;
+                    };
+                };
+            };
+            /** @description Unauthorized - Invalid credentials */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
 }

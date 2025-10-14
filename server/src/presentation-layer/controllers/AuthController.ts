@@ -1,6 +1,6 @@
 // service-layer/controllers/AuthController.ts
 import { Body, Controller, Post, Route, Tags, SuccessResponse, Response } from 'tsoa';
-import { authService } from 'service-layer/services/AuthService';
+import { authService } from '../../service-layer/services/AuthService';
 
 interface RegisterRequest {
   email: string;
@@ -33,7 +33,7 @@ export class AuthController extends Controller {
       return result;
     } catch (error: any) {
       this.setStatus(400);
-      throw new Error(error.message);
+      return { error: error.message };
     }
   }
 
@@ -48,7 +48,7 @@ export class AuthController extends Controller {
       return await authService.login(body.email, body.password);
     } catch (error: any) {
       this.setStatus(401);
-      throw new Error(error.message);
+      return { error: 'invalid credentials' }
     }
   }
 }
