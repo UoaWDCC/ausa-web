@@ -225,7 +225,7 @@ const Profile = () => {
             // Section Container
             <div className="flex gap-10 flex-col md:flex-row">
               {/* Sidebar section*/}
-              <div className="hidden lg:block lg:w-[300px] bg-white rounded-lg px-6 py-8 border border-neutral-200">
+              <div className="md:w-[300px] bg-white rounded-lg px-6 py-8 border border-neutral-200">
                 <h3 className="font-semibold text-xl mb-6 text-[#3B3F5C]">Entries</h3>
                 <ul className="space-y-3">
                   {entries.map((entry) => {
@@ -253,7 +253,7 @@ const Profile = () => {
                 </ul>
               </div>
               {/* Resource Link section */}
-              <div className="w-full lg:flex-1 flex flex-col gap-10">
+              <div className="w-full lg:flex-1 flex flex-col gap-10 max-h-[600px] overflow-y-auto pr-3 scrollable-resources">
                 {activeEntry ? (
                   <>
                     {activeEntry.resources.map((r) => (
