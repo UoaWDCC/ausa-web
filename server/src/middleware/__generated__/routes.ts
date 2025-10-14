@@ -6,6 +6,8 @@ import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './../../presentation-layer/controllers/UserController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { QuizController } from './../../presentation-layer/controllers/QuizController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { GoogleOAuthController } from './../../presentation-layer/controllers/GoogleOAuthController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { AuthController } from './../../presentation-layer/controllers/AuthController';
@@ -27,6 +29,78 @@ const models: TsoaRoute.Models = {
             "createdAt": {"dataType":"datetime","required":true},
             "updatedAt": {"dataType":"datetime","required":true},
             "role": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["user"]},{"dataType":"enum","enums":["lab_manager"]},{"dataType":"enum","enums":["admin"]}],"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Resource": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"string","required":true},
+            "title": {"dataType":"string","required":true},
+            "description": {"dataType":"string","required":true},
+            "url": {"dataType":"string"},
+            "type": {"dataType":"string","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "QuizOption": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"string","required":true},
+            "text": {"dataType":"string","required":true},
+            "nextQuestionId": {"dataType":"string"},
+            "resources": {"dataType":"array","array":{"dataType":"refObject","ref":"Resource"}},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "QuizQuestion": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"string","required":true},
+            "text": {"dataType":"string","required":true},
+            "description": {"dataType":"string"},
+            "options": {"dataType":"array","array":{"dataType":"refObject","ref":"QuizOption"},"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Record_string.QuizQuestion_": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{},"additionalProperties":{"ref":"QuizQuestion"},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Quiz": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"dataType":"string","required":true},
+            "title": {"dataType":"string","required":true},
+            "description": {"dataType":"string","required":true},
+            "startQuestionId": {"dataType":"string","required":true},
+            "questions": {"ref":"Record_string.QuizQuestion_","required":true},
+            "createdAt": {"dataType":"datetime"},
+            "updatedAt": {"dataType":"datetime"},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Pick_Quiz.Exclude_keyofQuiz.id-or-createdAt-or-updatedAt__": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"title":{"dataType":"string","required":true},"description":{"dataType":"string","required":true},"startQuestionId":{"dataType":"string","required":true},"questions":{"ref":"Record_string.QuizQuestion_","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Omit_Quiz.id-or-createdAt-or-updatedAt_": {
+        "dataType": "refAlias",
+        "type": {"ref":"Pick_Quiz.Exclude_keyofQuiz.id-or-createdAt-or-updatedAt__","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NavigateRequest": {
+        "dataType": "refObject",
+        "properties": {
+            "questionId": {"dataType":"string","required":true},
+            "optionId": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -187,6 +261,126 @@ export function RegisterRoutes(app: Router) {
                 next,
                 validatedArgs,
                 successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsQuizController_createQuiz: Record<string, TsoaRoute.ParameterSchema> = {
+                quizData: {"in":"body","name":"quizData","required":true,"ref":"Omit_Quiz.id-or-createdAt-or-updatedAt_"},
+        };
+        app.post('/quiz',
+            ...(fetchMiddlewares<RequestHandler>(QuizController)),
+            ...(fetchMiddlewares<RequestHandler>(QuizController.prototype.createQuiz)),
+
+            async function QuizController_createQuiz(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsQuizController_createQuiz, request, response });
+
+                const controller = new QuizController();
+
+              await templateService.apiHandler({
+                methodName: 'createQuiz',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsQuizController_getAllQuizzes: Record<string, TsoaRoute.ParameterSchema> = {
+        };
+        app.get('/quiz',
+            ...(fetchMiddlewares<RequestHandler>(QuizController)),
+            ...(fetchMiddlewares<RequestHandler>(QuizController.prototype.getAllQuizzes)),
+
+            async function QuizController_getAllQuizzes(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsQuizController_getAllQuizzes, request, response });
+
+                const controller = new QuizController();
+
+              await templateService.apiHandler({
+                methodName: 'getAllQuizzes',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsQuizController_getQuizById: Record<string, TsoaRoute.ParameterSchema> = {
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+        };
+        app.get('/quiz/:id',
+            ...(fetchMiddlewares<RequestHandler>(QuizController)),
+            ...(fetchMiddlewares<RequestHandler>(QuizController.prototype.getQuizById)),
+
+            async function QuizController_getQuizById(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsQuizController_getQuizById, request, response });
+
+                const controller = new QuizController();
+
+              await templateService.apiHandler({
+                methodName: 'getQuizById',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsQuizController_navigateQuiz: Record<string, TsoaRoute.ParameterSchema> = {
+                id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                body: {"in":"body","name":"body","required":true,"ref":"NavigateRequest"},
+        };
+        app.post('/quiz/:id/navigate',
+            ...(fetchMiddlewares<RequestHandler>(QuizController)),
+            ...(fetchMiddlewares<RequestHandler>(QuizController.prototype.navigateQuiz)),
+
+            async function QuizController_navigateQuiz(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsQuizController_navigateQuiz, request, response });
+
+                const controller = new QuizController();
+
+              await templateService.apiHandler({
+                methodName: 'navigateQuiz',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
               });
             } catch (err) {
                 return next(err);

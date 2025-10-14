@@ -37,7 +37,7 @@ const QuizButton: React.FC<QuizButtonProps> = ({
         ${className}
       `}
       style={{
-        backgroundColor: "var(--light-dark-grey)",
+        backgroundColor: "var(--light-grey-100)",
         color: "var(--black)",
       }}
       onMouseEnter={(e) => {

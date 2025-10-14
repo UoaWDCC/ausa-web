@@ -69,7 +69,7 @@ jobs:
 
       - name: Install dependencies if cache missed
         if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
   style:
     needs: [check_changes, setup]
@@ -104,7 +104,7 @@ jobs:
 
       - name: Install dependencies if cache missed
         if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Check formatting
         run: pnpm run prettier
@@ -142,7 +142,7 @@ jobs:
 
       - name: Install dependencies if cache missed
         if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Run linting
         run: pnpm run lint
@@ -180,7 +180,7 @@ jobs:
 
       - name: Install dependencies if cache missed
         if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Generate typing
         run: pnpm --filter server run tsoa spec-and-routes
@@ -233,7 +233,7 @@ jobs:
 
       - name: Install dependencies if cache missed
         if: steps.cache-pnpm-store.outputs.cache-hit != 'true'
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build
         run: pnpm run build
