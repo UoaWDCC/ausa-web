@@ -29,7 +29,7 @@ export const Input: React.FC<InputProps> = ({
         value={value}
         onChange={onChange}
         className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-white/80 backdrop-blur-sm"
-        style={{ fontFamily: "Montserrat, sans-serif", fontSize: "14px" }}
+        style={{ fontFamily: "Montserrat, sans-serif", fontSize: "14px", color: "var(--black)" }}
       />
     </div>
   )
