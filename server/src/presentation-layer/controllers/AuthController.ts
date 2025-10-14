@@ -1,17 +1,8 @@
-// service-layer/controllers/AuthController.ts
+
 import { Body, Controller, Post, Route, Tags, SuccessResponse, Response } from 'tsoa';
 import { authService } from '../../service-layer/services/AuthService';
-
-interface RegisterRequest {
-  email: string;
-  password: string;
-  displayName?: string;
-}
-
-interface LoginRequest {
-  email: string;
-  password: string;
-}
+import { RegisterRequest } from '../../service-layer/dtos/request/RegisterRequest';
+import { LoginRequest } from '../../service-layer/dtos/request/LoginRequest';
 
 @Route('auth')
 @Tags('Authentication')
