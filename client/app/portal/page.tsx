@@ -1,8 +1,9 @@
 "use client"
 
-import React, { useState } from "react"
+import React from "react"
 import PortalCard from "../components/composite/portal-card/PortalCard"
 import Background from "../components/composite/background/background"
+import Link from "next/link"
 
 const PortalPage = () => {
   return (
@@ -13,15 +14,21 @@ const PortalPage = () => {
             Welcome to AUSA Wellbeing
           </h2>
           <div className="flex flex-col gap-4">
-            <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
-              Test 1
-            </p>
-            <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
-              Test 2
-            </p>
-            <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
-              Test 3
-            </p>
+            <Link href="/">
+              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+                Home
+              </p>
+            </Link>
+            <Link href="/quiz">
+              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+                Quiz
+              </p>
+            </Link>
+            <Link href="/contact">
+              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+                Contact
+              </p>
+            </Link>
           </div>
         </PortalCard>
       </main>
