@@ -253,7 +253,7 @@ const Profile = () => {
                 </ul>
               </div>
               {/* Resource Link section */}
-              <div className="w-full lg:flex-1 flex flex-col gap-10 max-h-[600px] overflow-y-auto pr-3 scrollable-resources">
+              <div className="w-full lg:flex-1 flex flex-col gap-10 md:max-h-[600px] lg:overflow-y-auto pr-3 scrollable-resources">
                 {activeEntry ? (
                   <>
                     {activeEntry.resources.map((r) => (
