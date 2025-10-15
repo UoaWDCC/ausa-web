@@ -8,6 +8,7 @@ import type { User as FirebaseUser } from "firebase/auth"
 import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "@/app/config/firebase"
 import { getCurrentUser } from "@/app/services/firebase-auth"
+import Result from "../models/request-models/Result"
 
 type Resource = { id: string; title: string; url: string; description?: string }
 type Entry = { id: string; label: string; datetime: string; resources: Resource[] }
@@ -27,7 +28,6 @@ const TAB_COLOURS: Record<string, { header: string; main: string }> = {
 const sampleEntries: Entry[] = [
   {
     id: "E1",
-    label: "06/10/25, 1:10pm",
     datetime: "2025-10-06T13:10:00",
     resources: [
       { id: "R1", title: "Mixing University Life with Mental Wellbeing", url: "https://example.com/a", description: "aaa"},
