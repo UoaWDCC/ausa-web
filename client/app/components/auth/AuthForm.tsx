@@ -29,7 +29,11 @@ export const Input: React.FC<InputProps> = ({
         value={value}
         onChange={onChange}
         className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-white/80 backdrop-blur-sm"
-        style={{ fontFamily: "Montserrat, sans-serif", fontSize: "14px", color: "var(--black)" }}
+        style={{
+          fontFamily: "Montserrat, sans-serif",
+          fontSize: "14px",
+          color: "var(--black)",
+        }}
       />
     </div>
   )
@@ -84,7 +88,9 @@ export const AuthCard: React.FC<{
     <div
       className="min-h-screen flex items-center justify-center p-4"
       style={{
-        background: gradient || "linear-gradient(135deg, #e0f2fe 0%, #dbeafe 50%, #fef3c7 100%)",
+        background:
+          gradient ||
+          "linear-gradient(135deg, #e0f2fe 0%, #dbeafe 50%, #fef3c7 100%)",
       }}
     >
       <div

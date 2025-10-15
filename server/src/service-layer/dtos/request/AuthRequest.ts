@@ -4,6 +4,6 @@ export interface AuthRequest extends express.Request {
     uid: string
     name: string
     email?: string
-    role: "user" |"admin"
+    role: "user" | "admin"
   }
 }

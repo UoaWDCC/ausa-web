@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import Link from "next/link"
-import AuthForm, { AuthCard, Input, Button } from "../components/auth/AuthForm"
+import { AuthCard, Input, Button } from "../components/auth/AuthForm"
 import client from "../services/fetch-client"
 
 export default function LoginPage() {
@@ -15,7 +15,7 @@ export default function LoginPage() {
     try {
       setLoading(true)
       setError("")
-      
+
       const response = await client.POST("/auth/login", {
         body: {
           email,
@@ -29,7 +29,7 @@ export default function LoginPage() {
       }
 
       // Store the JWT token
-      if (response.data && 'token' in response.data) {
+      if (response.data && "token" in response.data) {
         localStorage.setItem("authToken", String(response.data.token))
         console.log("Login successful:", response.data)
         // Redirect to  home page
@@ -54,17 +54,35 @@ export default function LoginPage() {
             {error}
           </div>
         )}
-        <Input label="Email" type="email" placeholder="Example@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <Input label="Password" type="password" placeholder="Example Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <Input
+          label="Email"
+          type="email"
+          placeholder="Example@email.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          label="Password"
+          type="password"
+          placeholder="Example Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <div className="mt-6">
           <Button onClick={handleSubmit} variant="primary" disabled={loading}>
             {loading ? "Signing In..." : "Sign In"}
           </Button>
         </div>
 
-        <p className="text-center mt-4 text-sm" style={{ fontFamily: 'Montserrat, sans-serif', color: '#6b7280' }}>
-          Don't have an account?{' '}
-          <Link href="/signup" className="text-blue-600 hover:underline font-medium">
+        <p
+          className="text-center mt-4 text-sm"
+          style={{ fontFamily: "Montserrat, sans-serif", color: "#6b7280" }}
+        >
+          Don&apos;t have an account?{" "}
+          <Link
+            href="/signup"
+            className="text-blue-600 hover:underline font-medium"
+          >
             Sign up
           </Link>
         </p>
