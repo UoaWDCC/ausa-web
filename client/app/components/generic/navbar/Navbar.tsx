@@ -123,7 +123,7 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
                 }}
               />
 
-              {navigationItems.map((item, index) => (
+              {navigationItems.map((item) => (
                 <div
                   key={item}
                   className="relative z-10"
