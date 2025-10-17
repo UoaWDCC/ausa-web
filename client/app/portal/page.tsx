@@ -8,9 +8,9 @@ import Link from "next/link"
 const PortalPage = () => {
   return (
     <Background>
-      <main className="min-h-screen flex items-center justify-center">
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#3A7D8C] via-[#FAF7F2] to-[#CAE5F8]">
         <PortalCard>
-          <h2 className="text-2xl font-bold mb-6 text-center text-black">
+          <h2 className="text-2xl italic mb-6 text-center text-black">
             Welcome to AUSA Wellbeing
           </h2>
           <div className="flex flex-col gap-4">

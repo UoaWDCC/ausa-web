@@ -10,7 +10,11 @@ const PortalCard: React.FC<PortalCardProps> = ({
   className = "",
 }) => (
   <div
-    className={`rounded-2xl shadow-lg bg-white/20 p-8 max-w-md w-full backdrop-blur-md ${className}`}
+    className={`rounded-2xl max-w-md w-full shadow-lg bg-[#B9D5FF]/25 backdrop-blur-md p-8 ${className}`}
+    style={{
+      border: "2px solid",
+      borderImage: "linear-gradient(to right, #FFDE91, #5FADE6) 1",
+    }}
   >
     {children}
   </div>
