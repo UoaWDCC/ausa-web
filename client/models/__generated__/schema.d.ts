@@ -89,7 +89,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/auth/google/verify": {
+  "/auth/register": {
     parameters: {
       query?: never
       header?: never
@@ -98,15 +98,15 @@ export interface paths {
     }
     get?: never
     put?: never
-    /** @description Verifies Google ID token and authenticates user. */
-    post: operations["VerifyToken"]
+    /** @description Register a new user */
+    post: operations["Register"]
     delete?: never
     options?: never
     head?: never
     patch?: never
     trace?: never
   }
-  "/auth/send-verification-code": {
+  "/auth/login": {
     parameters: {
       query?: never
       header?: never
@@ -115,39 +115,8 @@ export interface paths {
     }
     get?: never
     put?: never
-    post: operations["SendVerificationCode"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/auth/verify-code": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations["VerifyCode"]
-    delete?: never
-    options?: never
-    head?: never
-    patch?: never
-    trace?: never
-  }
-  "/auth/verify-token": {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    get?: never
-    put?: never
-    post: operations["VerifyToken"]
+    /** @description Login a user */
+    post: operations["Login"]
     delete?: never
     options?: never
     head?: never
@@ -160,13 +129,14 @@ export interface components {
   schemas: {
     User: {
       email: string
+      password: string
       displayName?: string
       /** Format: date-time */
       createdAt: string
       /** Format: date-time */
       updatedAt: string
       /** @enum {string} */
-      role: "user" | "lab_manager" | "admin"
+      role: "user" | "admin"
     }
     Resource: {
       id: string
@@ -215,44 +185,14 @@ export interface components {
       questionId: string
       optionId: string
     }
-    GoogleOAuthUser: {
-      uid: string
+    RegisterRequest: {
       email: string
+      password: string
       displayName?: string
-      photoURL?: string
     }
-    GoogleOAuthResponse: {
-      success: boolean
-      message: string
-      token?: string
-      user?: components["schemas"]["GoogleOAuthUser"]
-    }
-    GoogleOAuthRequest: {
-      idToken: string
-    }
-    SendVerificationCodeResponse: {
-      success: boolean
-      message: string
-    }
-    SendVerificationCodeRequest: {
+    LoginRequest: {
       email: string
-    }
-    VerifyCodeResponse: {
-      success: boolean
-      message: string
-    }
-    VerifyCodeRequest: {
-      email: string
-      inputCode: string
-    }
-    VerifyTokenResponse: {
-      success: boolean
-      message: string
-      uid?: string
-      email?: string
-    }
-    VerifyTokenRequest: {
-      idToken: string
+      password: string
     }
   }
   responses: never
@@ -461,7 +401,7 @@ export interface operations {
       }
     }
   }
-  VerifyToken: {
+  Register: {
     parameters: {
       query?: never
       header?: never
@@ -470,22 +410,46 @@ export interface operations {
     }
     requestBody: {
       content: {
-        "application/json": components["schemas"]["GoogleOAuthRequest"]
+        "application/json": components["schemas"]["RegisterRequest"]
       }
     }
     responses: {
-      /** @description Ok */
-      200: {
+      /** @description User registered successfully */
+      201: {
         headers: {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["GoogleOAuthResponse"]
+          "application/json":
+            | {
+                user: {
+                  /** Format: date-time */
+                  updatedAt: string
+                  /** Format: date-time */
+                  createdAt: string
+                  /** @enum {string} */
+                  role: "user"
+                  displayName: string
+                  email: string
+                  id: string
+                }
+                token: unknown
+              }
+            | {
+                error: unknown
+              }
         }
+      }
+      /** @description Bad Request - User already exists */
+      400: {
+        headers: {
+          [name: string]: unknown
+        }
+        content?: never
       }
     }
   }
-  SendVerificationCode: {
+  Login: {
     parameters: {
       query?: never
       header?: never
@@ -494,66 +458,42 @@ export interface operations {
     }
     requestBody: {
       content: {
-        "application/json": components["schemas"]["SendVerificationCodeRequest"]
+        "application/json": components["schemas"]["LoginRequest"]
       }
     }
     responses: {
-      /** @description Ok */
+      /** @description Login successful */
       200: {
         headers: {
           [name: string]: unknown
         }
         content: {
-          "application/json": components["schemas"]["SendVerificationCodeResponse"]
+          "application/json":
+            | {
+                user: {
+                  /** Format: date-time */
+                  updatedAt: string
+                  /** Format: date-time */
+                  createdAt: string
+                  /** @enum {string} */
+                  role: "user" | "admin"
+                  displayName: string
+                  email: string
+                  id: string
+                }
+                token: unknown
+              }
+            | {
+                error: string
+              }
         }
       }
-    }
-  }
-  VerifyCode: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["VerifyCodeRequest"]
-      }
-    }
-    responses: {
-      /** @description Ok */
-      200: {
+      /** @description Unauthorized - Invalid credentials */
+      401: {
         headers: {
           [name: string]: unknown
         }
-        content: {
-          "application/json": components["schemas"]["VerifyCodeResponse"]
-        }
-      }
-    }
-  }
-  VerifyToken: {
-    parameters: {
-      query?: never
-      header?: never
-      path?: never
-      cookie?: never
-    }
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["VerifyTokenRequest"]
-      }
-    }
-    responses: {
-      /** @description Ok */
-      200: {
-        headers: {
-          [name: string]: unknown
-        }
-        content: {
-          "application/json": components["schemas"]["VerifyTokenResponse"]
-        }
+        content?: never
       }
     }
   }
