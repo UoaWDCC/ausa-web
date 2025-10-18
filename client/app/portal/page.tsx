@@ -8,29 +8,33 @@ import Link from "next/link"
 const PortalPage = () => {
   return (
     <Background>
-      <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#3A7D8C] via-[#FAF7F2] to-[#CAE5F8]">
-        <PortalCard>
+      <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-accent-warm-400 via-[#FAF7F2] to-white ">
+        {/* <PortalCard> */}
           <h2 className="text-2xl italic mb-6 text-center text-black">
             Welcome to AUSA Wellbeing
           </h2>
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-2 w-[400px] gap-4">
             <Link href="/">
-              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+              <div className="border bg-primary rounded-lg w-48 h-48 text-center text-sm bg-gradient-to-r text-white">
                 Home
-              </p>
+              </div>
             </Link>
             <Link href="/quiz">
-              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+              <div className="border bg-primary rounded-lg w-48 h-48 text-center text-sm bg-gradient-to-r text-white">
                 Quiz
-              </p>
+              </div>
             </Link>
             <Link href="/contact">
-              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+              <div className="border bg-primary rounded-lg w-48 h-48 text-center text-sm bg-gradient-to-r text-white">
                 Contact
-              </p>
+              </div>
+            </Link>
+             <Link href="/signup">
+              <div className="border bg-primary rounded-lg w-48 h-48 text-center text-sm bg-gradient-to-r text-white">
+                Sign Up
+              </div>
             </Link>
           </div>
-        </PortalCard>
       </main>
     </Background>
   )

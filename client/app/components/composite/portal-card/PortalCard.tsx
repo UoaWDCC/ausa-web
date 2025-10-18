@@ -14,6 +14,7 @@ const PortalCard: React.FC<PortalCardProps> = ({
     style={{
       border: "2px solid",
       borderImage: "linear-gradient(to right, #FFDE91, #5FADE6) 1",
+      color: "black",
     }}
   >
     {children}
