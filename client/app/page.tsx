@@ -1,76 +1,73 @@
-import React from "react"
+// app/page.tsx (App Router)
+// or pages/index.tsx (Pages Router)
+import Image from "next/image"
+import Carousel from "./components/composite/carousel/Carousel"
+import WellbeingCards from "./components/generic/card/card"
+import C1 from "../public/C1.svg"
+import C2 from "../public/C2.svg"
+import WellbeingCarousel from "./components/WellbeingCarousel/WellbeingCarousel"
+
+const carouselItems = [
+  {
+    title: "Counselling Services",
+    description:
+      "Free and confidential counselling sessions available to all students. Book online or in-person.",
+    image: "/counselling.jpg",
+    link: "https://www.auckland.ac.nz/en/on-campus/student-support/student-health-counselling.html",
+  },
+  {
+    title: "Medical Centre",
+    description:
+      "On-campus doctors and nurses providing primary healthcare, prescriptions, and wellbeing checks.",
+    image: "/medical.jpg",
+    link: "https://www.auckland.ac.nz/en/on-campus/student-support/student-health.html",
+  },
+  {
+    title: "Peer Support",
+    description:
+      "Connect with fellow students trained to support you through challenges in a safe space.",
+    image: "/peer.jpg",
+    link: "https://ausa.org.nz/",
+  },
+  {
+    title: "More Support",
+    description:
+      "Connect with fellow students trained to support you through challenges in a safe space.",
+    image: "/peer.jpg",
+    link: "https://ausa.org.nz/",
+  },
+]
+
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-10 bg-background">
-      {/* Headings */}
-      <div className="flex flex-col items-center gap-6">
-        <h1
-          className="h1"
-          style={{ color: "black", marginTop: "150px", marginBottom: "24px" }}
-        >
-          Heading 1 (h1)
-        </h1>
-        <h2 className="h2" style={{ color: "black", marginBottom: "20px" }}>
-          Heading 2 (h2)
-        </h2>
-        <div
-          className="subtitle-italic"
-          style={{ color: "black", marginBottom: "18px" }}
-        >
-          Subtitle Italic
-        </div>
-        <h3 className="h3" style={{ color: "black", marginBottom: "16px" }}>
-          Heading 3 (h3)
-        </h3>
-        <h4 className="h4" style={{ color: "black", marginBottom: "14px" }}>
-          Heading 4 (h4)
-        </h4>
-      </div>
-
-      {/* Body text */}
-      <div className="flex flex-col items-center gap-4 mt-8">
-        <p className="b1-body" style={{ color: "black", marginBottom: "12px" }}>
-          Body 1: Montserrat, 30px
+    <div className="bg-[#faf7f2] min-h-screen flex flex-col">
+      <div className="relative flex flex-col items-center justify-center text-center bg-gradient-to-b from-[#043873] bg-[#faf7f2] text-white min-h-screen max-w-[100vw] mt-10">
+        <h1 className="text-4xl md:text-6xl">Your Wellbeing, Our Priority</h1>
+        <Image
+          src={C2}
+          alt="Wellbeing Image"
+          className="w-36 md:w-64 absolute left-0 md:top-1/5 top-[10%]"
+        />
+        <Image
+          src={C1}
+          alt="Wellbeing Image"
+          className="w-48 md:w-96 absolute right-0 md:top-1/2 top-[70%]"
+        />
+        <p className="mt-4 max-w-2xl mx-auto text-lg">
+          Welcome to the TRK-AUSA Wellbeing Portal! This is your go-to space for
+          mental health support, resources and guidance. Whether you're feeling
+          overwhelmed, isolated, or just need someone to talk to, you're not
+          alone.
         </p>
-        <div
-          className="b2-body"
-          style={{ color: "black", marginBottom: "10px" }}
-        >
-          Body 2: Montserrat, 25px
-        </div>
-        <div
-          className="b3-body"
-          style={{ color: "black", marginBottom: "8px" }}
-        >
-          Body 3: Montserrat, 20px
-        </div>
+        <button className="mt-6 bg-yellow-500 cursor-pointer text-white px-6 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">
+          Learn More
+        </button>
       </div>
 
-      {/* Buttons showcase */}
-      <div className="flex flex-col gap-6 mt-10 items-center">
-        <div className="flex flex-row gap-4 flex-wrap justify-center">
-          {/* Primary Buttons */}
-          <button className="btn-primary">Primary (Hover me!)</button>
-          <button className="btn-primary">Primary Click Test</button>
-          <button className="btn-primary" disabled>
-            Primary Disabled
-          </button>
-
-          {/* Secondary Buttons */}
-          <button className="btn-secondary">Secondary (Hover me!)</button>
-          <button className="btn-secondary">Secondary Click Test</button>
-          <button className="btn-secondary" disabled>
-            Secondary Disabled
-          </button>
-
-          {/* Tertiary Buttons */}
-          <button className="btn-tertiary">Tertiary (Hover me!)</button>
-          <button className="btn-tertiary">Tertiary Click Test</button>
-          <button className="btn-tertiary" disabled>
-            Tertiary Disabled
-          </button>
-        </div>
-      </div>
+      <h1 className="text-[#3A7D8C] mt-10 italic text-4xl mb-8 ml-10">
+        Mental Wellbeing tips
+      </h1>
+      <WellbeingCards />
     </div>
   )
 }
