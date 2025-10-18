@@ -67,12 +67,7 @@ export default function Home() {
       <h1 className="text-[#3A7D8C] mt-10 italic text-4xl mb-8 ml-10">
         Mental Wellbeing tips
       </h1>
-      <div className="md:hidden flex justify-center">
-        <WellbeingCards />
-      </div>
-      <div className="hidden md:flex md:justify-center">
-        <WellbeingCarousel />
-      </div>
+      <WellbeingCards />
     </div>
   )
 }
