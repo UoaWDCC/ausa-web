@@ -50,7 +50,7 @@ export default function Home() {
           overwhelmed, isolated, or just need someone to talk to, you're not
           alone.
         </p>
-        <button className="mt-6 bg-yellow-500 text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">
+        <button className="mt-6 bg-yellow-500 cursor-pointer text-white px-6 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">
           Learn More
         </button>
       </div>
