@@ -12,6 +12,9 @@
 					"email": {
 						"type": "string"
 					},
+					"password": {
+						"type": "string"
+					},
 					"displayName": {
 						"type": "string"
 					},
@@ -27,13 +30,13 @@
 						"type": "string",
 						"enum": [
 							"user",
-							"lab_manager",
 							"admin"
 						]
 					}
 				},
 				"required": [
 					"email",
+					"password",
 					"createdAt",
 					"updatedAt",
 					"role"
@@ -207,152 +210,37 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"GoogleOAuthUser": {
+			"RegisterRequest": {
 				"properties": {
-					"uid": {
+					"email": {
 						"type": "string"
 					},
-					"email": {
+					"password": {
 						"type": "string"
 					},
 					"displayName": {
-						"type": "string"
-					},
-					"photoURL": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"uid",
-					"email"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"GoogleOAuthResponse": {
-				"properties": {
-					"success": {
-						"type": "boolean"
-					},
-					"message": {
-						"type": "string"
-					},
-					"token": {
-						"type": "string"
-					},
-					"user": {
-						"$ref": "#/components/schemas/GoogleOAuthUser"
-					}
-				},
-				"required": [
-					"success",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"GoogleOAuthRequest": {
-				"properties": {
-					"idToken": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"idToken"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"SendVerificationCodeResponse": {
-				"properties": {
-					"success": {
-						"type": "boolean"
-					},
-					"message": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"success",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"SendVerificationCodeRequest": {
-				"properties": {
-					"email": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"email"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"VerifyCodeResponse": {
-				"properties": {
-					"success": {
-						"type": "boolean"
-					},
-					"message": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"success",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"VerifyCodeRequest": {
-				"properties": {
-					"email": {
-						"type": "string"
-					},
-					"inputCode": {
 						"type": "string"
 					}
 				},
 				"required": [
 					"email",
-					"inputCode"
+					"password"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"VerifyTokenResponse": {
+			"LoginRequest": {
 				"properties": {
-					"success": {
-						"type": "boolean"
-					},
-					"message": {
-						"type": "string"
-					},
-					"uid": {
-						"type": "string"
-					},
 					"email": {
 						"type": "string"
-					}
-				},
-				"required": [
-					"success",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"VerifyTokenRequest": {
-				"properties": {
-					"idToken": {
+					},
+					"password": {
 						"type": "string"
 					}
 				},
 				"required": [
-					"idToken"
+					"email",
+					"password"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -783,86 +671,82 @@
 				}
 			}
 		},
-		"/auth/google/verify": {
+		"/auth/register": {
 			"post": {
-				"operationId": "VerifyToken",
+				"operationId": "Register",
 				"responses": {
-					"200": {
-						"description": "Ok",
+					"201": {
+						"description": "User registered successfully",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/GoogleOAuthResponse"
+									"anyOf": [
+										{
+											"properties": {
+												"user": {
+													"properties": {
+														"updatedAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"createdAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"role": {
+															"type": "string",
+															"enum": [
+																"user"
+															],
+															"nullable": false
+														},
+														"displayName": {
+															"type": "string"
+														},
+														"email": {
+															"type": "string"
+														},
+														"id": {
+															"type": "string"
+														}
+													},
+													"required": [
+														"updatedAt",
+														"createdAt",
+														"role",
+														"displayName",
+														"email",
+														"id"
+													],
+													"type": "object"
+												},
+												"token": {}
+											},
+											"required": [
+												"user",
+												"token"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"error": {}
+											},
+											"required": [
+												"error"
+											],
+											"type": "object"
+										}
+									]
 								}
 							}
 						}
+					},
+					"400": {
+						"description": "Bad Request - User already exists"
 					}
 				},
-				"description": "Verifies Google ID token and authenticates user.",
-				"tags": [
-					"Google OAuth"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/GoogleOAuthRequest"
-							}
-						}
-					}
-				}
-			}
-		},
-		"/auth/send-verification-code": {
-			"post": {
-				"operationId": "SendVerificationCode",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/SendVerificationCodeResponse"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Authentication"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/SendVerificationCodeRequest"
-							}
-						}
-					}
-				}
-			}
-		},
-		"/auth/verify-code": {
-			"post": {
-				"operationId": "VerifyCode",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/VerifyCodeResponse"
-								}
-							}
-						}
-					}
-				},
+				"description": "Register a new user",
 				"tags": [
 					"Authentication"
 				],
@@ -873,28 +757,91 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/VerifyCodeRequest"
+								"$ref": "#/components/schemas/RegisterRequest"
 							}
 						}
 					}
 				}
 			}
 		},
-		"/auth/verify-token": {
+		"/auth/login": {
 			"post": {
-				"operationId": "VerifyToken",
+				"operationId": "Login",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Login successful",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/VerifyTokenResponse"
+									"anyOf": [
+										{
+											"properties": {
+												"user": {
+													"properties": {
+														"updatedAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"createdAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"role": {
+															"type": "string",
+															"enum": [
+																"user",
+																"admin"
+															]
+														},
+														"displayName": {
+															"type": "string"
+														},
+														"email": {
+															"type": "string"
+														},
+														"id": {
+															"type": "string"
+														}
+													},
+													"required": [
+														"updatedAt",
+														"createdAt",
+														"role",
+														"displayName",
+														"email",
+														"id"
+													],
+													"type": "object"
+												},
+												"token": {}
+											},
+											"required": [
+												"user",
+												"token"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"error": {
+													"type": "string"
+												}
+											},
+											"required": [
+												"error"
+											],
+											"type": "object"
+										}
+									]
 								}
 							}
 						}
+					},
+					"401": {
+						"description": "Unauthorized - Invalid credentials"
 					}
 				},
+				"description": "Login a user",
 				"tags": [
 					"Authentication"
 				],
@@ -905,7 +852,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/VerifyTokenRequest"
+								"$ref": "#/components/schemas/LoginRequest"
 							}
 						}
 					}

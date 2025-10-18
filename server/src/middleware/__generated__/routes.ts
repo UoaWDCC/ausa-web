@@ -8,8 +8,6 @@ import { UserController } from './../../presentation-layer/controllers/UserContr
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { QuizController } from './../../presentation-layer/controllers/QuizController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { GoogleOAuthController } from './../../presentation-layer/controllers/GoogleOAuthController';
-// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { AuthController } from './../../presentation-layer/controllers/AuthController';
 import { expressAuthentication } from './../../business-layer/security/Authentication';
 // @ts-ignore - no great way to install types from subpackage
@@ -25,10 +23,11 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "email": {"dataType":"string","required":true},
+            "password": {"dataType":"string","required":true},
             "displayName": {"dataType":"string"},
             "createdAt": {"dataType":"datetime","required":true},
             "updatedAt": {"dataType":"datetime","required":true},
-            "role": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["user"]},{"dataType":"enum","enums":["lab_manager"]},{"dataType":"enum","enums":["admin"]}],"required":true},
+            "role": {"dataType":"union","subSchemas":[{"dataType":"enum","enums":["user"]},{"dataType":"enum","enums":["admin"]}],"required":true},
         },
         "additionalProperties": false,
     },
@@ -105,86 +104,21 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "GoogleOAuthUser": {
+    "RegisterRequest": {
         "dataType": "refObject",
         "properties": {
-            "uid": {"dataType":"string","required":true},
             "email": {"dataType":"string","required":true},
+            "password": {"dataType":"string","required":true},
             "displayName": {"dataType":"string"},
-            "photoURL": {"dataType":"string"},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "GoogleOAuthResponse": {
-        "dataType": "refObject",
-        "properties": {
-            "success": {"dataType":"boolean","required":true},
-            "message": {"dataType":"string","required":true},
-            "token": {"dataType":"string"},
-            "user": {"ref":"GoogleOAuthUser"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "GoogleOAuthRequest": {
-        "dataType": "refObject",
-        "properties": {
-            "idToken": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "SendVerificationCodeResponse": {
-        "dataType": "refObject",
-        "properties": {
-            "success": {"dataType":"boolean","required":true},
-            "message": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "SendVerificationCodeRequest": {
+    "LoginRequest": {
         "dataType": "refObject",
         "properties": {
             "email": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "VerifyCodeResponse": {
-        "dataType": "refObject",
-        "properties": {
-            "success": {"dataType":"boolean","required":true},
-            "message": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "VerifyCodeRequest": {
-        "dataType": "refObject",
-        "properties": {
-            "email": {"dataType":"string","required":true},
-            "inputCode": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "VerifyTokenResponse": {
-        "dataType": "refObject",
-        "properties": {
-            "success": {"dataType":"boolean","required":true},
-            "message": {"dataType":"string","required":true},
-            "uid": {"dataType":"string"},
-            "email": {"dataType":"string"},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "VerifyTokenRequest": {
-        "dataType": "refObject",
-        "properties": {
-            "idToken": {"dataType":"string","required":true},
+            "password": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
@@ -387,120 +321,60 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsGoogleOAuthController_verifyToken: Record<string, TsoaRoute.ParameterSchema> = {
-                requestBody: {"in":"body","name":"requestBody","required":true,"ref":"GoogleOAuthRequest"},
+        const argsAuthController_register: Record<string, TsoaRoute.ParameterSchema> = {
+                body: {"in":"body","name":"body","required":true,"ref":"RegisterRequest"},
         };
-        app.post('/auth/google/verify',
-            ...(fetchMiddlewares<RequestHandler>(GoogleOAuthController)),
-            ...(fetchMiddlewares<RequestHandler>(GoogleOAuthController.prototype.verifyToken)),
+        app.post('/auth/register',
+            ...(fetchMiddlewares<RequestHandler>(AuthController)),
+            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.register)),
 
-            async function GoogleOAuthController_verifyToken(request: ExRequest, response: ExResponse, next: any) {
+            async function AuthController_register(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsGoogleOAuthController_verifyToken, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_register, request, response });
 
-                const controller = new GoogleOAuthController();
+                const controller = new AuthController();
 
               await templateService.apiHandler({
-                methodName: 'verifyToken',
+                methodName: 'register',
                 controller,
                 response,
                 next,
                 validatedArgs,
-                successStatus: undefined,
+                successStatus: 201,
               });
             } catch (err) {
                 return next(err);
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsAuthController_sendVerificationCode: Record<string, TsoaRoute.ParameterSchema> = {
-                requestBody: {"in":"body","name":"requestBody","required":true,"ref":"SendVerificationCodeRequest"},
+        const argsAuthController_login: Record<string, TsoaRoute.ParameterSchema> = {
+                body: {"in":"body","name":"body","required":true,"ref":"LoginRequest"},
         };
-        app.post('/auth/send-verification-code',
+        app.post('/auth/login',
             ...(fetchMiddlewares<RequestHandler>(AuthController)),
-            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.sendVerificationCode)),
+            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.login)),
 
-            async function AuthController_sendVerificationCode(request: ExRequest, response: ExResponse, next: any) {
+            async function AuthController_login(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_sendVerificationCode, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_login, request, response });
 
                 const controller = new AuthController();
 
               await templateService.apiHandler({
-                methodName: 'sendVerificationCode',
+                methodName: 'login',
                 controller,
                 response,
                 next,
                 validatedArgs,
-                successStatus: undefined,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsAuthController_verifyCode: Record<string, TsoaRoute.ParameterSchema> = {
-                requestBody: {"in":"body","name":"requestBody","required":true,"ref":"VerifyCodeRequest"},
-        };
-        app.post('/auth/verify-code',
-            ...(fetchMiddlewares<RequestHandler>(AuthController)),
-            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.verifyCode)),
-
-            async function AuthController_verifyCode(request: ExRequest, response: ExResponse, next: any) {
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_verifyCode, request, response });
-
-                const controller = new AuthController();
-
-              await templateService.apiHandler({
-                methodName: 'verifyCode',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: undefined,
-              });
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsAuthController_verifyToken: Record<string, TsoaRoute.ParameterSchema> = {
-                requestBody: {"in":"body","name":"requestBody","required":true,"ref":"VerifyTokenRequest"},
-        };
-        app.post('/auth/verify-token',
-            ...(fetchMiddlewares<RequestHandler>(AuthController)),
-            ...(fetchMiddlewares<RequestHandler>(AuthController.prototype.verifyToken)),
-
-            async function AuthController_verifyToken(request: ExRequest, response: ExResponse, next: any) {
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsAuthController_verifyToken, request, response });
-
-                const controller = new AuthController();
-
-              await templateService.apiHandler({
-                methodName: 'verifyToken',
-                controller,
-                response,
-                next,
-                validatedArgs,
-                successStatus: undefined,
+                successStatus: 200,
               });
             } catch (err) {
                 return next(err);

@@ -1,54 +1,52 @@
-import { Body, Controller, Post, Route, Tags } from "tsoa"
-import { SendVerificationCodeRequest } from "../../service-layer/dtos/request/SendVerificationCodeRequest"
-import { SendVerificationCodeResponse } from "../../service-layer/dtos/response/SendVerificationCodeResponse"
-
-import AuthService from "../../service-layer/services/AuthService"
-import { VerifyCodeRequest } from "../../service-layer/dtos/request/VerifyCodeRequest"
-import { VerifyCodeResponse } from "../../service-layer/dtos/response/VerifyCodeResponse"
-
-import { VerifyTokenRequest } from "../../service-layer/dtos/request/VerifyTokenRequest"
-import { VerifyTokenResponse } from "../../service-layer/dtos/response/VerifyTokenResponse"
+import {
+  Body,
+  Controller,
+  Post,
+  Route,
+  Tags,
+  SuccessResponse,
+  Response,
+} from "tsoa"
+import { authService } from "../../service-layer/services/AuthService"
+import { RegisterRequest } from "../../service-layer/dtos/request/RegisterRequest"
+import { LoginRequest } from "../../service-layer/dtos/request/LoginRequest"
 
 @Route("auth")
 @Tags("Authentication")
 export class AuthController extends Controller {
-  private authService: AuthService
-
-  constructor() {
-    super()
-    this.authService = new AuthService()
+  /**
+   * Register a new user
+   */
+  @Post("register")
+  @SuccessResponse("201", "User registered successfully")
+  @Response("400", "Bad Request - User already exists")
+  public async register(@Body() body: RegisterRequest) {
+    try {
+      const result = await authService.register(
+        body.email,
+        body.password,
+        body.displayName,
+      )
+      this.setStatus(201)
+      return result
+    } catch (error: any) {
+      this.setStatus(400)
+      return { error: error.message }
+    }
   }
 
-  @Post("/send-verification-code")
-  public async sendVerificationCode(
-    @Body() requestBody: SendVerificationCodeRequest,
-  ): Promise<SendVerificationCodeResponse> {
-    const result = await this.authService.sendVerificationCode(
-      requestBody.email,
-    )
-    return result
-  }
-
-  @Post("/verify-code")
-  public async verifyCode(
-    @Body() requestBody: VerifyCodeRequest,
-  ): Promise<VerifyCodeResponse> {
-    const result = await this.authService.verifyCode(
-      requestBody.email,
-      requestBody.inputCode,
-    )
-    return result
-  }
-
-  @Post("/verify-token")
-  public async verifyToken(
-    @Body() requestBody: VerifyTokenRequest,
-  ): Promise<VerifyTokenResponse> {
-    console.log("=== Token Verification Request Received ===")
-    console.log("ID Token:", requestBody.idToken.substring(0, 20) + "...")
-    console.log("===========================================")
-
-    const result = await this.authService.verifyIdToken(requestBody.idToken)
-    return result
+  /**
+   * Login a user
+   */
+  @Post("login")
+  @SuccessResponse("200", "Login successful")
+  @Response("401", "Unauthorized - Invalid credentials")
+  public async login(@Body() body: LoginRequest) {
+    try {
+      return await authService.login(body.email, body.password)
+    } catch {
+      this.setStatus(401)
+      return { error: "invalid credentials" }
+    }
   }
 }
