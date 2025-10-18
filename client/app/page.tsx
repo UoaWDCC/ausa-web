@@ -1,7 +1,10 @@
 // app/page.tsx (App Router)
 // or pages/index.tsx (Pages Router)
+import Image from "next/image"
 import Carousel from "./components/composite/carousel/Carousel"
 import WellbeingCards from "./components/generic/card/card"
+import C1 from "../public/C1.svg"
+import C2 from "../public/C2.svg"
 
 const carouselItems = [
   {
@@ -37,8 +40,10 @@ const carouselItems = [
 export default function Home() {
   return (
     <div className="bg-[#faf7f2] min-h-screen flex flex-col">
-      <div className="relative flex flex-col items-center justify-center text-center bg-gradient-to-b from-[#043873] to-[#7EA5D0] text-white min-h-screen max-w-[100vw] mt-10">
+      <div className="relative flex flex-col items-center justify-center text-center bg-gradient-to-b from-[#043873] bg-[#faf7f2] text-white min-h-screen max-w-[100vw] mt-10">
         <h1 className="text-4xl md:text-6xl">Your Wellbeing, Our Priority</h1>
+        <Image src={C2} alt="Wellbeing Image" className="w-36 md:w-64 absolute left-0 md:top-1/5 top-[10%]" />
+        <Image src={C1} alt="Wellbeing Image" className="w-48 md:w-96 absolute right-0 md:top-1/2 top-[70%]" />
         <p className="mt-4 max-w-2xl mx-auto text-lg">
           Welcome to the TRK-AUSA Wellbeing Portal! This is your go-to space for
           mental health support, resources and guidance. Whether you're feeling
