@@ -11,7 +11,7 @@ interface CardProps {
 
 const Card = ( {lnk, pageName}:CardProps) => {
     return (<Link href={lnk}>
-      <div className="bg-[#FFDE91] rounded-lg w-48 h-48 justify-center hover:-translate-y-4 duration-300 hover:shadow-2xl items-center flex flex-col text-sm text-white shadow-lg">
+      <div className="bg-[#FFDE91] rounded-lg w-48 h-48 justify-center hover:-translate-y-4 duration-300 hover:bg-[#FFDE91]/85 hover:shadow-2xl items-center flex flex-col text-sm text-white shadow-lg">
         <h4 className="font-bold text-2xl text-black">{pageName}</h4>
       </div>
     </Link>)
