@@ -1,9 +1,21 @@
 "use client"
 
 import React from "react"
-import PortalCard from "../components/composite/portal-card/PortalCard"
 import Background from "../components/composite/background/background"
 import Link from "next/link"
+
+interface CardProps {
+  lnk: string
+  pageName: string
+}
+
+const Card = ( {lnk, pageName}:CardProps) => {
+    return (<Link href={lnk}>
+      <div className="bg-[#FFDE91] rounded-lg w-48 h-48 justify-center hover:-translate-y-4 duration-300 hover:shadow-2xl items-center flex flex-col text-sm text-white shadow-lg">
+        <h4 className="font-bold text-2xl text-black">{pageName}</h4>
+      </div>
+    </Link>)
+}
 
 const PortalPage = () => {
   return (
@@ -14,26 +26,10 @@ const PortalPage = () => {
             Welcome to AUSA Wellbeing
           </h2>
           <div className="grid grid-cols-2 w-[400px] gap-4">
-            <Link href="/">
-              <div className="bg-[#FFDE91] rounded-lg w-48 h-48 justify-center items-center flex flex-col text-sm text-white shadow-lg">
-                <h4 className="font-bold text-2xl text-black">Home</h4>
-              </div>
-            </Link>
-            <Link href="/quiz">
-              <div className="bg-[#FFDE91] rounded-lg w-48 h-48 justify-center items-center flex flex-col text-sm bg-gradient-to-r text-white shadow-lg">
-                <h4 className="font-bold text-2xl text-black">Quiz</h4>
-              </div>
-            </Link>
-            <Link href="/contact">
-              <div className="bg-[#FFDE91] rounded-lg w-48 h-48 justify-center items-center flex flex-col text-sm bg-gradient-to-r text-white shadow-lg">
-                <h4 className="font-bold text-2xl text-black">Contact</h4>
-              </div>
-            </Link>
-             <Link href="/signup">
-              <div className="bg-[#FFDE91] rounded-lg w-48 h-48 justify-center items-center flex flex-col text-sm bg-gradient-to-r text-white shadow-lg">
-                <h4 className="font-bold text-2xl text-black">Signup</h4>
-              </div>
-            </Link>
+            <Card lnk="/" pageName="Home" />
+            <Card lnk="/quiz" pageName="Quiz" />
+            <Card lnk="/contact" pageName="Contact" />
+            <Card lnk="/signup" pageName="Signup" />
           </div>
       </main>
     </Background>
