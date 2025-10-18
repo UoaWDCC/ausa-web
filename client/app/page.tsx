@@ -36,7 +36,7 @@ const carouselItems = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="bg-[#faf7f2] min-h-screen flex flex-col">
       <div className="relative flex flex-col items-center justify-center text-center bg-gradient-to-b from-[#043873] to-[#7EA5D0] text-white min-h-screen max-w-[100vw] mt-10">
         <h1 className="text-4xl md:text-6xl">Your Wellbeing, Our Priority</h1>
         <p className="mt-4 max-w-2xl mx-auto text-lg">
