@@ -49,7 +49,7 @@ const CarouselCard = ({
 
         <p className="text-sm text-gray-500 mt-4 line-clamp-3">{description}</p>
 
-        {(!!link || onCtaClick || ctaLabel) && (
+        {(!!link || onCtaClick) && (
           <div className="mt-4">
             <Button
               asLink={!!link}
