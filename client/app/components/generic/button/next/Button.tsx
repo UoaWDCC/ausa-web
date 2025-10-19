@@ -31,6 +31,8 @@ const buttonVariants = cva(
           "bg-btn-primary-bg",
           "hover:bg-btn-primary-bg-hover",
           "active:bg-btn-primary-bg-press",
+          "text-[var(--black)]",
+          "font-normal",
           "disabled:bg-btn-primary-bg-disabled",
           "disabled:text-btn-primary-fg-disabled",
         ],
