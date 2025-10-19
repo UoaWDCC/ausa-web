@@ -63,6 +63,12 @@ const Profile = () => {
 
   const [activeEntryId, setActiveEntryId] = useState<string | null>(null)
   const [entries, setEntries] = useState<Entry[]>(sampleEntries)
+
+  const [deleteConfirm, setDeleteConfirm] = useState<{ open: boolean; entryId: string | null }>({
+    open: false,
+    entryId: null,
+  })
+
   useEffect(() => {
     if (activeTab === "quizresults") {
       setActiveEntryId((prev) => prev ?? entries[0]?.id ?? null)
@@ -109,6 +115,12 @@ const Profile = () => {
     if (file) {
       console.log("Selected file:", file)
     }
+  }
+
+  const handleDeleteEntry = (entryId: string) => {
+    setEntries((prev) => prev.filter((e) => e.id !== entryId))
+    if (activeEntryId === entryId) setActiveEntryId(null)
+    setDeleteConfirm({ open: false, entryId: null })
   }
 
   const currentStyle = TAB_COLOURS[activeTab] ?? TAB_COLOURS.about
@@ -231,13 +243,12 @@ const Profile = () => {
                   {entries.map((entry) => {
                     const selected = entry.id === activeEntryId
                     return (
-                      <li key={entry.id}>
+                      <li key={entry.id} className="flex items-center justify-between">
                         <button
-                          className={`w-full text-left px-3 py-2 rounded-md transition text-xl ${selected ? "text-[#2563EB]" : "hover:text-[#0000FF] text-[#3B3F5C]"}`}
+                          className={`flex-1 text-left px-3 py-2 rounded-md transition text-xl ${selected ? "text-[#2563EB]" : "hover:text-[#0000FF] text-[#3B3F5C]"}`}
                           onClick={() => setActiveEntryId(entry.id)}
                         >
                           <div className="font-semibold text-xl">
-                            {/* ensure datetime is follows format in NZ */}
                             {new Date(entry.datetime).toLocaleDateString("en-NZ", {
                               day: "2-digit",
                               month: "2-digit",
@@ -247,6 +258,17 @@ const Profile = () => {
                             })}
                           </div>
                         </button>
+
+                        {/* Show X button when selected */}
+                        {selected && (
+                          <button
+                            onClick={() => setDeleteConfirm({ open: true, entryId: entry.id })}
+                            className="ml-2 text-red-500 hover:text-red-700 text-2xl font-bold transition"
+                            title="Delete entry"
+                          >
+                            ×
+                          </button>
+                        )}
                       </li>
                     )
                   })}
@@ -289,6 +311,30 @@ const Profile = () => {
           )}
         </div>
       </div>
+      {deleteConfirm.open && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] z-50">
+          {/* semi-transparent overlay keeps website visible but dimmed */}
+          <div className="bg-white rounded-2xl p-8 shadow-2xl w-[90%] max-w-[400px] text-center relative z-50">
+            <h2 className="text-xl font-semibold mb-6 text-[#3B3F5C]">
+              Are you sure you want to delete this entry?
+            </h2>
+            <div className="flex justify-center gap-6">
+              <button
+                onClick={() => handleDeleteEntry(deleteConfirm.entryId!)}
+                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
+              >
+                Yes, Delete
+              </button>
+              <button
+                onClick={() => setDeleteConfirm({ open: false, entryId: null })}
+                className="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 transition"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
