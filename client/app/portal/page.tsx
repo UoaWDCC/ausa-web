@@ -13,21 +13,21 @@ const PortalPage = () => {
           <h2 className="text-2xl italic mb-6 text-center text-black">
             Welcome to AUSA Wellbeing
           </h2>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 ">
             <Link href="/">
-              <p className="border hover:opacity-85 rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+              <h4 className=" hover:opacity-85 text-xl hover:shadow-lg duration-300 rounded-lg px-3 py-3 text-center bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-black">
                 Home
-              </p>
+              </h4>
             </Link>
             <Link href="/quiz">
-              <p className="border hover:opacity-85 rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+              <h4 className=" hover:opacity-85 text-xl hover:shadow-lg duration-300 rounded-lg px-3 py-3 text-center  bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-black">
                 Quiz
-              </p>
+              </h4>
             </Link>
             <Link href="/contact">
-              <p className="border hover:opacity-85 rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+              <h4 className="hover:opacity-85 text-xl hover:shadow-lg duration-300 rounded-lg px-3 py-3 text-center  bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-black">
                 Contact
-              </p>
+              </h4>
             </Link>
           </div>
         </PortalCard>
