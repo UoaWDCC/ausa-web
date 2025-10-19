@@ -1,7 +1,7 @@
 /**
  * The list of resources in each {@link BaseResource} object
  */
-export interface Resource {
+export interface ResourceItem {
   /**
    * The header of each card
    * @example Getting help from financial difficulties
@@ -37,5 +37,5 @@ export interface BaseResource {
   /**
    * The list of resources to display on each page
    */
-  resources: Resource[]
+  resources: ResourceItem[]
 }
