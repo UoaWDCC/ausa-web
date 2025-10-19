@@ -29,8 +29,6 @@ const cards = [
     cta: {
       href: "/resources/external",
       label: "Visit External",
-      target: "_blank",
-      rel: "noopener noreferrer",
     },
   },
   {
