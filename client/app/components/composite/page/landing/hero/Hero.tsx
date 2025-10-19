@@ -10,7 +10,7 @@ interface HeroProps {
 
 export const Hero = ({ title, onCtaClick = () => {}, subtitle }: HeroProps) => {
   return (
-    <section className="flex flex-col items-center justify-center py-20 primary-blue-gradient w-full text-white min-h-[75svh] text-center px-4">
+    <section className="flex flex-col items-center justify-center py-20 primary-blue-gradient w-full text-white min-h-[57svh] text-center px-4 mt-15">
       <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
         {title}
       </h1>
