@@ -1,10 +1,12 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import Button from "../button/regular/Button"
 import MobileDrawer from "./MobileDrawer"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { cn } from "@/utils/cn"
+import { Button } from "@/app/components/generic/button/next/Button"
+import Image from "next/image"
 
 export interface NavbarProps {
   onNavigate?: (page: string) => void
@@ -13,9 +15,6 @@ export interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [hasScrolled, setHasScrolled] = useState(false)
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
-  const [highlightStyle, setHighlightStyle] = useState({ width: 0, left: 0 })
   const pathname = usePathname()
   const buttonRefs = React.useRef<{ [key: string]: HTMLDivElement | null }>({})
 
@@ -46,15 +45,6 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
   }, [pathname])
 
   useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 0)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden"
     }
@@ -64,65 +54,30 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
     }
   }, [isMobileMenuOpen])
 
-  const updateHighlightPosition = (item: string) => {
-    const buttonElement = buttonRefs.current[item]
-    if (buttonElement) {
-      const { offsetLeft, offsetWidth } = buttonElement
-      setHighlightStyle({ left: offsetLeft, width: offsetWidth })
-    }
-  }
-
   const handleNavClick = (item: string) => {
     setActiveItem(item)
     onNavigate?.(item)
   }
 
-  const handleMouseEnter = (item: string) => {
-    setHoveredItem(item)
-    updateHighlightPosition(item)
-  }
-
-  const handleMouseLeave = () => {
-    setHoveredItem(null)
-    updateHighlightPosition(activeItem)
-  }
-
-  // Update highlight position when active item changes
-  useEffect(() => {
-    if (activeItem) {
-      updateHighlightPosition(activeItem)
-    }
-  }, [activeItem])
-
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
 
   return (
     <>
-      <nav
-        className={`
-          navbar fixed top-0 left-0 z-50 w-full transition-all duration-500 ease-out
-          ${hasScrolled ? "bg-black/80" : "bg-black"}
-          ${className}
-        `}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className={cn(className, "bg-[var(--black)] fixed w-screen")}>
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="">
-              <img src="/AusaLogo.svg" alt="AUSA Logo" className="h-15" />
-            </div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-3 flex-1 justify-center relative">
-              {/* Moving highlight background */}
-              <div
-                className="absolute top-0 bottom-0 bg-[var(--btn-primary-bg)] rounded-lg transition-all duration-300 ease-out pointer-events-none z-0"
-                style={{
-                  width: `${highlightStyle.width}px`,
-                  left: `${highlightStyle.left}px`,
-                }}
+            <Link href="/">
+              <Image
+                src="/AusaLogo.svg"
+                width={200}
+                height={200}
+                alt="AUSA Logo"
+                className="h-15 w-fit"
               />
-
+            </Link>
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center flex-1 gap-3 pr-4 justify-end relative">
               {navigationItems.map((item) => (
                 <div
                   key={item}
@@ -135,24 +90,6 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
                     <div
                       className="px-4 py-2 rounded-lg transition-colors duration-200 relative cursor-pointer"
                       onClick={() => handleNavClick(item)}
-                      onMouseEnter={() => handleMouseEnter(item)}
-                      onMouseLeave={handleMouseLeave}
-                      style={{
-                        color: (
-                          hoveredItem
-                            ? hoveredItem === item
-                            : activeItem === item
-                        )
-                          ? "black"
-                          : "white",
-                        fontWeight: (
-                          hoveredItem
-                            ? hoveredItem === item
-                            : activeItem === item
-                        )
-                          ? "bold"
-                          : "normal",
-                      }}
                     >
                       {item}
                     </div>
@@ -161,19 +98,14 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
               ))}
             </div>
 
-            {/* Login */}
+            {/**
+             * Login
+             * TODO: connect to auth
+             */}
             <div className="hidden md:flex">
-              <Link href={navPaths["Login"]}>
-                <Button
-                  label="Login"
-                  onClick={() => handleNavClick("Login")}
-                  className={`
-                      px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
-                      bg-[var(--btn-secondary-bg-press)] hover:bg-[var(--btn-secondary-bg)] hover:scale-105
-                    `}
-                  fontWeight={"bold"}
-                />
-              </Link>
+              <Button asLink href={navPaths["Login"]} variant="square">
+                Login
+              </Button>
             </div>
             <div className="flex">
               {/* Mobile Menu Button */}
