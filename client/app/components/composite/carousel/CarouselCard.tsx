@@ -11,6 +11,7 @@ export interface CarouselCardProps {
   ctaLabel?: string
   link?: string
   variant?: "wide" | "thin"
+  buttonLabel?: string
 }
 
 const carouselCardVariations = cva(
