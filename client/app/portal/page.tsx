@@ -15,17 +15,17 @@ const PortalPage = () => {
           </h2>
           <div className="flex flex-col gap-4">
             <Link href="/">
-              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+              <p className="border hover:opacity-85 rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
                 Home
               </p>
             </Link>
             <Link href="/quiz">
-              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+              <p className="border hover:opacity-85 rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
                 Quiz
               </p>
             </Link>
             <Link href="/contact">
-              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+              <p className="border hover:opacity-85 rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
                 Contact
               </p>
             </Link>
