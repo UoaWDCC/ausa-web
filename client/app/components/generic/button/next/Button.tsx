@@ -5,7 +5,7 @@ import { ExternalLinkIcon } from "@/app/components/generic/icon/ExternalLinkIcon
 
 const buttonVariants = cva(
   // Base styles
-  "inline-flex items-center justify-center font-thin cursor-pointer rounded-full  font-light transition-colors disabled:pointer-events-none disabled:opacity-50 text-primary",
+  "inline-flex items-center justify-center font-thin cursor-pointer rounded-full font-light transition-colors disabled:pointer-events-none disabled:opacity-50 text-primary",
   {
     variants: {
       variant: {
@@ -88,7 +88,10 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
           {...linkProps}
         >
           {children}
-          <span className="max-w-5 max-h-5 flex items-center ml-1">
+          <span
+            className="max-w-5 max-h-5 flex items-center ml-1"
+            aria-hidden="true"
+          >
             <ExternalLinkIcon height={"100%"} width={"100%"} />
           </span>
         </a>

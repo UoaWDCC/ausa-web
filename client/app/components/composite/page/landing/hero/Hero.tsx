@@ -19,11 +19,9 @@ export const Hero = ({ title, onCtaClick = () => {}, subtitle }: HeroProps) => {
           {subtitle}
         </p>
       )}
-      {onCtaClick && (
-        <Button onClick={onCtaClick} asLink href={"/quiz"} size="lg">
-          Get Started
-        </Button>
-      )}
+      <Button onClick={onCtaClick} asLink href={"/quiz"} size="lg">
+        Get Started
+      </Button>
     </section>
   )
 }

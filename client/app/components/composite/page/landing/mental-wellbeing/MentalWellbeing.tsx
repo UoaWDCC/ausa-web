@@ -15,7 +15,7 @@ export const MentalWellbeing = ({ heading }: MentalWellbeingProps) => (
         src="/cloud-big.png"
         width={600}
         height={500}
-        alt="Big cloud image (decoration)"
+        alt=""
       />
     </span>
     {/** Important: do not use negative `bottom`*/}
@@ -25,7 +25,7 @@ export const MentalWellbeing = ({ heading }: MentalWellbeingProps) => (
         src="/cloud-small.png"
         width={300}
         height={300}
-        alt="Big cloud image (decoration)"
+        alt=""
       />
     </span>
   </section>
