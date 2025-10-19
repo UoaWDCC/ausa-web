@@ -15,17 +15,17 @@ const PortalPage = () => {
           </h2>
           <div className="flex flex-col gap-4 ">
             <Link href="/">
-              <h4 className=" hover:opacity-85 text-xl hover:shadow-lg duration-300 rounded-lg px-3 py-3 text-center bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-black">
+              <h4 className="hover:opacity-85 text-xl hover:shadow-lg duration-300 hover:text-black/60 rounded-lg px-3 py-3 text-center bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-black">
                 Home
               </h4>
             </Link>
             <Link href="/quiz">
-              <h4 className=" hover:opacity-85 text-xl hover:shadow-lg duration-300 rounded-lg px-3 py-3 text-center  bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-black">
+              <h4 className="hover:opacity-85 text-xl hover:shadow-lg hover:text-black/60 duration-300 rounded-lg px-3 py-3 text-center bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-black">
                 Quiz
               </h4>
             </Link>
             <Link href="/contact">
-              <h4 className="hover:opacity-85 text-xl hover:shadow-lg duration-300 rounded-lg px-3 py-3 text-center  bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-black">
+              <h4 className="hover:opacity-85 text-xl hover:shadow-lg duration-300 hover:text-black/60 rounded-lg px-3 py-3 text-center  bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-black">
                 Contact
               </h4>
             </Link>
