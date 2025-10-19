@@ -17,13 +17,10 @@ export default async function WellbeingResourcesPage() {
             <h1 className="text-6xl text-[var(--white)]">
               <span className="italic">Wellbeing</span>
               <br />
-              Resources
+              {data.title}
             </h1>
             <p className="text-lg max-w-4xl text-[var(--white)] font-thin">
-              Looking after your wellbeing goes beyond study—it’s about balance,
-              resilience, and support. Here you’ll find practical tools, guides,
-              and services designed to help you manage stress, boost your mental
-              health, and feel your best.
+              {data.description}
             </p>
           </div>
         </div>

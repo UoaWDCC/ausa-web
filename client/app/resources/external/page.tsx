@@ -17,17 +17,15 @@ export default async function ExternalResourcesPage() {
             <h1 className="text-6xl text-[var(--white)]">
               <span className="italic">External</span>
               <br />
-              Resources
+              {data.title}
             </h1>
-            <p className="text-lg max-w-4xl text-[var(--white)] font-thin">
-              Sometimes the best support comes from outside the university. This
-              page links you to trusted organisations, hotlines, and services
-              for extra help when you need it.
+            <p className="text-lg max-w-4xl text-[var(--white)] font-thin pt-20">
+              {data.description}
             </p>
           </div>
         </div>
       </header>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-20 place-items-center py-20">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-20 place-items-center py-20 w-full max-w-6xl">
         {data?.resources?.map((resource) => (
           <CarouselCard
             key={resource.header}

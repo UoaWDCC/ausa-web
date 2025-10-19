@@ -17,14 +17,10 @@ export default async function FinancialResourcesPage() {
             <h1 className="text-6xl text-[var(--white)]">
               <span className="italic">Financial</span>
               <br />
-              Resources
+              {data.title}
             </h1>
             <p className="text-lg max-w-4xl text-[var(--white)] font-thin">
-              Money worries can add extra stress, but you don’t have to face
-              them alone. This page connects you with tools, services, and
-              advice to help manage your finances. Taking control of your
-              financial wellbeing is just as important as caring for your mental
-              health.
+              {data.description}
             </p>
           </div>
         </div>

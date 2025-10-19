@@ -17,7 +17,7 @@ export default async function AcademicResourcesPage() {
             <h1 className="text-6xl text-[var(--white)]">
               <span className="italic">{data?.title || "Academic"}</span>
               <br />
-              Resources
+              {data.title}
             </h1>
             <p className="text-lg max-w-4xl text-[var(--white)] font-thin">
               {data?.description || "Explore our academic resources"}
