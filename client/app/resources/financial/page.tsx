@@ -1,10 +1,8 @@
-import { useFinancialResources } from "@/app/services/resource/resourceQueries"
+import CarouselCard from "@/app/components/composite/carousel/CarouselCard"
+import ResourceService from "@/app/services/resource/resourceService"
 
-export default function FinancialResourcesPage() {
-  // const financialResources = useFinancialResources()
-
-  // const { data } = financialResources
-  // const { title, description, resources } = data
+export default async function FinancialResourcesPage() {
+  const data = await ResourceService.getFinancialResources()
 
   return (
     <main className="min-h-screen flex flex-col items-center p-0">
@@ -31,7 +29,18 @@ export default function FinancialResourcesPage() {
           </div>
         </div>
       </header>
-      <section></section>
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-20 place-items-center py-20">
+        {data?.resources?.map((resource) => (
+          <CarouselCard
+            key={resource.header}
+            title={resource.header}
+            description={resource.description}
+            image={resource.image}
+            link={resource.href}
+            variant="wide"
+          />
+        ))}
+      </section>
     </main>
   )
 }
