@@ -8,16 +8,44 @@ interface PortalCardProps {
 const PortalCard: React.FC<PortalCardProps> = ({
   children,
   className = "",
-}) => (
-  <div
-    className={`rounded-2xl shadow-lg bg-white/20 p-8 max-w-md w-full backdrop-blur-md ${className}`}
-    style={{
-      border: "2px solid",
-      borderImage: "linear-gradient(to right, #FFDE91, #5FADE6) 1",
-    }}
-  >
-    {children}
-  </div>
-)
+}) => {
+  const styles = `
+    .grad-border {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    .grad-border::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      border-radius: 1rem;
+      padding: 2px;
+      background: linear-gradient(to right, #FFDE91, #5FADE6);
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+  `
+
+  return (
+    <>
+      <style>{styles}</style>
+      <div
+        className={`grad-border p-8 max-w-md w-full shadow-lg ${className}`}
+        style={{
+          backgroundColor: "rgba(185, 213, 255, 0.25)",
+          backdropFilter: "blur(12px)",
+        }}
+      >
+        {children}
+      </div>
+    </>
+  )
+}
 
 export default PortalCard
