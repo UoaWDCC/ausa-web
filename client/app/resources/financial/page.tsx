@@ -10,6 +10,7 @@ export default async function FinancialResourcesPage() {
         <img
           src="/financial_resources.jpeg"
           className="absolute inset-0 w-full h-full object-cover brightness-60"
+          alt="Financial Resources"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#043873] to-transparent opacity-60 z-10 pointer-events-none" />
         <div className="relative z-20 w-full h-full flex items-end justify-center pb-8">

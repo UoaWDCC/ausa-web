@@ -10,6 +10,7 @@ export default async function ExternalResourcesPage() {
         <img
           src="/external_resources.jpeg"
           className="absolute inset-0 w-full h-full object-cover brightness-60"
+          alt="External Resources"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#3A7D8C] to-transparent opacity-60 z-10 pointer-events-none" />
         <div className="relative z-20 w-full h-full flex items-end justify-center pb-8">

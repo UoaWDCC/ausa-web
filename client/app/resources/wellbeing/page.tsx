@@ -10,6 +10,7 @@ export default async function WellbeingResourcesPage() {
         <img
           src="/wellbeing_resources.jpeg"
           className="absolute inset-0 w-full h-full object-cover brightness-60"
+          alt="Wellbeing Resources"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#FFDE91] to-transparent opacity-40 z-10 pointer-events-none" />
         <div className="relative z-20 w-full h-full flex items-end justify-center pb-8">
