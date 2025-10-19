@@ -68,6 +68,7 @@ interface ButtonAsLink extends BaseButtonProps {
   target?: string
   rel?: string
   onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  showIcon?: boolean
 }
 
 type ButtonProps = ButtonAsButton | ButtonAsLink
@@ -77,7 +78,14 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
     const baseClasses = cn(buttonVariants({ variant, size, className }))
 
     if (props.asLink) {
-      const { href, target, rel, onClick, ...linkProps } = props
+      const {
+        showIcon = false,
+        href,
+        target,
+        rel,
+        onClick,
+        ...linkProps
+      } = props
       return (
         <a
           ref={ref as React.Ref<HTMLAnchorElement>}
@@ -90,12 +98,14 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
           {...linkProps}
         >
           {children}
-          <span
-            className="max-w-5 max-h-5 flex items-center ml-1"
-            aria-hidden="true"
-          >
-            <ExternalLinkIcon height={"100%"} width={"100%"} />
-          </span>
+          {showIcon && (
+            <span
+              className="max-w-5 max-h-5 flex items-center ml-1"
+              aria-hidden="true"
+            >
+              <ExternalLinkIcon height={"100%"} width={"100%"} />
+            </span>
+          )}
         </a>
       )
     }

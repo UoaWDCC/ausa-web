@@ -67,14 +67,15 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <Image
-              src="/AusaLogo.svg"
-              width={200}
-              height={200}
-              alt="AUSA Logo"
-              className="h-15 w-fit"
-            />
-
+            <Link href="/">
+              <Image
+                src="/AusaLogo.svg"
+                width={200}
+                height={200}
+                alt="AUSA Logo"
+                className="h-15 w-fit"
+              />
+            </Link>
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center flex-1 gap-3 pr-4 justify-end relative">
               {navigationItems.map((item) => (
@@ -102,7 +103,9 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
              * TODO: connect to auth
              */}
             <div className="hidden md:flex">
-              <Button variant="square">Login</Button>
+              <Button asLink href={navPaths["Login"]} variant="square">
+                Login
+              </Button>
             </div>
             <div className="flex">
               {/* Mobile Menu Button */}
