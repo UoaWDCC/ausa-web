@@ -2,3 +2,4 @@
 **/.svn
 **/node_modules
 **/server/src/middleware
+client/models/__generated__/schema.d.ts
