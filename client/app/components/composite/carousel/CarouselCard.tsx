@@ -19,8 +19,8 @@ const carouselCardVariations = cva(
   {
     variants: {
       variant: {
-        wide: ["max-w-[630px]", "h-[450px]"],
-        thin: ["max-w-[350px]", "h-[470px]"],
+        wide: ["h-[450px]"],
+        thin: ["h-[470px]"],
       },
     },
     defaultVariants: {
