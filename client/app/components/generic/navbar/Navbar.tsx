@@ -63,7 +63,7 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
 
   return (
     <>
-      <nav className={cn(className, "bg-[var(--black)] fixed w-screen")}>
+      <nav className={cn(className, "bg-[var(--black)] fixed w-screen z-20")}>
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}

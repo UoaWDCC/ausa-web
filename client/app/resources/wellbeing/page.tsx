@@ -13,7 +13,7 @@ export default async function WellbeingResourcesPage() {
           alt="Wellbeing Resources"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#FFDE91] to-transparent opacity-40 z-10 pointer-events-none" />
-        <div className="relative z-20 w-full h-full flex items-end justify-center pb-8">
+        <div className="relative z-15 w-full h-full flex items-end justify-center pb-8">
           <div className="flex flex-row items-end gap-10 max-w-6xl px-8">
             <h1 className="text-6xl text-[var(--white)]">
               <span className="italic">Wellbeing</span>
