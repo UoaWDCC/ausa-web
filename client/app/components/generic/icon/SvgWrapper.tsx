@@ -24,8 +24,7 @@ interface SvgWrapperProps {
   onClick?: () => void
 }
 
-export interface SvgWrapperConsumerProps
-  extends Omit<SvgWrapperProps, "children"> {}
+export type SvgWrapperConsumerProps = Omit<SvgWrapperProps, "children">
 
 const SvgWrapper: React.FC<SvgWrapperProps> = ({
   children,

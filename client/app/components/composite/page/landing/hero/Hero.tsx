@@ -15,7 +15,7 @@ export const Hero = ({ title, onCtaClick = () => {}, subtitle }: HeroProps) => {
         {title}
       </h1>
       {subtitle && (
-        <p className="text-xl md:text-2xl font-thin mb-8 horizontal-clipping">
+        <p className="text-sm md:text-xl font-thin mb-8 horizontal-clipping">
           {subtitle}
         </p>
       )}
