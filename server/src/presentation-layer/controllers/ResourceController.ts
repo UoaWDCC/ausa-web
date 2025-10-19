@@ -4,7 +4,7 @@ import { Controller, Get, Route, SuccessResponse, Tags } from "tsoa"
 
 @Tags("Resources")
 @Route("resources")
-export class ResourceContoller extends Controller {
+export class ResourceController extends Controller {
   /**
    * Fetches all financial resources
    *

@@ -6,7 +6,7 @@ import {  fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { UserController } from './../../presentation-layer/controllers/UserController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { ResourceContoller } from './../../presentation-layer/controllers/ResourceController';
+import { ResourceController } from './../../presentation-layer/controllers/ResourceController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { QuizController } from './../../presentation-layer/controllers/QuizController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -224,21 +224,21 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsResourceContoller_getFinancialResources: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsResourceController_getFinancialResources: Record<string, TsoaRoute.ParameterSchema> = {
         };
         app.get('/resources/financial',
-            ...(fetchMiddlewares<RequestHandler>(ResourceContoller)),
-            ...(fetchMiddlewares<RequestHandler>(ResourceContoller.prototype.getFinancialResources)),
+            ...(fetchMiddlewares<RequestHandler>(ResourceController)),
+            ...(fetchMiddlewares<RequestHandler>(ResourceController.prototype.getFinancialResources)),
 
-            async function ResourceContoller_getFinancialResources(request: ExRequest, response: ExResponse, next: any) {
+            async function ResourceController_getFinancialResources(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsResourceContoller_getFinancialResources, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsResourceController_getFinancialResources, request, response });
 
-                const controller = new ResourceContoller();
+                const controller = new ResourceController();
 
               await templateService.apiHandler({
                 methodName: 'getFinancialResources',
@@ -253,21 +253,21 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsResourceContoller_getAcademicResources: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsResourceController_getAcademicResources: Record<string, TsoaRoute.ParameterSchema> = {
         };
         app.get('/resources/academic',
-            ...(fetchMiddlewares<RequestHandler>(ResourceContoller)),
-            ...(fetchMiddlewares<RequestHandler>(ResourceContoller.prototype.getAcademicResources)),
+            ...(fetchMiddlewares<RequestHandler>(ResourceController)),
+            ...(fetchMiddlewares<RequestHandler>(ResourceController.prototype.getAcademicResources)),
 
-            async function ResourceContoller_getAcademicResources(request: ExRequest, response: ExResponse, next: any) {
+            async function ResourceController_getAcademicResources(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsResourceContoller_getAcademicResources, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsResourceController_getAcademicResources, request, response });
 
-                const controller = new ResourceContoller();
+                const controller = new ResourceController();
 
               await templateService.apiHandler({
                 methodName: 'getAcademicResources',
@@ -282,21 +282,21 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsResourceContoller_getExternalResources: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsResourceController_getExternalResources: Record<string, TsoaRoute.ParameterSchema> = {
         };
         app.get('/resources/external',
-            ...(fetchMiddlewares<RequestHandler>(ResourceContoller)),
-            ...(fetchMiddlewares<RequestHandler>(ResourceContoller.prototype.getExternalResources)),
+            ...(fetchMiddlewares<RequestHandler>(ResourceController)),
+            ...(fetchMiddlewares<RequestHandler>(ResourceController.prototype.getExternalResources)),
 
-            async function ResourceContoller_getExternalResources(request: ExRequest, response: ExResponse, next: any) {
+            async function ResourceController_getExternalResources(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsResourceContoller_getExternalResources, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsResourceController_getExternalResources, request, response });
 
-                const controller = new ResourceContoller();
+                const controller = new ResourceController();
 
               await templateService.apiHandler({
                 methodName: 'getExternalResources',
@@ -311,21 +311,21 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        const argsResourceContoller_getWellbeingResources: Record<string, TsoaRoute.ParameterSchema> = {
+        const argsResourceController_getWellbeingResources: Record<string, TsoaRoute.ParameterSchema> = {
         };
         app.get('/resources/wellbeing',
-            ...(fetchMiddlewares<RequestHandler>(ResourceContoller)),
-            ...(fetchMiddlewares<RequestHandler>(ResourceContoller.prototype.getWellbeingResources)),
+            ...(fetchMiddlewares<RequestHandler>(ResourceController)),
+            ...(fetchMiddlewares<RequestHandler>(ResourceController.prototype.getWellbeingResources)),
 
-            async function ResourceContoller_getWellbeingResources(request: ExRequest, response: ExResponse, next: any) {
+            async function ResourceController_getWellbeingResources(request: ExRequest, response: ExResponse, next: any) {
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
             let validatedArgs: any[] = [];
             try {
-                validatedArgs = templateService.getValidatedArgs({ args: argsResourceContoller_getWellbeingResources, request, response });
+                validatedArgs = templateService.getValidatedArgs({ args: argsResourceController_getWellbeingResources, request, response });
 
-                const controller = new ResourceContoller();
+                const controller = new ResourceController();
 
               await templateService.apiHandler({
                 methodName: 'getWellbeingResources',
