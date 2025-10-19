@@ -8,6 +8,34 @@ export const WELLBEING_RESOURCES = "wellbeing"
 
 export default class ResourceRepository {
   /**
+   * Method used to create a resource in the database.
+   *
+   * @param path The path of the resource document
+   * @param resource The resource to create
+   */
+  public async createResource(
+    path: "financial" | "academic" | "external" | "wellbeing",
+    resource: BaseResource,
+  ): Promise<void> {
+    await FirestoreCollections.resources.doc(path).set(resource)
+  }
+
+  /**
+   * Method used to edit a resource in the database.
+   *
+   * @param path The path of the resource document
+   * @param resource The resource to edit
+   */
+  public async editResource(
+    path: "financial" | "academic" | "external" | "wellbeing",
+    resource: Partial<BaseResource>,
+  ): Promise<void> {
+    await FirestoreCollections.resources
+      .doc(path)
+      .set(resource, { merge: true })
+  }
+
+  /**
    * Method used to get all financial resources from the database.
    *
    * @returns An array of {@link BaseResource} objects representing the financial resources.
