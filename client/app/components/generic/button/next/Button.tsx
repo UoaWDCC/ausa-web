@@ -103,7 +103,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
               className="max-w-5 max-h-5 flex items-center ml-1"
               aria-hidden="true"
             >
-              <ExternalLinkIcon height={"100%"} width={"100%"} />
+              <ExternalLinkIcon height="24" width="24" />
             </span>
           )}
         </a>
