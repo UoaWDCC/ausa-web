@@ -31,7 +31,7 @@ const ContactsLeft: React.FC<ContactsLeftProps> = ({
 
       {/* Text */}
       <div className="relative z-10 px-6">
-        <h3 className="text-5xl md:text-6xl mb-2 mt-15 justify-left text-shadow-lg">
+        <h3 className="text-5xl md:text-6xl mb-2 mt-15 justify-left text-shadow-lg text-white">
           {title1}
         </h3>
         <h3 className="text-5xl md:text-6xl mb-2 mt-5 italic text-orange-300 text-shadow-lg">

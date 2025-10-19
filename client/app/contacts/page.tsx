@@ -156,7 +156,12 @@ const Contacts = () => {
 
             {/* submit button */}
             <div className="col-span-1 md:col-span-2 flex justify-end mt-6">
-              <Button label="Submit" backgroundColor="#2563eb" type="submit" />
+              <Button
+                className="duration-300 hover:shadow-xl shadow-sm"
+                label="Submit"
+                backgroundColor="#2563eb"
+                type="submit"
+              />
             </div>
           </div>
         </div>
