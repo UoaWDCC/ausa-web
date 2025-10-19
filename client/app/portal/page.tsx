@@ -1,39 +1,38 @@
 "use client"
 
 import React from "react"
+import PortalCard from "../components/composite/portal-card/PortalCard"
 import Background from "../components/composite/background/background"
 import Link from "next/link"
-
-interface CardProps {
-  lnk: string
-  pageName: string
-}
-
-const Card = ( {lnk, pageName}:CardProps) => {
-    return (<Link href={lnk}>
-      <div className="bg-[#FFDE91] rounded-lg w-48 h-48 justify-center hover:-translate-y-4 duration-300 hover:bg-[#FFDE91]/85 hover:shadow-2xl items-center flex flex-col text-sm text-white shadow-lg">
-        <h4 className="font-bold text-2xl text-black">{pageName}</h4>
-      </div>
-    </Link>)
-}
 
 const PortalPage = () => {
   return (
     <Background>
-      <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#043873] bg-[#faf7f2]">
-        {/* <PortalCard> */}
-          <h2 className="text-2xl italic mb-6 text-center text-[#FAF7F2]">
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#3A7D8C] via-[#FAF7F2] to-[#CAE5F8]">
+        <PortalCard>
+          <h2 className="text-2xl italic mb-6 text-center text-black ">
             Welcome to AUSA Wellbeing
           </h2>
-          <div className="grid grid-cols-2 w-[400px] gap-4">
-            <Card lnk="/" pageName="Home" />
-            <Card lnk="/quiz" pageName="Quiz" />
-            <Card lnk="/contact" pageName="Contact" />
-            <Card lnk="/signup" pageName="Signup" />
+          <div className="flex flex-col gap-4">
+            <Link href="/">
+              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+                Home
+              </p>
+            </Link>
+            <Link href="/quiz">
+              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+                Quiz
+              </p>
+            </Link>
+            <Link href="/contact">
+              <p className="border rounded-lg px-3 py-3 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#94C2DD] text-white">
+                Contact
+              </p>
+            </Link>
           </div>
+        </PortalCard>
       </main>
     </Background>
   )
 }
-
 export default PortalPage
