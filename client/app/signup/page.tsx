@@ -1,14 +1,15 @@
 "use client"
 
-import React, { useState, ChangeEvent } from "react"
+import React, { useState } from "react"
 import Link from "next/link"
-import { AuthCard, Input, Button } from "../components/auth/AuthForm"
 import client from "../services/fetch-client"
+import { setToken } from "../services/auth-client"
+import { AuthCard, Input, Button } from "../components/auth/AuthForm"
 
 export default function SignupPage() {
-  const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [displayName, setDisplayName] = useState("")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -17,88 +18,56 @@ export default function SignupPage() {
       setLoading(true)
       setError("")
 
-      const response = await client.POST("/auth/register", {
+      const response = await (client as any).POST("/auth/register", {
         body: {
           email,
           password,
-          displayName: fullName,
+          displayName,
         },
       })
 
       if (response.error) {
-        setError("User already exists")
+        setError("Unable to sign up")
         return
       }
 
-      // Store the JWT token
       if (response.data && "token" in response.data) {
-        localStorage.setItem("authToken", String(response.data.token))
-        console.log("Registration successful:", response.data)
-        // Redirect to  home page
+        setToken(String(response.data.token))
         window.location.href = "/"
       }
     } catch (err) {
-      console.error("Registration error:", err)
-      setError("An error occurred during registration")
+      console.error("Signup error:", err)
+      setError("An error occurred during signup")
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <AuthCard
-      title="Sign up to AUSA"
-      gradient="linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #e0f2fe 100%)"
-    >
+    <AuthCard title="Create an account" gradient="linear-gradient(135deg, #ecfccb 0%, #fef3c7 50%, #fff7ed 100%)">
       <div>
         {error && (
           <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
             {error}
           </div>
         )}
-        <Input
-          label="Full Name"
-          type="text"
-          placeholder="Example Name"
-          value={fullName}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setFullName(e.target.value)
-          }
-        />
-        <Input
-          label="Email"
-          type="email"
-          placeholder="Example@email.com"
-          value={email}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setEmail(e.target.value)
-          }
-        />
-        <Input
-          label="Password"
-          type="password"
-          placeholder="Example Password"
-          value={password}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setPassword(e.target.value)
-          }
-        />
+
+        <Input label="Display name" placeholder="Your name" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
+
+        <Input label="Email" type="email" placeholder="Example@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+
+        <Input label="Password" type="password" placeholder="Example Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+
         <div className="mt-6">
           <Button onClick={handleSubmit} variant="primary" disabled={loading}>
-            {loading ? "Signing Up..." : "Sign Up"}
+            {loading ? "Creating..." : "Create Account"}
           </Button>
         </div>
 
-        <p
-          className="text-center mt-4 text-sm"
-          style={{ fontFamily: "Montserrat, sans-serif", color: "#6b7280" }}
-        >
-          Already have an account?{" "}
-          <Link
-            href="/login"
-            className="text-blue-600 hover:underline font-medium"
-          >
-            Log in
+        <p className="text-center mt-4 text-sm" style={{ fontFamily: "Montserrat, sans-serif", color: "#6b7280" }}>
+          Already have an account?{' '}
+          <Link href="/login" className="text-blue-600 hover:underline font-medium">
+            Sign in
           </Link>
         </p>
       </div>

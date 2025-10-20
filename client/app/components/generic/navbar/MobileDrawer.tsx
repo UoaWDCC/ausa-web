@@ -10,6 +10,9 @@ interface MobileDrawerProps {
   navigationItems: string[]
   activeItem: string
   onNavClick: (item: string) => void
+  isAuthenticated?: boolean
+  onLogout?: () => void
+  displayName?: string | null
   className?: string
 }
 
@@ -19,6 +22,9 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   navigationItems,
   activeItem,
   onNavClick,
+  isAuthenticated,
+  onLogout,
+  displayName,
 }) => {
   const handleNavClick = (item: string) => {
     onNavClick(item)
@@ -86,20 +92,37 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
             ))}
           </nav>
 
-          {/* Login */}
+          {/* Auth action (Login or Logout) */}
           <div className="mt-auto pt-6">
-            <Link href={navPaths["Login"]}>
-              <Button
-                label="Login"
-                backgroundColor={"var(--btn-secondary-bg-press)"}
-                className={`
-                  w-20 px-4 py-3 justify-centre rounded-lg transition-all duration-300
-                  "hover:bg-btn-secondary-bg hover:scale-105"
-                `}
-                fontWeight={"bold"}
-                onClick={() => handleNavClick("Login")}
-              />
-            </Link>
+            {/** Render Logout when authenticated, otherwise Login */}
+            {/** onLogout is provided by Navbar which also clears local token */}
+            {isAuthenticated ? (
+              <div className="space-y-3">
+                {displayName && (
+                  <div className="text-white font-medium text-base">{displayName}</div>
+                )}
+                <Button
+                  label="Logout"
+                  backgroundColor={"var(--btn-secondary-bg)"}
+                  className={`w-20 px-4 py-3 justify-centre rounded-lg transition-all duration-300 hover:bg-btn-secondary-bg-press`}
+                  fontWeight={"bold"}
+                  onClick={() => {
+                    onClose()
+                    onLogout?.()
+                  }}
+                />
+              </div>
+            ) : (
+              <Link href={navPaths["Login"]}>
+                <Button
+                  label="Login"
+                  backgroundColor={"var(--btn-secondary-bg-press)"}
+                  className={`w-20 px-4 py-3 justify-centre rounded-lg transition-all duration-300 hover:bg-btn-secondary-bg hover:scale-105`}
+                  fontWeight={"bold"}
+                  onClick={() => handleNavClick("Login")}
+                />
+              </Link>
+            )}
           </div>
         </div>
       </div>

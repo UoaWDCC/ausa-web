@@ -1,6 +1,12 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
+import {
+  getToken,
+  logoutRequest,
+  removeToken,
+  getDisplayName,
+} from "../../../services/auth-client"
 import Button from "../button/regular/Button"
 import MobileDrawer from "./MobileDrawer"
 import Link from "next/link"
@@ -18,6 +24,8 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
   const [highlightStyle, setHighlightStyle] = useState({ width: 0, left: 0 })
   const pathname = usePathname()
   const buttonRefs = React.useRef<{ [key: string]: HTMLDivElement | null }>({})
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [displayName, setDisplayName] = useState<string | null>(null)
 
   const navigationItems = ["Home", "Resources", "Quiz", "FAQs", "Contacts"]
 
@@ -43,6 +51,30 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
 
   useEffect(() => {
     setActiveItem(pathToItem[pathname])
+  }, [pathname])
+
+  // detect token in localStorage to show logout
+  useEffect(() => {
+    // Re-check token whenever the pathname changes (helps after login redirects)
+    setIsAuthenticated(Boolean(getToken()))
+    setDisplayName(getDisplayName())
+
+    const onStorage = (e: StorageEvent) => {
+      // listen for both keys used in the app
+      if (e.key === "token" || e.key === "authToken") {
+        setIsAuthenticated(Boolean(e.newValue))
+        // update display name when token changes
+        try {
+          // read directly from localStorage in case newValue is null
+          setDisplayName(getDisplayName())
+        } catch {
+          setDisplayName(null)
+        }
+      }
+    }
+
+    window.addEventListener("storage", onStorage)
+    return () => window.removeEventListener("storage", onStorage)
   }, [pathname])
 
   useEffect(() => {
@@ -105,6 +137,15 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
   }, [activeItem])
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
+
+  const handleLogout = async () => {
+    await logoutRequest()
+    try {
+      removeToken()
+    } catch {}
+    setIsAuthenticated(false)
+    window.location.href = "/"
+  }
 
   return (
     <>
@@ -182,19 +223,33 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
               ))}
             </div>
 
-            {/* Login */}
+            {/* Auth actions */}
             <div className="hidden md:flex">
-              <Link href={navPaths["Login"]}>
-                <Button
-                  label="Login"
-                  onClick={() => handleNavClick("Login")}
-                  className={`
-                      px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
-                      bg-[var(--btn-secondary-bg-press)] hover:bg-[var(--btn-secondary-bg)] hover:scale-105
-                    `}
-                  fontWeight={"bold"}
-                />
-              </Link>
+                {!isAuthenticated ? (
+                  <Link href={navPaths["Login"]}>
+                    <Button
+                      label="Login"
+                      onClick={() => handleNavClick("Login")}
+                      className={`
+                        px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
+                        bg-[var(--btn-secondary-bg-press)] hover:bg-[var(--btn-secondary-bg)] hover:scale-105
+                      `}
+                      fontWeight={"bold"}
+                    />
+                  </Link>
+                ) : (
+                  <div className="flex items-center gap-3">
+                    {displayName && (
+                      <div className="text-sm font-medium text-white">{displayName}</div>
+                    )}
+                    <button
+                      onClick={handleLogout}
+                      className="px-4 py-2 rounded-lg transition-all duration-150 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-bg-press)] font-bold"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
             </div>
             <div className="flex">
               {/* Mobile Menu Button */}
@@ -232,6 +287,9 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
         navigationItems={navigationItems}
         activeItem={activeItem}
         onNavClick={handleNavClick}
+        isAuthenticated={isAuthenticated}
+        onLogout={handleLogout}
+        displayName={displayName}
       />
     </>
   )

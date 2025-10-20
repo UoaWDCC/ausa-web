@@ -25,6 +25,15 @@ app.use("/swagger", swaggerUI.serve, swaggerUI.setup(swaggerJson))
 
 RegisterRoutes(app)
 
+// Simple logout endpoint - since JWTs are stateless we just respond OK.
+// Client should also remove the token locally. If you later implement
+// token revocation/blacklisting, perform it here.
+app.post("/auth/logout", (req, res) => {
+  // Optionally inspect Authorization header for logging
+  // const authHeader = String(req.headers.authorization || "")
+  res.status(200).json({ success: true })
+})
+
 const port = process.env.PORT || 8000
 
 const _app = app.listen(port, () => {
