@@ -81,8 +81,8 @@ const FAQ = () => {
   }, [activeTab])
 
   return (
-    <div className="flex flex-col pt-20 min-h-screen px-4">
-      <h2 className="h2 text-primary-emphasis mb-6 leading-tight sm:leading-[100px]">
+    <div className="flex flex-col pt-20 min-h-screen px-6 py-2">
+      <h2 className="h4 text-primary-emphasis leading-tight sm:leading-[100px]">
         Frequently Asked Questions
       </h2>
       <p className="b3-body text-primary-emphasis mb-8 mt-4">
