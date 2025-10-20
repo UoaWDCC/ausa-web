@@ -98,7 +98,7 @@ const FAQ = () => {
             backgroundColor={
               activeTab.label === tab.label ? tab.bg : "var(--light-grey)"
             }
-            className="px-6 py-3 rounded-full whitespace-nowrap w-48 justify-center"
+            className="px-6 py-3 rounded-full whitespace-nowrap w-48 justify-center text-[var(--black)!important]"
             onClick={() => setActiveTab(tab)}
           />
         ))}
