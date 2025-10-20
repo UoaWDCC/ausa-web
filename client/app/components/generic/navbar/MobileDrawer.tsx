@@ -1,8 +1,9 @@
 "use client"
 
 import React from "react"
-import Button from "../button/regular/Button"
 import Link from "next/link"
+import { Button } from "@/app/components/generic/button/next/Button"
+import OldButton from "@/app/components/generic/button/regular/Button"
 
 interface MobileDrawerProps {
   isOpen: boolean
@@ -62,7 +63,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
           <nav className="flex flex-col space-y-2">
             {navigationItems.map((item) => (
               <Link href={navPaths[item]} key={`mobile-${item}`}>
-                <Button
+                <OldButton
                   key={`mobile-${item}`}
                   label={item}
                   onClick={() => handleNavClick(item)}
@@ -88,18 +89,9 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
 
           {/* Login */}
           <div className="mt-auto pt-6">
-            <Link href={navPaths["Login"]}>
-              <Button
-                label="Login"
-                backgroundColor={"var(--btn-secondary-bg-press)"}
-                className={`
-                  w-20 px-4 py-3 justify-centre rounded-lg transition-all duration-300
-                  "hover:bg-btn-secondary-bg hover:scale-105"
-                `}
-                fontWeight={"bold"}
-                onClick={() => handleNavClick("Login")}
-              />
-            </Link>
+            <Button asLink href={navPaths["Login"]} variant="square">
+              Login
+            </Button>
           </div>
         </div>
       </div>

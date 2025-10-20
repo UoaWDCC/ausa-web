@@ -44,6 +44,62 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"ResourceItem": {
+				"description": "The list of resources in each {@link BaseResource} object",
+				"properties": {
+					"header": {
+						"type": "string",
+						"description": "The header of each card"
+					},
+					"description": {
+						"type": "string",
+						"description": "The description of each resource card"
+					},
+					"image": {
+						"type": "string",
+						"description": "The background image of each resource card"
+					},
+					"href": {
+						"type": "string",
+						"description": "The href of clicking the cards"
+					}
+				},
+				"required": [
+					"header",
+					"description",
+					"image",
+					"href"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BaseResource": {
+				"description": "The base resource card (extends from the four known categories, financial, academic, external, wellbeing)",
+				"properties": {
+					"title": {
+						"type": "string",
+						"description": "The title of the page"
+					},
+					"description": {
+						"type": "string",
+						"description": "The description of the page (normally shown in the heading section)"
+					},
+					"resources": {
+						"items": {
+							"$ref": "#/components/schemas/ResourceItem"
+						},
+						"type": "array",
+						"description": "The list of resources to display on each page"
+					}
+				},
+				"required": [
+					"title",
+					"description",
+					"resources"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"Resource": {
 				"properties": {
 					"id": {
@@ -328,6 +384,98 @@
 						}
 					}
 				]
+			}
+		},
+		"/resources/financial": {
+			"get": {
+				"operationId": "GetFinancialResources",
+				"responses": {
+					"200": {
+						"description": "Fetched all financial resources",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResource"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetches all financial resources",
+				"tags": [
+					"Resources"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/resources/academic": {
+			"get": {
+				"operationId": "GetAcademicResources",
+				"responses": {
+					"200": {
+						"description": "Fetched all academic resources",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResource"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetches all academic resources",
+				"tags": [
+					"Resources"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/resources/external": {
+			"get": {
+				"operationId": "GetExternalResources",
+				"responses": {
+					"200": {
+						"description": "Fetched all external resources",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResource"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetches all external resources",
+				"tags": [
+					"Resources"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/resources/wellbeing": {
+			"get": {
+				"operationId": "GetWellbeingResources",
+				"responses": {
+					"200": {
+						"description": "Fetched all wellbeing resources",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResource"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetches all wellbeing resources",
+				"tags": [
+					"Resources"
+				],
+				"security": [],
+				"parameters": []
 			}
 		},
 		"/quiz": {
