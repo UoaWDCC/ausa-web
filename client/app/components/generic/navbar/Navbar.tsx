@@ -88,7 +88,7 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
                 >
                   <Link href={navPaths[item]}>
                     <div
-                      className="px-4 py-2 rounded-lg transition-colors duration-200 relative cursor-pointer"
+                      className="px-4 py-2 font-semibold rounded-lg hover:bg-accent-warm-200 hover:text-black transition-colors text-white duration-200 relative cursor-pointer"
                       onClick={() => handleNavClick(item)}
                     >
                       {item}
