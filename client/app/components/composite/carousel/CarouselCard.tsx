@@ -1,19 +1,33 @@
 import React from "react"
-import Button from "@/app/components/generic/button/regular/Button"
+import { cva } from "class-variance-authority"
+import { cn } from "@/utils/cn"
+import { Button } from "@/app/components/generic/button/next/Button"
 
-interface CarouselCardProps {
+export interface CarouselCardProps {
   title: string
   description: string
   image: string
-  link: string
+  onCtaClick?: () => void
+  ctaLabel?: string
+  link?: string
   variant?: "wide" | "thin"
 }
 
-const getDimensions = (variant: "wide" | "thin") => {
-  if (variant === "wide") return { width: 630, height: 450 }
-  // default to thin: mobile-first design
-  return { width: 350, height: 470 }
-}
+const carouselCardVariations = cva(
+  // Base styles
+  "w-full relative rounded-lg overflow-hidden bg-white flex flex-col border-gray-300 border-2",
+  {
+    variants: {
+      variant: {
+        wide: ["h-[450px]"],
+        thin: ["h-[470px]"],
+      },
+    },
+    defaultVariants: {
+      variant: "thin",
+    },
+  },
+)
 
 const CarouselCard = ({
   title,
@@ -21,29 +35,32 @@ const CarouselCard = ({
   image,
   link,
   variant,
+  onCtaClick,
+  ctaLabel = "Learn More",
 }: CarouselCardProps) => {
-  const { width, height } = getDimensions(variant || "thin")
+  const baseClasses = cn(carouselCardVariations({ variant }))
+
   return (
-    <div
-      className="relative rounded-lg overflow-hidden shadow-md bg-white flex flex-col border-gray-200 border"
-      style={{ width, height }}
-    >
+    <div className={baseClasses}>
       <img src={image} alt={title} className="w-full h-1/2 object-cover" />
 
       <div className="p-4 flex flex-col flex-1">
-        <h3 className="text-lg text-gray-600 font-semibold">{title}</h3>
+        <h3 className="text-3xl text-gray-700 font-semibold">{title}</h3>
 
-        <p className="text-sm text-gray-600 mt-2 line-clamp-3">{description}</p>
+        <p className="text-sm text-gray-500 mt-4 line-clamp-3">{description}</p>
 
-        <div className="mt-auto mb-4">
-          <a href={link} target="_blank" rel="noopener noreferrer">
+        {(!!link || onCtaClick) && (
+          <div className="mt-4">
             <Button
-              label="Visit Website"
-              className="px-6 py-3 mt-4 rounded-full btn-secondary"
-              fontWeight="normal"
-            />
-          </a>
-        </div>
+              asLink={!!link}
+              href={link || "#"}
+              onClick={onCtaClick}
+              variant="secondary"
+            >
+              {ctaLabel}
+            </Button>
+          </div>
+        )}
 
         <img
           src="/ausa_logo.png"

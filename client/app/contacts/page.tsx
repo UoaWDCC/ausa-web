@@ -75,7 +75,6 @@ const Contacts = () => {
             <ContactsLeft
               title1="Have any Questions?"
               title2="Reach out!"
-              subtitle="We're here to listen and support you. Whether you have a question, need guidance, or just want to connect with our team, you can reach out anytime."
               backgroundImage={background}
             />
           </div>

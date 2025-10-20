@@ -1,10 +1,12 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
-import Button from "../button/regular/Button"
 import MobileDrawer from "./MobileDrawer"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { cn } from "@/utils/cn"
+import { Button } from "@/app/components/generic/button/next/Button"
+import Image from "next/image"
 
 export interface NavbarProps {
   onNavigate?: (page: string) => void
@@ -13,23 +15,15 @@ export interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [hasScrolled, setHasScrolled] = useState(false)
   const pathname = usePathname()
+  const buttonRefs = React.useRef<{ [key: string]: HTMLDivElement | null }>({})
 
-  const navigationItems = [
-    "Home",
-    "Resources",
-    "Quiz",
-    "Events",
-    "FAQs",
-    "Contacts",
-  ]
+  const navigationItems = ["Home", "Resources", "Quiz", "FAQs", "Contacts"]
 
   const navPaths: Record<string, string> = {
     Home: "/",
     Resources: "/resources",
     Quiz: "/quiz",
-    Events: "/events",
     FAQs: "/faqs",
     Contacts: "/contacts",
     Login: "/login",
@@ -39,7 +33,6 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
     "/": "Home",
     "/resources": "Resources",
     "/quiz": "Quiz",
-    "/events": "Events",
     "/faqs": "FAQs",
     "/contacts": "Contacts",
     "/login": "Login",
@@ -50,15 +43,6 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
   useEffect(() => {
     setActiveItem(pathToItem[pathname])
   }, [pathname])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 0)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -79,66 +63,49 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
 
   return (
     <>
-      <nav
-        className={`
-          navbar fixed top-0 left-0 z-50 w-full transition-all duration-500 ease-out
-          ${hasScrolled ? "bg-black/80" : "bg-black"}
-          ${className}
-        `}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className={cn(className, "bg-[var(--black)] fixed w-screen z-20")}>
+        <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="">
-              <img src="/AusaLogo.svg" alt="AUSA Logo" className="h-15" />
-            </div>
-
+            <Link href="/">
+              <Image
+                src="/AusaLogo.svg"
+                width={200}
+                height={200}
+                alt="AUSA Logo"
+                className="h-15 w-fit"
+              />
+            </Link>
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-3 flex-1 justify-center">
+            <div className="hidden md:flex items-center flex-1 gap-3 pr-4 justify-end relative">
               {navigationItems.map((item) => (
-                <div key={item} className="group relative">
+                <div
+                  key={item}
+                  className="relative z-10"
+                  ref={(el) => {
+                    buttonRefs.current[item] = el
+                  }}
+                >
                   <Link href={navPaths[item]}>
-                    <Button
-                      label={item}
+                    <div
+                      className="px-4 py-2 rounded-lg hover:bg-accent-warm-200 hover:text-black transition-colors text-white duration-200 relative cursor-pointer"
                       onClick={() => handleNavClick(item)}
-                      backgroundColor={
-                        activeItem === item
-                          ? "var(--btn-primary-bg)"
-                          : "transparent"
-                      }
-                      className={`
-                        px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
-                        ${
-                          activeItem === item
-                            ? "font-medium shadow-md"
-                            : "hover:bg-btn-primary-bg-hover group-hover:scale-105"
-                        }
-                      `}
-                      fontWeight={activeItem === item ? "bold" : "normal"}
-                    />
+                    >
+                      {item}
+                    </div>
                   </Link>
-
-                  {/* Hover Animation */}
-                  {activeItem !== item && (
-                    <div className="absolute bottom-0 left-1/2 h-0.5 w-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 transition-all duration-300 ease-out group-hover:w-full group-hover:left-0" />
-                  )}
                 </div>
               ))}
             </div>
 
-            {/* Login */}
+            {/**
+             * Login
+             * TODO: connect to auth
+             */}
             <div className="hidden md:flex">
-              <Link href={navPaths["Login"]}>
-                <Button
-                  label="Login"
-                  onClick={() => handleNavClick("Login")}
-                  className={`
-                      px-4 py-2 rounded-lg transition-all duration-300 relative overflow-hidden
-                      bg-[var(--btn-secondary-bg-press)] hover:bg-[var(--btn-secondary-bg)] hover:scale-105
-                    `}
-                  fontWeight={"bold"}
-                />
-              </Link>
+              <Button asLink href={navPaths["Login"]} variant="square">
+                Login
+              </Button>
             </div>
             <div className="flex">
               {/* Mobile Menu Button */}

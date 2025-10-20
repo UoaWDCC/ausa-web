@@ -12,6 +12,9 @@
 					"email": {
 						"type": "string"
 					},
+					"password": {
+						"type": "string"
+					},
 					"displayName": {
 						"type": "string"
 					},
@@ -27,13 +30,13 @@
 						"type": "string",
 						"enum": [
 							"user",
-							"lab_manager",
 							"admin"
 						]
 					}
 				},
 				"required": [
 					"email",
+					"password",
 					"createdAt",
 					"updatedAt",
 					"role"
@@ -41,152 +44,259 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"GoogleOAuthUser": {
+			"ResourceItem": {
+				"description": "The list of resources in each {@link BaseResource} object",
 				"properties": {
-					"uid": {
+					"header": {
+						"type": "string",
+						"description": "The header of each card"
+					},
+					"description": {
+						"type": "string",
+						"description": "The description of each resource card"
+					},
+					"image": {
+						"type": "string",
+						"description": "The background image of each resource card"
+					},
+					"href": {
+						"type": "string",
+						"description": "The href of clicking the cards"
+					}
+				},
+				"required": [
+					"header",
+					"description",
+					"image",
+					"href"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BaseResource": {
+				"description": "The base resource card (extends from the four known categories, financial, academic, external, wellbeing)",
+				"properties": {
+					"title": {
+						"type": "string",
+						"description": "The title of the page"
+					},
+					"description": {
+						"type": "string",
+						"description": "The description of the page (normally shown in the heading section)"
+					},
+					"resources": {
+						"items": {
+							"$ref": "#/components/schemas/ResourceItem"
+						},
+						"type": "array",
+						"description": "The list of resources to display on each page"
+					}
+				},
+				"required": [
+					"title",
+					"description",
+					"resources"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Resource": {
+				"properties": {
+					"id": {
 						"type": "string"
 					},
+					"title": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"url": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"description",
+					"type"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"QuizOption": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"text": {
+						"type": "string"
+					},
+					"nextQuestionId": {
+						"type": "string"
+					},
+					"resources": {
+						"items": {
+							"$ref": "#/components/schemas/Resource"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"text"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"QuizQuestion": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"text": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"options": {
+						"items": {
+							"$ref": "#/components/schemas/QuizOption"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"id",
+					"text",
+					"options"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Record_string.QuizQuestion_": {
+				"properties": {},
+				"additionalProperties": {
+					"$ref": "#/components/schemas/QuizQuestion"
+				},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
+			"Quiz": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"startQuestionId": {
+						"type": "string"
+					},
+					"questions": {
+						"$ref": "#/components/schemas/Record_string.QuizQuestion_"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"title",
+					"description",
+					"startQuestionId",
+					"questions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pick_Quiz.Exclude_keyofQuiz.id-or-createdAt-or-updatedAt__": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"startQuestionId": {
+						"type": "string"
+					},
+					"questions": {
+						"$ref": "#/components/schemas/Record_string.QuizQuestion_"
+					}
+				},
+				"required": [
+					"title",
+					"description",
+					"startQuestionId",
+					"questions"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"Omit_Quiz.id-or-createdAt-or-updatedAt_": {
+				"$ref": "#/components/schemas/Pick_Quiz.Exclude_keyofQuiz.id-or-createdAt-or-updatedAt__",
+				"description": "Construct a type with the properties of T except for those in type K."
+			},
+			"NavigateRequest": {
+				"properties": {
+					"questionId": {
+						"type": "string"
+					},
+					"optionId": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"questionId",
+					"optionId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"RegisterRequest": {
+				"properties": {
 					"email": {
+						"type": "string"
+					},
+					"password": {
 						"type": "string"
 					},
 					"displayName": {
-						"type": "string"
-					},
-					"photoURL": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"uid",
-					"email"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"GoogleOAuthResponse": {
-				"properties": {
-					"success": {
-						"type": "boolean"
-					},
-					"message": {
-						"type": "string"
-					},
-					"token": {
-						"type": "string"
-					},
-					"user": {
-						"$ref": "#/components/schemas/GoogleOAuthUser"
-					}
-				},
-				"required": [
-					"success",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"GoogleOAuthRequest": {
-				"properties": {
-					"idToken": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"idToken"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"SendVerificationCodeResponse": {
-				"properties": {
-					"success": {
-						"type": "boolean"
-					},
-					"message": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"success",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"SendVerificationCodeRequest": {
-				"properties": {
-					"email": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"email"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"VerifyCodeResponse": {
-				"properties": {
-					"success": {
-						"type": "boolean"
-					},
-					"message": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"success",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"VerifyCodeRequest": {
-				"properties": {
-					"email": {
-						"type": "string"
-					},
-					"inputCode": {
 						"type": "string"
 					}
 				},
 				"required": [
 					"email",
-					"inputCode"
+					"password"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"VerifyTokenResponse": {
+			"LoginRequest": {
 				"properties": {
-					"success": {
-						"type": "boolean"
-					},
-					"message": {
-						"type": "string"
-					},
-					"uid": {
-						"type": "string"
-					},
 					"email": {
 						"type": "string"
-					}
-				},
-				"required": [
-					"success",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"VerifyTokenRequest": {
-				"properties": {
-					"idToken": {
+					},
+					"password": {
 						"type": "string"
 					}
 				},
 				"required": [
-					"idToken"
+					"email",
+					"password"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -276,24 +386,152 @@
 				]
 			}
 		},
-		"/auth/google/verify": {
+		"/resources/financial": {
+			"get": {
+				"operationId": "GetFinancialResources",
+				"responses": {
+					"200": {
+						"description": "Fetched all financial resources",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResource"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetches all financial resources",
+				"tags": [
+					"Resources"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/resources/academic": {
+			"get": {
+				"operationId": "GetAcademicResources",
+				"responses": {
+					"200": {
+						"description": "Fetched all academic resources",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResource"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetches all academic resources",
+				"tags": [
+					"Resources"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/resources/external": {
+			"get": {
+				"operationId": "GetExternalResources",
+				"responses": {
+					"200": {
+						"description": "Fetched all external resources",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResource"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetches all external resources",
+				"tags": [
+					"Resources"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/resources/wellbeing": {
+			"get": {
+				"operationId": "GetWellbeingResources",
+				"responses": {
+					"200": {
+						"description": "Fetched all wellbeing resources",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResource"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetches all wellbeing resources",
+				"tags": [
+					"Resources"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/quiz": {
 			"post": {
-				"operationId": "VerifyToken",
+				"operationId": "CreateQuiz",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/GoogleOAuthResponse"
+									"anyOf": [
+										{
+											"properties": {
+												"quiz": {
+													"$ref": "#/components/schemas/Quiz"
+												},
+												"message": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"quiz",
+												"message",
+												"success"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"quiz": {},
+												"message": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"message",
+												"success"
+											],
+											"type": "object"
+										}
+									]
 								}
 							}
 						}
 					}
 				},
-				"description": "Verifies Google ID token and authenticates user.",
+				"description": "Create a new quiz",
 				"tags": [
-					"Google OAuth"
+					"Quiz"
 				],
 				"security": [],
 				"parameters": [],
@@ -302,28 +540,361 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/GoogleOAuthRequest"
+								"$ref": "#/components/schemas/Omit_Quiz.id-or-createdAt-or-updatedAt_"
 							}
 						}
 					}
 				}
-			}
-		},
-		"/auth/send-verification-code": {
-			"post": {
-				"operationId": "SendVerificationCode",
+			},
+			"get": {
+				"operationId": "GetAllQuizzes",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/SendVerificationCodeResponse"
+									"anyOf": [
+										{
+											"properties": {
+												"message": {},
+												"quizzes": {
+													"items": {
+														"properties": {
+															"description": {
+																"type": "string"
+															},
+															"title": {
+																"type": "string"
+															},
+															"id": {
+																"type": "string"
+															}
+														},
+														"required": [
+															"description",
+															"title",
+															"id"
+														],
+														"type": "object"
+													},
+													"type": "array"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"quizzes",
+												"success"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"quizzes": {
+													"items": {
+														"properties": {
+															"description": {
+																"type": "string"
+															},
+															"title": {
+																"type": "string"
+															},
+															"id": {
+																"type": "string"
+															}
+														},
+														"required": [
+															"description",
+															"title",
+															"id"
+														],
+														"type": "object"
+													},
+													"type": "array"
+												},
+												"message": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"quizzes",
+												"message",
+												"success"
+											],
+											"type": "object"
+										}
+									]
 								}
 							}
 						}
 					}
 				},
+				"description": "Get all quizzes",
+				"tags": [
+					"Quiz"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/quiz/{id}": {
+			"get": {
+				"operationId": "GetQuizById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"properties": {
+												"quiz": {},
+												"message": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"message",
+												"success"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"message": {},
+												"quiz": {
+													"$ref": "#/components/schemas/Quiz"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"quiz",
+												"success"
+											],
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Get quiz by ID",
+				"tags": [
+					"Quiz"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/quiz/{id}/navigate": {
+			"post": {
+				"operationId": "NavigateQuiz",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"properties": {
+												"questionId": {},
+												"question": {},
+												"resources": {},
+												"type": {},
+												"message": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"message",
+												"success"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"questionId": {},
+												"question": {},
+												"message": {},
+												"resources": {
+													"items": {
+														"$ref": "#/components/schemas/Resource"
+													},
+													"type": "array"
+												},
+												"type": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"resources",
+												"type",
+												"success"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"resources": {},
+												"message": {},
+												"questionId": {
+													"type": "string"
+												},
+												"question": {
+													"$ref": "#/components/schemas/QuizQuestion"
+												},
+												"type": {
+													"type": "string"
+												},
+												"success": {
+													"type": "boolean"
+												}
+											},
+											"required": [
+												"questionId",
+												"question",
+												"type",
+												"success"
+											],
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"description": "Navigate quiz - answer question and get next step",
+				"tags": [
+					"Quiz"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/NavigateRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/register": {
+			"post": {
+				"operationId": "Register",
+				"responses": {
+					"201": {
+						"description": "User registered successfully",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"properties": {
+												"user": {
+													"properties": {
+														"updatedAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"createdAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"role": {
+															"type": "string",
+															"enum": [
+																"user"
+															],
+															"nullable": false
+														},
+														"displayName": {
+															"type": "string"
+														},
+														"email": {
+															"type": "string"
+														},
+														"id": {
+															"type": "string"
+														}
+													},
+													"required": [
+														"updatedAt",
+														"createdAt",
+														"role",
+														"displayName",
+														"email",
+														"id"
+													],
+													"type": "object"
+												},
+												"token": {}
+											},
+											"required": [
+												"user",
+												"token"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"error": {}
+											},
+											"required": [
+												"error"
+											],
+											"type": "object"
+										}
+									]
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad Request - User already exists"
+					}
+				},
+				"description": "Register a new user",
 				"tags": [
 					"Authentication"
 				],
@@ -334,28 +905,91 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/SendVerificationCodeRequest"
+								"$ref": "#/components/schemas/RegisterRequest"
 							}
 						}
 					}
 				}
 			}
 		},
-		"/auth/verify-code": {
+		"/auth/login": {
 			"post": {
-				"operationId": "VerifyCode",
+				"operationId": "Login",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Login successful",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/VerifyCodeResponse"
+									"anyOf": [
+										{
+											"properties": {
+												"user": {
+													"properties": {
+														"updatedAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"createdAt": {
+															"type": "string",
+															"format": "date-time"
+														},
+														"role": {
+															"type": "string",
+															"enum": [
+																"user",
+																"admin"
+															]
+														},
+														"displayName": {
+															"type": "string"
+														},
+														"email": {
+															"type": "string"
+														},
+														"id": {
+															"type": "string"
+														}
+													},
+													"required": [
+														"updatedAt",
+														"createdAt",
+														"role",
+														"displayName",
+														"email",
+														"id"
+													],
+													"type": "object"
+												},
+												"token": {}
+											},
+											"required": [
+												"user",
+												"token"
+											],
+											"type": "object"
+										},
+										{
+											"properties": {
+												"error": {
+													"type": "string"
+												}
+											},
+											"required": [
+												"error"
+											],
+											"type": "object"
+										}
+									]
 								}
 							}
 						}
+					},
+					"401": {
+						"description": "Unauthorized - Invalid credentials"
 					}
 				},
+				"description": "Login a user",
 				"tags": [
 					"Authentication"
 				],
@@ -366,39 +1000,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/VerifyCodeRequest"
-							}
-						}
-					}
-				}
-			}
-		},
-		"/auth/verify-token": {
-			"post": {
-				"operationId": "VerifyToken",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/VerifyTokenResponse"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Authentication"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/VerifyTokenRequest"
+								"$ref": "#/components/schemas/LoginRequest"
 							}
 						}
 					}
