@@ -84,13 +84,23 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
 
   const handleMouseLeave = () => {
     setHoveredItem(null)
+    const isPrimaryActive = navigationItems.includes(activeItem || "")
+    if (!isPrimaryActive) {
+      // on non-primary pages, hide highlight immediately when hover ends
+      setHighlightStyle({ left: 0, width: 0 })
+      return
+    }
     updateHighlightPosition(activeItem)
   }
 
   // Update highlight position when active item changes
   useEffect(() => {
-    if (activeItem) {
+    const isPrimaryActive = navigationItems.includes(activeItem || "")
+    if (isPrimaryActive) {
       updateHighlightPosition(activeItem)
+    } else {
+      // clear highlight when on non-primary pages
+      setHighlightStyle({ left: 0, width: 0 })
     }
   }, [activeItem])
 
@@ -115,13 +125,24 @@ const Navbar: React.FC<NavbarProps> = ({ className = "", onNavigate }) => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-3 flex-1 justify-center relative">
               {/* Moving highlight background */}
-              <div
-                className="absolute top-0 bottom-0 bg-[var(--btn-primary-bg)] rounded-lg transition-all duration-300 ease-out pointer-events-none z-0"
-                style={{
-                  width: `${highlightStyle.width}px`,
-                  left: `${highlightStyle.left}px`,
-                }}
-              />
+              {navigationItems.includes(activeItem || "") ? (
+                <div
+                  className="absolute top-0 bottom-0 bg-[var(--btn-primary-bg)] rounded-lg transition-all duration-300 ease-out pointer-events-none z-0"
+                  style={{
+                    width: `${highlightStyle.width}px`,
+                    left: `${highlightStyle.left}px`,
+                  }}
+                />
+              ) : (
+                // Non-primary pages: render instant highlight for hover without animation
+                <div
+                  className="absolute top-0 bottom-0 bg-[var(--btn-primary-bg)] rounded-lg pointer-events-none z-0"
+                  style={{
+                    width: `${highlightStyle.width}px`,
+                    left: `${highlightStyle.left}px`,
+                  }}
+                />
+              )}
 
               {navigationItems.map((item) => (
                 <div
