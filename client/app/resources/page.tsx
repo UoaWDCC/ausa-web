@@ -12,7 +12,7 @@ const cards = [
     },
   },
   {
-    image: "",
+    image: "financial_resources.jpeg",
     heading: "Financial Stability & Support",
     description:
       "Access financial support, budgeting tools, and resources for economic wellbeing.",
@@ -22,7 +22,7 @@ const cards = [
     },
   },
   {
-    image: "",
+    image: "wellbeing_resources.jpeg",
     heading: "Mental & Emotional Wellbeing",
     description:
       "Find mental health support, counseling services, and emotional wellness resources.",
@@ -32,7 +32,7 @@ const cards = [
     },
   },
   {
-    image: "",
+    image: "physical_resources.jpg",
     heading: "Physical Wellbeing",
     description:
       "Discover health services, fitness resources, and physical wellness support.",
@@ -42,7 +42,7 @@ const cards = [
     },
   },
   {
-    image: "",
+    image: "social_resources.jpeg",
     heading: "Social & Family Wellbeing",
     description:
       "Connect with community support, family services, and social wellness resources.",
