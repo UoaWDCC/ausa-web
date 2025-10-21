@@ -1,10 +1,12 @@
 import { BaseResource } from "../../business-layer/models/Resource"
 import FirestoreCollections from "../../data-layer/adapters/FirestoreCollections"
 
-export const FINANCIAL_RESOURCES = "financial"
-export const ACADEMIC_RESOURCES = "academic"
-export const EXTERNAL_RESOURCES = "external"
-export const WELLBEING_RESOURCES = "wellbeing"
+export const LAND_ENVIRONMENT_RESOURCES = "land-environment"
+export const FINANCIAL_STABILITY_RESOURCES = "financial-stability"
+export const MENTAL_EMOTIONAL_RESOURCES = "mental-emotional"
+export const PHYSICAL_RESOURCES = "physical"
+export const SOCIAL_FAMILY_RESOURCES = "social-family"
+export const SPIRITUAL_RESOURCES = "spiritual"
 
 export default class ResourceRepository {
   /**
@@ -14,7 +16,7 @@ export default class ResourceRepository {
    * @param resource The resource to create
    */
   public async createResource(
-    path: "financial" | "academic" | "external" | "wellbeing",
+    path: "land-environment" | "financial-stability" | "mental-emotional" | "physical" | "social-family" | "spiritual",
     resource: BaseResource,
   ): Promise<void> {
     await FirestoreCollections.resources.doc(path).set(resource)
@@ -27,7 +29,7 @@ export default class ResourceRepository {
    * @param resource The resource to edit
    */
   public async editResource(
-    path: "financial" | "academic" | "external" | "wellbeing",
+    path: "land-environment" | "financial-stability" | "mental-emotional" | "physical" | "social-family" | "spiritual",
     resource: Partial<BaseResource>,
   ): Promise<void> {
     await FirestoreCollections.resources
@@ -36,49 +38,73 @@ export default class ResourceRepository {
   }
 
   /**
-   * Method used to get all financial resources from the database.
-   *
-   * @returns An array of {@link BaseResource} objects representing the financial resources.
-   */
-  public async getFinancialResources(): Promise<BaseResource> {
+    * Method used to get all land & environment resources from the database.
+    *
+    * @returns A {@link BaseResource} object representing the land & environment resources.
+    */
+  public async getLandEnvironmentResources(): Promise<BaseResource> {
     const res = await FirestoreCollections.resources
-      .doc(FINANCIAL_RESOURCES)
+      .doc(LAND_ENVIRONMENT_RESOURCES)
       .get()
     return res.data()
   }
 
   /**
-   * Method used to get all academic resources from the database.
-   *
-   * @returns An array of {@link BaseResource} objects representing the academic resources.
-   */
-  public async getAcademicResources(): Promise<BaseResource> {
+    * Method used to get all financial stability resources from the database.
+    *
+    * @returns A {@link BaseResource} object representing the financial stability resources.
+    */
+  public async getFinancialStabilityResources(): Promise<BaseResource> {
     const res = await FirestoreCollections.resources
-      .doc(ACADEMIC_RESOURCES)
+      .doc(FINANCIAL_STABILITY_RESOURCES)
       .get()
     return res.data()
   }
 
   /**
-   * Method used to get all external resources from the database.
-   *
-   * @returns An array of {@link BaseResource} objects representing the external resources.
-   */
-  public async getExternalResources(): Promise<BaseResource> {
+    * Method used to get all mental & emotional wellbeing resources from the database.
+    *
+    * @returns A {@link BaseResource} object representing the mental & emotional wellbeing resources.
+    */
+  public async getMentalEmotionalResources(): Promise<BaseResource> {
     const res = await FirestoreCollections.resources
-      .doc(EXTERNAL_RESOURCES)
+      .doc(MENTAL_EMOTIONAL_RESOURCES)
       .get()
     return res.data()
   }
 
   /**
-   * Method used to get all wellbeing resources from the database.
-   *
-   * @returns An array of {@link BaseResource} objects representing the wellbeing resources.
-   */
-  public async getWellbeingResources(): Promise<BaseResource> {
+    * Method used to get all physical wellbeing resources from the database.
+    *
+    * @returns A {@link BaseResource} object representing the physical wellbeing resources.
+    */
+  public async getPhysicalResources(): Promise<BaseResource> {
     const res = await FirestoreCollections.resources
-      .doc(WELLBEING_RESOURCES)
+      .doc(PHYSICAL_RESOURCES)
+      .get()
+    return res.data()
+  }
+
+  /**
+    * Method used to get all social & family wellbeing resources from the database.
+    *
+    * @returns A {@link BaseResource} object representing the social & family wellbeing resources.
+    */
+  public async getSocialFamilyResources(): Promise<BaseResource> {
+    const res = await FirestoreCollections.resources
+      .doc(SOCIAL_FAMILY_RESOURCES)
+      .get()
+    return res.data()
+  }
+
+  /**
+    * Method used to get all spiritual wellbeing resources from the database.
+    *
+    * @returns A {@link BaseResource} object representing the spiritual wellbeing resources.
+    */
+  public async getSpiritualResources(): Promise<BaseResource> {
+    const res = await FirestoreCollections.resources
+      .doc(SPIRITUAL_RESOURCES)
       .get()
     return res.data()
   }

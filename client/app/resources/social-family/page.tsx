@@ -1,8 +1,8 @@
 import CarouselCard from "@/app/components/composite/carousel/CarouselCard"
 import ResourceService from "@/app/services/resource/resourceService"
 
-export default async function WellbeingResourcesPage() {
-  const data = await ResourceService.getWellbeingResources()
+export default async function SocialFamilyResourcesPage() {
+  const data = await ResourceService.getSocialFamilyResources()
 
   return (
     <main className="min-h-screen flex flex-col items-center p-0">

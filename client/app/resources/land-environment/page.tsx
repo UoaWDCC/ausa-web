@@ -1,27 +1,27 @@
 import CarouselCard from "@/app/components/composite/carousel/CarouselCard"
 import ResourceService from "@/app/services/resource/resourceService"
 
-export default async function FinancialResourcesPage() {
-  const data = await ResourceService.getFinancialResources()
+export default async function LandEnvironmentResourcesPage() {
+  const data = await ResourceService.getLandEnvironmentResources()
 
   return (
     <main className="min-h-screen flex flex-col items-center p-0">
       <header className="relative w-full h-[50vh]">
         <img
-          src="/financial_resources.jpeg"
-          className="absolute inset-0 w-full h-full object-cover brightness-60"
-          alt="Financial Resources"
+          src="/academic_resources.jpeg"
+          className="absolute inset-0 w-full h-full object-cover brightness-40"
+          alt="Academic Resources"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#043873] to-transparent opacity-60 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#7EC6EC] to-transparent opacity-60 z-10 pointer-events-none" />
         <div className="relative z-15 w-full h-full flex items-end justify-center pb-8">
           <div className="flex flex-row items-end gap-10 max-w-6xl px-8">
             <h1 className="text-6xl text-[var(--white)]">
-              <span className="italic">Financial</span>
+              <span className="italic">{data?.title || "Academic"}</span>
               <br />
               {data.title}
             </h1>
             <p className="text-lg max-w-4xl text-[var(--white)] font-thin">
-              {data.description}
+              {data?.description || "Explore our academic resources"}
             </p>
           </div>
         </div>

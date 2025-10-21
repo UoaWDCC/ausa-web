@@ -1,8 +1,8 @@
 import CarouselCard from "@/app/components/composite/carousel/CarouselCard"
 import ResourceService from "@/app/services/resource/resourceService"
 
-export default async function ExternalResourcesPage() {
-  const data = await ResourceService.getExternalResources()
+export default async function MentalEmotionalResourcesPage() {
+  const data = await ResourceService.getMentalEmotionalResources()
 
   return (
     <main className="min-h-screen flex flex-col items-center p-0">
