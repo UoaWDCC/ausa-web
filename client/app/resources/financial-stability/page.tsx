@@ -26,7 +26,7 @@ export default async function FinancialStabilityResourcesPage() {
           </div>
         </div>
       </header>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-20 place-items-center py-20">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-20 place-items-center py-20 w-full max-w-6xl">
         {data?.resources?.map((resource) => (
           <CarouselCard
             key={resource.header}

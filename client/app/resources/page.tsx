@@ -2,10 +2,10 @@ import CarouselCard from "../components/composite/carousel/CarouselCard"
 
 const cards = [
   {
-    image: "",
+    image: "land_environment_resources.jpeg",
     heading: "Connection to Land & Environment",
     description:
-      "Explore resources that help you connect with the land, environment, and cultural practices.",
+      "Explore resources that help you connect with the land and environment.",
     cta: {
       href: "/resources/land-environment",
       label: "View Resources",
@@ -32,8 +32,8 @@ const cards = [
     },
   },
   {
-    image: "physical_resources.jpg",
-    heading: "Physical Wellbeing",
+    image: "physical_resources.jpeg",
+    heading: "Physical Wellbeing & Health",
     description:
       "Discover health services, fitness resources, and physical wellness support.",
     cta: {
@@ -52,8 +52,8 @@ const cards = [
     },
   },
   {
-    image: "",
-    heading: "Spiritual Wellbeing",
+    image: "spiritual_resources.jpeg",
+    heading: "Spiritual & Inner Wellbeing",
     description:
       "Explore spiritual practices, cultural connections, and inner wellness resources.",
     cta: {
