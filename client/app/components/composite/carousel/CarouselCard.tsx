@@ -1,15 +1,11 @@
 import React from "react"
 import { cva } from "class-variance-authority"
 import { cn } from "@/utils/cn"
-import { Button } from "@/app/components/generic/button/next/Button"
 
 export interface CarouselCardProps {
   title: string
   description: string
-  image: string
-  onCtaClick?: () => void
-  ctaLabel?: string
-  link?: string
+  icon: React.ReactNode
   variant?: "wide" | "thin"
 }
 
@@ -32,42 +28,18 @@ const carouselCardVariations = cva(
 const CarouselCard = ({
   title,
   description,
-  image,
-  link,
+  icon,
   variant,
-  onCtaClick,
-  ctaLabel = "Learn More",
 }: CarouselCardProps) => {
   const baseClasses = cn(carouselCardVariations({ variant }))
 
+  const classes = `${baseClasses} w-full flex flex-col items-center text-center bg-gradient-to-b from-[#043873] to-[#7EA5D0] text-white p-8 rounded-lg shadow-lg transition-transform hover:scale-105`
+
   return (
-    <div className={baseClasses}>
-      <img src={image} alt={title} className="w-full h-1/2 object-cover" />
-
-      <div className="p-4 flex flex-col flex-1">
-        <h3 className="text-3xl text-gray-700 font-semibold">{title}</h3>
-
-        <p className="text-sm text-gray-500 mt-4 line-clamp-3">{description}</p>
-
-        {(!!link || onCtaClick) && (
-          <div className="mt-4">
-            <Button
-              asLink={!!link}
-              href={link || "#"}
-              onClick={onCtaClick}
-              variant="secondary"
-            >
-              {ctaLabel}
-            </Button>
-          </div>
-        )}
-
-        <img
-          src="/ausa_logo.png"
-          alt="AUSA Logo"
-          className="absolute bottom-3 right-3 w-14 h-14"
-        />
-      </div>
+    <div className={classes}>
+      <div className="text-6xl text-white mb-6">{icon}</div>
+      <h2 className="text-2xl font-semibold mb-4">{title}</h2>
+      <p className="text-sm text-blue-100 leading-relaxed">{description}</p>
     </div>
   )
 }
