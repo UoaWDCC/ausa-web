@@ -3,6 +3,11 @@ import { Hero } from "@/app/components/composite/page/landing/hero/Hero"
 import { MentalWellbeing } from "@/app/components/composite/page/landing/mental-wellbeing/MentalWellbeing"
 import { CarouselCardProps } from "@/app/components/composite/carousel/CarouselCard"
 
+export const metadata = {
+  title: "Home | AUSA WEB",
+  description: "Access your wellbeing resources and tools",
+}
+
 const mentalWellbeingCards: CarouselCardProps[] = [
   {
     title: "Stress Management",

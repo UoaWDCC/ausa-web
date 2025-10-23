@@ -48,6 +48,8 @@ export default function LoginPage() {
       title="Welcome Back"
       gradient="linear-gradient(135deg, #dbeafe 0%, #e0f2fe 50%, #f0f9ff 100%)"
     >
+      <title>Login | AUSA WEB</title>
+      <meta name="description" content="A wellbeing portal for AUSA members"></meta>
       <div>
         {error && (
           <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">

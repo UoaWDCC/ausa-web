@@ -11,6 +11,8 @@ const SignUpPage = () => {
 
   return (
     <Background>
+      <title>Sign Up | AUSA WEB</title>
+      <meta name="description" content="A wellbeing portal for AUSA members"></meta>
       <main className="min-h-screen flex items-center justify-center">
         <PortalCard>
           <h2 className="text-2xl font-bold mb-6 text-center text-black">

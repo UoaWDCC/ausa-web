@@ -1,5 +1,11 @@
 import Page from "@/public/page-not-found-svgrepo-com.svg"
 import Image from "next/image"
+
+export const metadata = {
+  title: "Page Not Found | AUSA WEB",
+  description: "Access your wellbeing resources and tools",
+}
+
 const NotFound = () => {
   return (
     <div className="w-full min-h-[100vh] flex flex-col justify-center items-center gap-4">
