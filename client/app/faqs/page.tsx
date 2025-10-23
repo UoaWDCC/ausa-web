@@ -98,7 +98,7 @@ const FAQ = () => {
           const isActive = activeTab.label === tab.label
           const bgColor = isActive ? tab.bg : "var(--light-grey)"
           const hoverColor = isActive ? tab.hoverBg : "var(--light-grey)"
-          
+
           return (
             <Button
               key={tab.label}

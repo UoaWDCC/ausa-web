@@ -156,9 +156,9 @@ const Contacts = () => {
 
             {/* submit button */}
             <div className="col-span-1 md:col-span-2 flex justify-end mt-6">
-              <Button 
-                label="Submit" 
-                backgroundColor="#2563eb" 
+              <Button
+                label="Submit"
+                backgroundColor="#2563eb"
                 type="submit"
                 className="px-6 py-3 rounded-full whitespace-nowrap text-white"
               />
