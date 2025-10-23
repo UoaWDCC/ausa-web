@@ -36,13 +36,21 @@ const PortalCard: React.FC<PortalCardProps> = ({
     <>
       <style>{styles}</style>
       <div
-        className={`grad-border p-15 max-w-md w-full shadow-lg ${className}`}
+        className="md:w-2/3 max-w-lg rounded-2xl p-8 shadow-lg backdrop-blur-md"
         style={{
-          backgroundColor: "rgba(185, 213, 255, 0.25)",
-          backdropFilter: "blur(12px)",
+          background: "rgba(255, 255, 255, 0.7)",
+          border: "1px solid rgba(255, 255, 255, 0.5)",
         }}
       >
-        {children}
+        <div
+          className="text-gray-700"
+          style={{
+            fontFamily: "Crimson Text, serif",
+            fontSize: "16px",
+          }}
+        >
+          {children}
+        </div>
       </div>
     </>
   )

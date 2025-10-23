@@ -6,25 +6,37 @@ import Link from "next/link"
 
 const PortalPage = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#3A7D8C] via-[#FAF7F2] to-[#CAE5F8] ">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#3A7D8C] via-[#FAF7F2] to-[#CAE5F8]">
       <PortalCard>
-        <h2 className="text-2xl italic mb-6 text-center text-black ">
+        <h2
+          className="text-center mb-8"
+          style={{
+            fontFamily: "Crimson Text, serif",
+            fontSize: "36px",
+            fontWeight: 600,
+            fontStyle: "italic",
+            color: "#043873",
+          }}
+        >
           Welcome to AUSA Wellbeing
         </h2>
-        <div className="flex flex-col gap-4 ">
+
+        <div className="flex flex-col gap-4">
           <Link href="/">
-            <p className="border border-white rounded-lg px-3 py-4 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#FFF0CC] text-black hover:drop-shadow-lg transition-all duration-300 ease-out">
-              Home
+            <p className="rounded-lg px-3 py-4 text-center text-lg font-medium bg-gradient-to-r from-[#9abce2ff] to-[#c9dff8ff] hover:drop-shadow-lg transition-all duration-300 ease-out">
+              <h2>Home</h2>
             </p>
           </Link>
+
           <Link href="/quiz">
-            <p className="border border-white rounded-lg px-3 py-4 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#FFF0CC] text-black hover:drop-shadow-lg transition-all duration-300 ease-out">
-              Quiz
+            <p className="rounded-lg px-3 py-4 text-center text-lg font-medium bg-gradient-to-r from-[#9abce2ff] to-[#c9dff8ff] hover:drop-shadow-lg transition-all duration-300 ease-out">
+              <h2>Quiz</h2>
             </p>
           </Link>
+
           <Link href="/contacts">
-            <p className="border border-white rounded-lg px-3 py-4 text-center text-sm bg-gradient-to-r from-[#FFDE91] to-[#FFF0CC] text-black hover:drop-shadow-lg transition-all duration-300 ease-out">
-              Contact
+            <p className="rounded-lg px-3 py-4 text-center text-lg font-medium bg-gradient-to-r from-[#9abce2ff] to-[#c9dff8ff] hover:drop-shadow-lg transition-all duration-300 ease-out">
+              <h2>Contact</h2>
             </p>
           </Link>
         </div>
@@ -32,4 +44,5 @@ const PortalPage = () => {
     </div>
   )
 }
+
 export default PortalPage
