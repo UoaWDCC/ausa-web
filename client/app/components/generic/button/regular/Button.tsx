@@ -9,6 +9,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fontWeight?: "normal" | "medium" | "semibold" | "bold"
   icon?: React.ElementType
   iconPosition?: "left" | "right"
+  textColour?: string
 }
 
 // base button component w/ common styling/functionality across all variants
@@ -19,6 +20,7 @@ const BaseButton = ({
   iconPosition = "left",
   textSize = "text-base",
   fontWeight,
+  textColour, // <= new
   ...props
 }: ButtonProps) => {
   return (
@@ -37,6 +39,7 @@ const BaseButton = ({
         <props.icon className="w-4.5" />
       )}
       <h5
+        style={textColour ? { color: textColour } : undefined} // inline color here
         className={[
           getTextSizeClass(textSize),
           getFontWeightClass(fontWeight),
