@@ -5,10 +5,7 @@ interface PortalCardProps {
   className?: string
 }
 
-const PortalCard: React.FC<PortalCardProps> = ({
-  children,
-  className = "",
-}) => {
+const PortalCard: React.FC<PortalCardProps> = ({ children }) => {
   const styles = `
     .grad-border {
       position: relative;
