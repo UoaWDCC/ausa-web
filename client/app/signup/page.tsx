@@ -51,7 +51,10 @@ export default function SignupPage() {
       gradient="linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #e0f2fe 100%)"
     >
       <title>Sign Up | AUSA WEB</title>
-      <meta name="description" content="A wellbeing portal for AUSA members"></meta>
+      <meta
+        name="description"
+        content="A wellbeing portal for AUSA members"
+      ></meta>
       <div>
         {error && (
           <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">

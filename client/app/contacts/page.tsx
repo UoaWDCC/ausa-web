@@ -66,7 +66,10 @@ const Contacts = () => {
   return (
     <div className="flex justify-center items-start min-h-screen bg-gray-100 py-16 px-5 md:p-10">
       <title>Contacts | AUSA WEB</title>
-      <meta name="description" content="A wellbeing portal for AUSA members"></meta>
+      <meta
+        name="description"
+        content="A wellbeing portal for AUSA members"
+      ></meta>
       <form
         className="w-full max-w-[1500px] max-h-[1500px] p-5 md:p-10 mt-5 md:mt-[30px] flex flex-col md:flex-row gap-6 md:gap-10"
         onSubmit={sendEmail}
