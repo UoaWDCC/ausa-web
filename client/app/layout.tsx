@@ -1,16 +1,24 @@
-import type { Metadata } from "next"
+"use client"
+
+// import type { Metadata } from "next"
 import "./globals.css"
 import { Providers } from "./providers"
 import Navbar from "./components/generic/navbar/Navbar"
+import { usePathname } from "next/navigation"
 
-export const metadata: Metadata = {
-  title: "AUSA WEB",
-  description: "",
-}
+// export const metadata: Metadata = {
+//   title: "AUSA WEB",
+//   description: "",
+// }
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const pathname = usePathname()
+
+  const hideNavbarRoutes = ["/portal"] // list any routes that shouldn't show navbar
+  const shouldHideNavbar = hideNavbarRoutes.includes(pathname)
+
   return (
     <html lang="en">
       <head>
@@ -20,9 +28,8 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {" "}
         <Providers>
-          <Navbar />
+          {!shouldHideNavbar && <Navbar />}
           {children}
         </Providers>
       </body>

@@ -1,5 +1,10 @@
 import CarouselCard from "../components/composite/carousel/CarouselCard"
 
+export const metadata = {
+  title: "Resources | AUSA WEB",
+  description: "Access your wellbeing resources and tools",
+}
+
 const cards = [
   {
     image: "/financial_resources.jpeg",
