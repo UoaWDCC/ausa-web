@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query"
-import ResourceService from "./resourceService"
+// import { useQuery } from "@tanstack/react-query"
+// import ResourceService from "./resourceService"
 
 /*
   export function useFinancialResources() {

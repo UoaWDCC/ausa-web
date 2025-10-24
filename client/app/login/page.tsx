@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import Link from "next/link"
-import { AuthCard, Input, Button } from "../components/auth/AuthForm"
+import { AuthCard, Input } from "../components/auth/AuthForm"
 import client from "../services/fetch-client"
 
 export default function LoginPage() {
