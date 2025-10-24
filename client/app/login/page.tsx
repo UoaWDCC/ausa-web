@@ -71,7 +71,7 @@ export default function LoginPage() {
         <div className="mt-6 flex flex-col items-center">
           <button
             onClick={handleSubmit}
-            className="text-[#2563eb] bg-[#2563eb]/30 hover:bg-[#2563eb]/20 duration-300 rounded-md m-2 px-4 py-2 cursor-pointer"
+            className="text-[#2563eb] bg-[#2563eb]/20 hover:bg-[#2563eb]/10 duration-300 rounded-md m-2 px-4 py-2 cursor-pointer"
             disabled={loading}
           >
             {loading ? "Signing In..." : "Sign In"}
