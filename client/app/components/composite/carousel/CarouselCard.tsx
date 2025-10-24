@@ -56,7 +56,6 @@ const CarouselCard = ({
           <p className="text-lg text-blue-100 leading-relaxed">{description}</p>
         </div>
       </Modal>
-
     </div>
   )
 }
