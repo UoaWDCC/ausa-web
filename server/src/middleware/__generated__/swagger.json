@@ -386,12 +386,12 @@
 				]
 			}
 		},
-		"/resources/financial": {
+		"/resources/land-environment": {
 			"get": {
-				"operationId": "GetFinancialResources",
+				"operationId": "GetLandEnvironmentResources",
 				"responses": {
 					"200": {
-						"description": "Fetched all financial resources",
+						"description": "Fetched all land & environment resources",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -401,7 +401,7 @@
 						}
 					}
 				},
-				"description": "Fetches all financial resources",
+				"description": "Fetches all land & environment resources",
 				"tags": [
 					"Resources"
 				],
@@ -409,12 +409,12 @@
 				"parameters": []
 			}
 		},
-		"/resources/academic": {
+		"/resources/financial-stability": {
 			"get": {
-				"operationId": "GetAcademicResources",
+				"operationId": "GetFinancialStabilityResources",
 				"responses": {
 					"200": {
-						"description": "Fetched all academic resources",
+						"description": "Fetched all financial stability resources",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -424,7 +424,7 @@
 						}
 					}
 				},
-				"description": "Fetches all academic resources",
+				"description": "Fetches all financial stability resources",
 				"tags": [
 					"Resources"
 				],
@@ -432,12 +432,12 @@
 				"parameters": []
 			}
 		},
-		"/resources/external": {
+		"/resources/mental-emotional": {
 			"get": {
-				"operationId": "GetExternalResources",
+				"operationId": "GetMentalEmotionalResources",
 				"responses": {
 					"200": {
-						"description": "Fetched all external resources",
+						"description": "Fetched all mental & emotional wellbeing resources",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -447,7 +447,7 @@
 						}
 					}
 				},
-				"description": "Fetches all external resources",
+				"description": "Fetches all mental & emotional wellbeing resources",
 				"tags": [
 					"Resources"
 				],
@@ -455,12 +455,12 @@
 				"parameters": []
 			}
 		},
-		"/resources/wellbeing": {
+		"/resources/physical": {
 			"get": {
-				"operationId": "GetWellbeingResources",
+				"operationId": "GetPhysicalResources",
 				"responses": {
 					"200": {
-						"description": "Fetched all wellbeing resources",
+						"description": "Fetched all physical wellbeing resources",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -470,7 +470,53 @@
 						}
 					}
 				},
-				"description": "Fetches all wellbeing resources",
+				"description": "Fetches all physical wellbeing resources",
+				"tags": [
+					"Resources"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/resources/social-family": {
+			"get": {
+				"operationId": "GetSocialFamilyResources",
+				"responses": {
+					"200": {
+						"description": "Fetched all social & family wellbeing resources",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResource"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetches all social & family wellbeing resources",
+				"tags": [
+					"Resources"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/resources/spiritual": {
+			"get": {
+				"operationId": "GetSpiritualResources",
+				"responses": {
+					"200": {
+						"description": "Fetched all spiritual wellbeing resources",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/BaseResource"
+								}
+							}
+						}
+					}
+				},
+				"description": "Fetches all spiritual wellbeing resources",
 				"tags": [
 					"Resources"
 				],

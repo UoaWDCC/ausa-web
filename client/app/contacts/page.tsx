@@ -2,7 +2,6 @@
 import React from "react"
 import TextBox from "../components/composite/text-box/TextBox"
 import Dropdown from "../components/composite/dropdown/Dropdown"
-import Button from "../components/generic/button/regular/Button"
 import emailjs from "@emailjs/browser"
 import { useState } from "react"
 import ContactsLeft from "../components/composite/contacts/ContactsLeft"

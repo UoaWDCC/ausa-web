@@ -44,29 +44,22 @@ const CarouselCard = ({
     <div className={baseClasses}>
       <img src={image} alt={title} className="w-full h-1/2 object-cover" />
 
-      <div className="p-4 flex flex-col flex-1">
+      <div className="p-4 pb-0 flex flex-col flex-1">
         <h3 className="text-3xl text-gray-700 font-semibold">{title}</h3>
 
         <p className="text-sm text-gray-500 mt-4 line-clamp-3">{description}</p>
+      </div>
 
-        {(!!link || onCtaClick) && (
-          <div className="mt-4">
-            <Button
-              asLink={!!link}
-              href={link || "#"}
-              onClick={onCtaClick}
-              variant="secondary"
-            >
-              {ctaLabel}
-            </Button>
-          </div>
-        )}
-
-        <img
-          src="/ausa_logo.png"
-          alt="AUSA Logo"
-          className="absolute bottom-3 right-3 w-14 h-14"
-        />
+      <div className="px-4 pb-4 flex justify-between items-center">
+        <Button
+          asLink={!!link}
+          href={link || "#"}
+          onClick={onCtaClick}
+          variant="secondary"
+        >
+          {ctaLabel}
+        </Button>
+        <img src="/ausa_logo.png" alt="AUSA Logo" className="w-14 h-14" />
       </div>
     </div>
   )

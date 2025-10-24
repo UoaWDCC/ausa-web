@@ -6,53 +6,79 @@ import { Controller, Get, Route, SuccessResponse, Tags } from "tsoa"
 @Route("resources")
 export class ResourceController extends Controller {
   /**
-   * Fetches all financial resources
+   * Fetches all land & environment resources
    *
-   * @returns The financial resource with resource items
+   * @returns The land & environment resources with resource items
    */
-  @SuccessResponse(200, "Fetched all financial resources")
-  @Get("/financial")
-  public async getFinancialResources(): Promise<BaseResource> {
-    const data = await new ResourceRepository().getFinancialResources()
+  @SuccessResponse(200, "Fetched all land & environment resources")
+  @Get("/land-environment")
+  public async getLandEnvironmentResources(): Promise<BaseResource> {
+    const data = await new ResourceRepository().getLandEnvironmentResources()
 
     return data
   }
 
   /**
-   * Fetches all academic resources
+   * Fetches all financial stability resources
    *
-   * @returns The academic resources with resource items
+   * @returns The financial stability resources with resource items
    */
-  @SuccessResponse(200, "Fetched all academic resources")
-  @Get("/academic")
-  public async getAcademicResources(): Promise<BaseResource> {
-    const data = await new ResourceRepository().getAcademicResources()
+  @SuccessResponse(200, "Fetched all financial stability resources")
+  @Get("/financial-stability")
+  public async getFinancialStabilityResources(): Promise<BaseResource> {
+    const data = await new ResourceRepository().getFinancialStabilityResources()
 
     return data
   }
 
   /**
-   * Fetches all external resources
+   * Fetches all mental & emotional wellbeing resources
    *
-   * @returns The external resources with resource items
+   * @returns The mental & emotional wellbeing resources with resource items
    */
-  @SuccessResponse(200, "Fetched all external resources")
-  @Get("/external")
-  public async getExternalResources(): Promise<BaseResource> {
-    const data = await new ResourceRepository().getExternalResources()
+  @SuccessResponse(200, "Fetched all mental & emotional wellbeing resources")
+  @Get("/mental-emotional")
+  public async getMentalEmotionalResources(): Promise<BaseResource> {
+    const data = await new ResourceRepository().getMentalEmotionalResources()
 
     return data
   }
 
   /**
-   * Fetches all wellbeing resources
+   * Fetches all physical wellbeing resources
    *
-   * @returns The wellbeing resources with resource items
+   * @returns The physical wellbeing resources with resource items
    */
-  @SuccessResponse(200, "Fetched all wellbeing resources")
-  @Get("/wellbeing")
-  public async getWellbeingResources(): Promise<BaseResource> {
-    const data = await new ResourceRepository().getWellbeingResources()
+  @SuccessResponse(200, "Fetched all physical wellbeing resources")
+  @Get("/physical")
+  public async getPhysicalResources(): Promise<BaseResource> {
+    const data = await new ResourceRepository().getPhysicalResources()
+
+    return data
+  }
+
+  /**
+   * Fetches all social & family wellbeing resources
+   *
+   * @returns The social & family wellbeing resources with resource items
+   */
+  @SuccessResponse(200, "Fetched all social & family wellbeing resources")
+  @Get("/social-family")
+  public async getSocialFamilyResources(): Promise<BaseResource> {
+    const data = await new ResourceRepository().getSocialFamilyResources()
+
+    return data
+  }
+
+  /**
+   * Fetches all spiritual wellbeing resources
+   *
+   * @returns The spiritual wellbeing resources with resource items
+   */
+  @SuccessResponse(200, "Fetched all spiritual wellbeing resources")
+  @Get("/spiritual")
+  public async getSpiritualResources(): Promise<BaseResource> {
+    const data = await new ResourceRepository().getSpiritualResources()
 
     return data
   }

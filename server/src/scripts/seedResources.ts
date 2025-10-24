@@ -2,7 +2,7 @@ import "dotenv/config"
 import ResourceRepository from "../data-layer/repositories/ResourceRepository"
 ;(async () => {
   const resourceRepository = new ResourceRepository()
-  resourceRepository.createResource("academic", {
+  resourceRepository.createResource("physical", {
     title: "Academic",
     description:
       "Studying can be challenging, but the right support makes all the difference. Here, you’ll find tools and services to help you succeed—whether it’s study skills, time management, tutoring, or academic advice. Remember, asking for help is a sign of strength, not weakness.",
@@ -24,7 +24,7 @@ import ResourceRepository from "../data-layer/repositories/ResourceRepository"
     ],
   })
 
-  resourceRepository.createResource("financial", {
+  resourceRepository.createResource("land-environment", {
     title: "Financial",
     description:
       "Financial difficulties can be overwhelming, but you're not alone. Explore resources for budgeting, scholarships, financial aid, and support to help you manage your finances and focus on your studies.",
@@ -46,7 +46,7 @@ import ResourceRepository from "../data-layer/repositories/ResourceRepository"
     ],
   })
 
-  resourceRepository.createResource("external", {
+  resourceRepository.createResource("financial-stability", {
     title: "External",
     description:
       "Beyond the university, there are external opportunities and resources to enhance your career, community involvement, and personal growth. Discover career services, job boards, and more.",
@@ -68,7 +68,7 @@ import ResourceRepository from "../data-layer/repositories/ResourceRepository"
     ],
   })
 
-  resourceRepository.createResource("wellbeing", {
+  resourceRepository.createResource("mental-emotional", {
     title: "Wellbeing",
     description:
       "Your wellbeing is paramount. Access resources for mental health, physical health, relationships, and overall wellness to support a balanced and fulfilling university life.",
