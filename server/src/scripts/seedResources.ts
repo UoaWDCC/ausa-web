@@ -2,7 +2,7 @@ import "dotenv/config"
 import ResourceRepository from "../data-layer/repositories/ResourceRepository"
 ;(async () => {
   const resourceRepository = new ResourceRepository()
-  resourceRepository.createResource("academic", {
+  resourceRepository.createResource("physical", {
     title: "Academic",
     description:
       "Studying can be challenging, but the right support makes all the difference. Here, you’ll find tools and services to help you succeed—whether it’s study skills, time management, tutoring, or academic advice. Remember, asking for help is a sign of strength, not weakness.",
