@@ -1,8 +1,8 @@
 import CarouselCard from "@/app/components/composite/carousel/CarouselCard"
 import ResourceService from "@/app/services/resource/resourceService"
 
-export default async function FinancialResourcesPage() {
-  const data = await ResourceService.getFinancialResources()
+export default async function FinancialStabilityResourcesPage() {
+  const data = await ResourceService.getFinancialStabilityResources()
 
   return (
     <main className="min-h-screen flex flex-col items-center p-0">
@@ -26,7 +26,7 @@ export default async function FinancialResourcesPage() {
           </div>
         </div>
       </header>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-20 place-items-center py-20">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-20 place-items-center py-20 w-full max-w-6xl">
         {data?.resources?.map((resource) => (
           <CarouselCard
             key={resource.header}

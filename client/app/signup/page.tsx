@@ -2,7 +2,7 @@
 
 import React, { useState, ChangeEvent } from "react"
 import Link from "next/link"
-import { AuthCard, Input, Button } from "../components/auth/AuthForm"
+import { AuthCard, Input } from "../components/auth/AuthForm"
 import client from "../services/fetch-client"
 
 export default function SignupPage() {
@@ -83,10 +83,14 @@ export default function SignupPage() {
             setPassword(e.target.value)
           }
         />
-        <div className="mt-6">
-          <Button onClick={handleSubmit} variant="primary" disabled={loading}>
+        <div className="mt-6 flex flex-col items-center">
+          <button
+            onClick={handleSubmit}
+            className="text-[#2563eb] bg-[#2563eb]/20 hover:bg-[#2563eb]/10 duration-300 rounded-md m-2 px-4 py-2 cursor-pointer"
+            disabled={loading}
+          >
             {loading ? "Signing Up..." : "Sign Up"}
-          </Button>
+          </button>
         </div>
 
         <p

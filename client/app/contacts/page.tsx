@@ -2,7 +2,6 @@
 import React from "react"
 import TextBox from "../components/composite/text-box/TextBox"
 import Dropdown from "../components/composite/dropdown/Dropdown"
-import Button from "../components/generic/button/regular/Button"
 import emailjs from "@emailjs/browser"
 import { useState } from "react"
 import ContactsLeft from "../components/composite/contacts/ContactsLeft"
@@ -156,7 +155,12 @@ const Contacts = () => {
 
             {/* submit button */}
             <div className="col-span-1 md:col-span-2 flex justify-end mt-6">
-              <Button label="Submit" backgroundColor="#2563eb" type="submit" />
+              <button
+                type="submit"
+                className="px-6 py-3 rounded-full hover:bg-[#2563eb]/70 bg-[#2563eb] cursor-pointer duration-300 whitespace-nowrap text-white"
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>

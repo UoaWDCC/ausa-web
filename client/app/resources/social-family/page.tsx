@@ -1,26 +1,26 @@
 import CarouselCard from "@/app/components/composite/carousel/CarouselCard"
 import ResourceService from "@/app/services/resource/resourceService"
 
-export default async function ExternalResourcesPage() {
-  const data = await ResourceService.getExternalResources()
+export default async function SocialFamilyResourcesPage() {
+  const data = await ResourceService.getSocialFamilyResources()
 
   return (
     <main className="min-h-screen flex flex-col items-center p-0">
       <header className="relative w-full h-[50vh]">
         <img
-          src="/external_resources.jpeg"
+          src="/social_resources.jpeg"
           className="absolute inset-0 w-full h-full object-cover brightness-60"
-          alt="External Resources"
+          alt="Social & Family Resources"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#3A7D8C] to-transparent opacity-60 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#FFDE91] to-transparent opacity-40 z-10 pointer-events-none" />
         <div className="relative z-15 w-full h-full flex items-end justify-center pb-8">
           <div className="flex flex-row items-end gap-10 max-w-6xl px-8">
             <h1 className="text-6xl text-[var(--white)]">
-              <span className="italic">External</span>
+              <span className="italic">Social & Family</span>
               <br />
               {data.title}
             </h1>
-            <p className="text-lg max-w-4xl text-[var(--white)] font-thin pt-20">
+            <p className="text-lg max-w-4xl text-[var(--white)] font-thin">
               {data.description}
             </p>
           </div>

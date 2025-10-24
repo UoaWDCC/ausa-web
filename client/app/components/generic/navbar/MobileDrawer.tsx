@@ -72,14 +72,8 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
                       ? "var(--btn-primary-bg)"
                       : "transparent"
                   }
-                  className={`
-                    w-full justify-start px-4 py-3 rounded-lg transition-all duration-500
-                    ${
-                      activeItem === item
-                        ? "text-btn-primary-fg hover:bg-btn-primary-bg-hover"
-                        : "text-primary-emphasis hover:bg-btn-secondary-bg-hover"
-                    }
-                  `}
+                  textColour={activeItem === item ? "black" : undefined}
+                  className={`w-full justify-start px-4 py-3 rounded-lg transition-all duration-500 ${activeItem === item ? "hover:bg-btn-primary-bg-hover" : "hover:bg-btn-secondary-bg-hover"}`}
                   textSize="text-lg"
                   fontWeight={activeItem === item ? "bold" : "normal"}
                 />

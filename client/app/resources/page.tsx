@@ -2,43 +2,63 @@ import CarouselCard from "../components/composite/carousel/CarouselCard"
 
 const cards = [
   {
-    image: "/financial_resources.jpeg",
-    heading: "Financial Resources",
+    image: "land_environment_resources.jpeg",
+    heading: "Connection to Land & Environment",
     description:
-      "Explore scholarships, grants, budgeting tools, and financial support to help you thrive.",
+      "Explore resources that help you connect with the land and environment.",
     cta: {
-      href: "/resources/financial",
-      label: "View Financial",
+      href: "/resources/land-environment",
+      label: "View Resources",
     },
   },
   {
-    image: "/academic_resources.jpeg",
-    heading: "Academic Resources",
+    image: "financial_resources.jpeg",
+    heading: "Financial Stability & Support",
     description:
-      "Access study guides, tutoring, workshops, and academic support for your success.",
+      "Access financial support, budgeting tools, and resources for economic wellbeing.",
     cta: {
-      href: "/resources/academic",
-      label: "View Academic",
+      href: "/resources/financial-stability",
+      label: "View Resources",
     },
   },
   {
-    image: "/external_resources.jpeg",
-    heading: "External Resources",
+    image: "wellbeing_resources.jpeg",
+    heading: "Mental & Emotional Wellbeing",
     description:
-      "Find trusted external organizations and services for additional help and opportunities.",
+      "Find mental health support, counseling services, and emotional wellness resources.",
     cta: {
-      href: "/resources/external",
-      label: "Visit External",
+      href: "/resources/mental-emotional",
+      label: "View Resources",
     },
   },
   {
-    image: "/wellbeing_resources.jpeg",
-    heading: "Wellbeing Resources",
+    image: "physical_resources.jpeg",
+    heading: "Physical Wellbeing & Health",
     description:
-      "Discover mental health, wellness, and support services to help you feel your best.",
+      "Discover health services, fitness resources, and physical wellness support.",
     cta: {
-      href: "/resources/wellbeing",
-      label: "View Wellbeing",
+      href: "/resources/physical",
+      label: "View Resources",
+    },
+  },
+  {
+    image: "social_resources.jpeg",
+    heading: "Social & Family Wellbeing",
+    description:
+      "Connect with community support, family services, and social wellness resources.",
+    cta: {
+      href: "/resources/social-family",
+      label: "View Resources",
+    },
+  },
+  {
+    image: "spiritual_resources.jpeg",
+    heading: "Spiritual & Inner Wellbeing",
+    description:
+      "Explore spiritual practices, cultural connections, and inner wellness resources.",
+    cta: {
+      href: "/resources/spiritual",
+      label: "View Resources",
     },
   },
 ]
