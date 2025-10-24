@@ -52,7 +52,7 @@ const CarouselCard = ({
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(!isModalOpen)}>
         <div className="p-6 max-w-md">
           <div className="text-8xl text-white mb-6">{icon}</div>
-          <h2 className="text-3xl font-bold mb-4">{title}</h2>
+          <h2 className="text-3xl font-bold mb-4 text-white">{title}</h2>
           <p className="text-lg text-blue-100 leading-relaxed">{description}</p>
         </div>
       </Modal>
