@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query"
 import ResourceService from "./resourceService"
 
-export function useFinancialResources() {
+/*
+  export function useFinancialResources() {
   return useQuery({
     queryKey: ["resources", "financial"],
     queryFn: ResourceService.getFinancialResources,
@@ -28,3 +29,4 @@ export function useExternalResources() {
     queryFn: ResourceService.getExternalResources,
   })
 }
+*/
