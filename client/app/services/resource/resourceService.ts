@@ -11,7 +11,10 @@ const defaultResource: BaseResource = {
 const ResourceService = {
   getLandEnvironmentResources: async (): Promise<BaseResource> => {
     try {
-      const { data, response } = await client.GET("/resources/land-environment")
+      const { data, response } = await client.GET(
+        "/resources/land-environment" as any,
+        {},
+      )
 
       if (!response.ok)
         throw new Error("Failed to fetch land & environment resources")
@@ -25,7 +28,8 @@ const ResourceService = {
   getFinancialStabilityResources: async (): Promise<BaseResource> => {
     try {
       const { data, response } = await client.GET(
-        "/resources/financial-stability",
+        "/resources/financial-stability" as any,
+        {},
       )
 
       if (!response.ok)
@@ -39,7 +43,10 @@ const ResourceService = {
   },
   getMentalEmotionalResources: async (): Promise<BaseResource> => {
     try {
-      const { data, response } = await client.GET("/resources/mental-emotional")
+      const { data, response } = await client.GET(
+        "/resources/mental-emotional" as any,
+        {},
+      )
 
       if (!response.ok)
         throw new Error(
@@ -54,7 +61,10 @@ const ResourceService = {
   },
   getPhysicalResources: async (): Promise<BaseResource> => {
     try {
-      const { data, response } = await client.GET("/resources/physical")
+      const { data, response } = await client.GET(
+        "/resources/physical" as any,
+        {},
+      )
 
       if (!response.ok)
         throw new Error("Failed to fetch physical wellbeing resources")
@@ -67,7 +77,10 @@ const ResourceService = {
   },
   getSocialFamilyResources: async (): Promise<BaseResource> => {
     try {
-      const { data, response } = await client.GET("/resources/social-family")
+      const { data, response } = await client.GET(
+        "/resources/social-family" as any,
+        {},
+      )
 
       if (!response.ok)
         throw new Error("Failed to fetch social & family wellbeing resources")
@@ -80,7 +93,10 @@ const ResourceService = {
   },
   getSpiritualResources: async (): Promise<BaseResource> => {
     try {
-      const { data, response } = await client.GET("/resources/spiritual")
+      const { data, response } = await client.GET(
+        "/resources/spiritual" as any,
+        {},
+      )
 
       if (!response.ok)
         throw new Error("Failed to fetch spiritual wellbeing resources")
