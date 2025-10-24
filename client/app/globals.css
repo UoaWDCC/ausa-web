@@ -129,6 +129,52 @@
   .navbar {
     background: var(--black);
   }
+
+  .btn-primary {
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-fg);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--btn-primary-bg-hover);
+  }
+
+  .btn-primary:active:not(:disabled) {
+    background-color: var(--btn-primary-bg-press);
+  }
+
+  .btn-primary:disabled {
+    background-color: var(--btn-primary-bg-disabled);
+    color: var(--btn-primary-fg-disabled);
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    background-color: var(--btn-secondary-bg);
+    color: var(--btn-secondary-fg);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--btn-secondary-bg-hover);
+  }
+
+  .btn-secondary:active:not(:disabled) {
+    background-color: var(--btn-secondary-bg-press);
+  }
+
+  .btn-secondary:disabled {
+    background-color: var(--btn-secondary-bg-disabled);
+    color: var(--btn-secondary-fg-disabled);
+    cursor: not-allowed;
+  }
 }
 
 @layer base {

@@ -8,6 +8,7 @@ const tabConfigs = [
   {
     label: "University Support",
     bg: "var(--btn-secondary-bg)",
+    hoverBg: "var(--btn-secondary-bg-hover)",
     gradient: "to bottom, var(--white), var(--btn-secondary-bg)",
     faqs: [
       {
@@ -30,6 +31,7 @@ const tabConfigs = [
   {
     label: "External Support",
     bg: "var(--btn-tertiary-bg-hover)",
+    hoverBg: "var(--btn-tertiary-bg-press)",
     gradient: "to bottom, var(--white), var(--btn-tertiary-bg-hover)",
     faqs: [
       {
@@ -52,6 +54,7 @@ const tabConfigs = [
   {
     label: "Emergency Support",
     bg: "var(--btn-primary-bg-press)",
+    hoverBg: "var(--btn-primary-bg-hover)",
     gradient: "to bottom, var(--white), var(--btn-primary-bg-press)",
     faqs: [
       {
@@ -91,17 +94,27 @@ const FAQ = () => {
         help you find what you need quickly and confidently.
       </p>
       <div className="flex flex-wrap sm:flex-row gap-4 mb-10">
-        {tabConfigs.map((tab) => (
-          <Button
-            key={tab.label}
-            label={tab.label}
-            backgroundColor={
-              activeTab.label === tab.label ? tab.bg : "var(--light-grey)"
-            }
-            className="px-6 py-3 rounded-full whitespace-nowrap w-48 justify-center text-[var(--black)!important]"
-            onClick={() => setActiveTab(tab)}
-          />
-        ))}
+        {tabConfigs.map((tab) => {
+          const isActive = activeTab.label === tab.label
+          const bgColor = isActive ? tab.bg : "var(--light-grey)"
+          const hoverColor = isActive ? tab.hoverBg : "var(--light-grey)"
+
+          return (
+            <Button
+              key={tab.label}
+              label={tab.label}
+              backgroundColor={bgColor}
+              className="px-6 py-3 rounded-full whitespace-nowrap w-48 justify-center text-[var(--black)!important] transition-all duration-200"
+              onClick={() => setActiveTab(tab)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = hoverColor
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = bgColor
+              }}
+            />
+          )
+        })}
       </div>
       <h3 className="h3 text-primary-emphasis mb-6 leading-snug">
         {activeTab.label}
