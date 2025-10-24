@@ -2,55 +2,46 @@ import React from "react"
 import { Hero } from "@/app/components/composite/page/landing/hero/Hero"
 import { MentalWellbeing } from "@/app/components/composite/page/landing/mental-wellbeing/MentalWellbeing"
 import { CarouselCardProps } from "@/app/components/composite/carousel/CarouselCard"
+import { FaBullhorn } from "react-icons/fa"
+import { TbMessages } from "react-icons/tb"
+import { FaHandHoldingHeart } from "react-icons/fa"
 
 const mentalWellbeingCards: CarouselCardProps[] = [
   {
     title: "Stress Management",
     description:
       "Learn effective techniques to manage stress and anxiety in your daily life. Discover mindfulness practices and coping strategies.",
-    image: "https://picsum.photos/seed/stress/400/300",
-    link: "/resources/stress-management",
-    ctaLabel: "Learn More",
+    icon: <FaBullhorn />,
   },
   {
     title: "24/7 Support Line",
     description:
       "Access our confidential support line anytime you need someone to talk to. Trained counselors are available around the clock.",
-    image: "https://picsum.photos/seed/support/400/300",
-    link: "/support/hotline",
-    ctaLabel: "Get Help Now",
+    icon: <TbMessages />,
   },
   {
     title: "Mental Health Resources",
     description:
       "Explore our comprehensive library of mental health resources, articles, and tools to support your wellbeing journey.",
-    image: "https://picsum.photos/seed/resources/400/300",
-    link: "/resources",
-    ctaLabel: "View Resources",
+    icon: <FaHandHoldingHeart />,
   },
   {
     title: "Peer Support Groups",
     description:
       "Connect with others who understand what you're going through. Join our supportive community and share experiences.",
-    image: "https://picsum.photos/seed/peer/400/300",
-    link: "/community/peer-support",
-    ctaLabel: "Join Community",
+    icon: <FaHandHoldingHeart />,
   },
   {
     title: "Wellness Workshops",
     description:
       "Attend our interactive workshops on topics like resilience, self-care, and emotional intelligence. Free for all members.",
-    image: "https://picsum.photos/seed/workshop/400/300",
-    link: "/events/workshops",
-    ctaLabel: "See Schedule",
+    icon: <FaBullhorn />,
   },
   {
     title: "Self-Care Tips",
     description:
       "Practical self-care strategies you can implement today. Small steps can make a big difference in your mental health.",
-    image: "https://picsum.photos/seed/selfcare/400/300",
-    link: "/resources/self-care",
-    ctaLabel: "Read More",
+    icon: <TbMessages />,
   },
 ]
 
