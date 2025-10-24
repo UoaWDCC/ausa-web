@@ -13,7 +13,8 @@ const ResourceService = {
     try {
       const { data, response } = await client.GET("/resources/land-environment")
 
-      if (!response.ok) throw new Error("Failed to fetch land & environment resources")
+      if (!response.ok)
+        throw new Error("Failed to fetch land & environment resources")
 
       return data || defaultResource
     } catch (error) {
@@ -23,9 +24,12 @@ const ResourceService = {
   },
   getFinancialStabilityResources: async (): Promise<BaseResource> => {
     try {
-      const { data, response } = await client.GET("/resources/financial-stability")
+      const { data, response } = await client.GET(
+        "/resources/financial-stability",
+      )
 
-      if (!response.ok) throw new Error("Failed to fetch financial stability resources")
+      if (!response.ok)
+        throw new Error("Failed to fetch financial stability resources")
 
       return data || defaultResource
     } catch (error) {
@@ -37,7 +41,10 @@ const ResourceService = {
     try {
       const { data, response } = await client.GET("/resources/mental-emotional")
 
-      if (!response.ok) throw new Error("Failed to fetch mental & emotional wellbeing resources")
+      if (!response.ok)
+        throw new Error(
+          "Failed to fetch mental & emotional wellbeing resources",
+        )
 
       return data || defaultResource
     } catch (error) {
@@ -49,7 +56,8 @@ const ResourceService = {
     try {
       const { data, response } = await client.GET("/resources/physical")
 
-      if (!response.ok) throw new Error("Failed to fetch physical wellbeing resources")
+      if (!response.ok)
+        throw new Error("Failed to fetch physical wellbeing resources")
 
       return data || defaultResource
     } catch (error) {
@@ -61,7 +69,8 @@ const ResourceService = {
     try {
       const { data, response } = await client.GET("/resources/social-family")
 
-      if (!response.ok) throw new Error("Failed to fetch social & family wellbeing resources")
+      if (!response.ok)
+        throw new Error("Failed to fetch social & family wellbeing resources")
 
       return data || defaultResource
     } catch (error) {
@@ -73,7 +82,8 @@ const ResourceService = {
     try {
       const { data, response } = await client.GET("/resources/spiritual")
 
-      if (!response.ok) throw new Error("Failed to fetch spiritual wellbeing resources")
+      if (!response.ok)
+        throw new Error("Failed to fetch spiritual wellbeing resources")
 
       return data || defaultResource
     } catch (error) {

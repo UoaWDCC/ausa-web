@@ -50,21 +50,17 @@ const CarouselCard = ({
         <p className="text-sm text-gray-500 mt-4 line-clamp-3">{description}</p>
       </div>
 
-        <div className="px-4 pb-4 flex justify-between items-center">
-          <Button
-            asLink={!!link}
-            href={link || "#"}
-            onClick={onCtaClick}
-            variant="secondary"
-          >
-            {ctaLabel}
-          </Button>
-          <img
-            src="/ausa_logo.png"
-            alt="AUSA Logo"
-            className="w-14 h-14"
-          />
-        </div>
+      <div className="px-4 pb-4 flex justify-between items-center">
+        <Button
+          asLink={!!link}
+          href={link || "#"}
+          onClick={onCtaClick}
+          variant="secondary"
+        >
+          {ctaLabel}
+        </Button>
+        <img src="/ausa_logo.png" alt="AUSA Logo" className="w-14 h-14" />
+      </div>
     </div>
   )
 }

@@ -20,7 +20,9 @@ export default async function LandEnvironmentResourcesPage() {
               <br />
               {data.title}
             </h1>
-            <p className="text-lg max-w-4xl text-[var(--white)] font-thin"> {data?.description}
+            <p className="text-lg max-w-4xl text-[var(--white)] font-thin">
+              {" "}
+              {data?.description}
             </p>
           </div>
         </div>
