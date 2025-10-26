@@ -1,8 +1,6 @@
 "use client"
 
-import CarouselCard, {
-  CarouselCardProps,
-} from "@/app/components/composite/carousel/CarouselCard"
+import CarouselCard, { CarouselCardProps } from "./MainPageCarousel"
 import { useCallback, useMemo, useState } from "react"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { cn } from "@/utils/cn"
