@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { CarouselCardProps } from "@/app/components/composite/carousel/CarouselCard"
+import { CarouselCardProps } from "@/app/components/composite/carousel/MainPageCarousel
 import { CarouselPlayer } from "@/app/components/composite/carousel/CarouselPlayer"
 interface MentalWellbeingProps {
   // TODO: define correct type for card items
