@@ -1,7 +1,7 @@
 import React from "react"
 import { Hero } from "@/app/components/composite/page/landing/hero/Hero"
 import { MentalWellbeing } from "@/app/components/composite/page/landing/mental-wellbeing/MentalWellbeing"
-import { CarouselCardProps } from "@/app/components/composite/carousel/CarouselCard"
+import { CarouselCardProps } from "./components/composite/carousel/MainPageCarousel"
 import { FaBullhorn } from "react-icons/fa"
 import { TbMessages } from "react-icons/tb"
 import { FaHandHoldingHeart } from "react-icons/fa"
